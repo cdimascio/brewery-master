@@ -4574,7 +4574,7 @@ a.list-group-item.active > .badge,
     }
     .jumbotron h1,
     .jumbotron .h1 {
-        font-size: 67.5px;
+        font-size: 3em;
     }
 }
 .thumbnail {
