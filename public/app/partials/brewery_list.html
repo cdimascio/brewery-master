@@ -1,0 +1,23 @@
+<div ng-controller="BreweryListController">
+    <div class="main-column-container overflow-container">
+        <ul class="list-group">
+            <div ng-repeat="item in data">
+                <li class="list-group-item" ng-class-even="'list-group-item-alternate'">
+                    <a href="#" class="list-group-item" ng-class-even="'list-group-item-alternate'" ng-click="notifySelect($event, item)">
+                        <div class="brewery-list-item-container">
+                        <div>
+                        <img class="brewery-list-icon" src="{{item.brewery.images.icon}}">
+                        </div>
+                        <div>
+                        <h4 class="list-group-item-heading">{{item.brewery.name}}</h4>
+                        </div>
+                        <p class="list-group-item-text">
+                            {{item.locationTypeDisplay}}
+                        </p>
+                        </div>
+                    </a>
+                </li>
+            </div>
+        </ul>
+    </div>
+</div>

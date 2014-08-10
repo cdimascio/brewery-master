@@ -1,11 +1,11 @@
 define(function (require) {
 
     function map(containerDiv) {
+        var markers = [];
         var map = null;
-        var bounds = new google.maps.LatLngBounds();
         var infowindow = new google.maps.InfoWindow();
         return {
-            init: function () {
+            init: function (searchHandler) {
                 map = new google.maps.Map(containerDiv, {
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
                     navigationControl: true,
@@ -14,15 +14,18 @@ define(function (require) {
                     }
                 });
 
-                map.fitBounds(bounds);
-
-                var sb = searchBox(map)[0];
+                var sb = searchBox(map, searchHandler)[0];
                 sb.index = 1;
                 map.controls[google.maps.ControlPosition.TOP_LEFT].push(sb);
 
                 return map;
             },
-
+            clearMarkers: function () {
+                for (var i = 0; i < markers.length; i++) {
+                    markers[i].setMap(null);
+                }
+                markers = [];
+            },
             addMarker : function(lat, long, content, data, clickHandler) {
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(lat, long),
@@ -36,33 +39,35 @@ define(function (require) {
                     };
                 })(marker, content));
 
-               /* google.maps.event.addListener(marker, 'mouseout', (function () {
-                    return function () {
-                        infowindow.close();
-                    }
-                })());*/
-
-                google.maps.event.addListener(marker, /*'dblclick'*/ 'click', (function (data) {
+                google.maps.event.addListener(marker, 'click', (function (data) {
                     return function() {
                         clickHandler(data);
                     };
                 })(data));
 
-                bounds.extend(marker.position);
+                markers.push(marker);
+            },
+            fitBounds : function() {
+                var bounds = new google.maps.LatLngBounds();
+                for (var i=0; i < markers.length; i++) {
+                    bounds.extend(markers[i].position);
+                }
+                map.fitBounds(bounds);
             }
-        };
+
+    };
     }
 
-    function searchBox(map) {
+    function searchBox(map, handler) {
         var container = $('<div/>').
             attr({'class': 'input-map'});
-        $('<input/>')
+        var input = $('<input/>')
             .attr({
                 type: 'text',
                 id: 'mapInput',
                 name: 'mapInput'})
             .appendTo(container);
-        $('<button/>')
+        var button = $('<button/>')
             .attr({
                 type: 'button',
                 id: 'mapSubmit',
@@ -70,8 +75,9 @@ define(function (require) {
                 'class': 'btn-sm btn-primary btn-map'})
             .text('Search').appendTo(container);
 
-        google.maps.event.addDomListener(container[0], 'click', function() {
-            alert('clicked');
+        google.maps.event.addDomListener(button[0], 'click', function(evt) {
+            evt.searchText = $('#mapInput').val();
+            handler(evt);
         });
         return container;
     }

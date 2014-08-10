@@ -4,5 +4,9 @@ define(function (require) {
             $scope.brewery = brewery;
             $scope.$apply();
         });
+        $scope.$on('BreweryListController.selected', function(event, brewery) {
+            $scope.brewery = brewery;
+            $scope.$apply();
+        });
     }];
 });

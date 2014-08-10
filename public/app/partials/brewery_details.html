@@ -1,0 +1,53 @@
+<div ng-controller="BrewerySelectedController">
+    <div class="main-column-container overflow-container">
+        <div ng-show="brewery.name">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">
+                        {{brewery.brewery.name}}
+                    </h2>
+                </div>
+                <div class="panel-body">
+                    <img class="brewery-details-img" src="{{brewery.brewery.images.medium}}">
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Description
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        {{brewery.brewery.description}}
+                    </p>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Address
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        {{brewery.streetAddress}} {{brewery.locality}} {{brewery.region}} {{brewery.phone}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div ng-show="!brewery.name">
+            <div class="jumbotron details-jumbotron">
+                <h2>
+                    Welcome to the Brewery
+                </h2>
+                <p>
+                    Select a marker on the map or a item in the list to view details.
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-large" href="#">Learn more</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

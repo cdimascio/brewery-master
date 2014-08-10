@@ -1,12 +1,76 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
 a {
   color: #00B7FF;
 }
 
+h1 {
+    font-size: 1.7em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.3em;
+}
+
+h4 {
+    font-size: 1.2em;
+}
+
+.brewery-details-img {
+    margin:auto;
+    width: 100%;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 2px 2px;
+    background-color: #262626;/*#4e5d6c;*/
+    border-bottom: 1px solid rgba(0,0,0,.7)
+}
+
+a.list-group-item {
+  border: none;
+}
+
+.list-group-item-alternate {
+    background-color:#262626;/* #22313f;  #2b3e50;*/
+}
+
+.brewery-list-item-container {
+    overflow: hidden;
+    height:100%;
+}
+
+.overflow-container {
+    overflow:auto;
+    margin-bottom: 0px;
+}
+
+.details-jumbotron {
+    height: 300px;
+}
+.main-column-container {
+    height: 300px;
+    border: solid 1px rgba(0,0,0,0.5);
+}
+
+.tight-left {
+    padding-left: 0px;
+}
+
+.tight-right {
+    padding-right: 0px;
+}
+
+.brewery-list-icon {
+    float: left;
+    height: 32px;
+    width: 32px;
+    padding: 2px;
+}
 
 #map-canvas {
     min-height:300px;
@@ -16,14 +80,32 @@ a {
     #map-canvas {
         min-height:300px;
     }
+    .main-column-container {
+        height: 300px;
+    }
+    .details-jumbotron {
+        height: 300px;
+    }
 }
 @media (min-width: 992px) {
     #map-canvas {
-        min-height:450px;
+        min-height:600px;
+    }
+    .main-column-container {
+        height: 600px;
+    }
+    .details-jumbotron {
+        height: 600px;
     }
 }
 @media (min-width: 1200px) {
     #map-canvas {
         min-height:600px;
+    }
+    .main-column-container {
+        height: 600px;
+    }
+    .details-jumbotron {
+        height: 600px;
     }
 }

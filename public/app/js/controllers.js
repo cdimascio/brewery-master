@@ -7,4 +7,5 @@ define(function (require) {
     module.controller('BreweryMapController', require('controllers/brewery_map_ctrl'));
     module.controller('BreweryListController', require('controllers/brewery_list_ctrl'));
     module.controller('BrewerySelectedController', require('controllers/brewery_brewery_ctrl'));
+    module.controller('MainController', require('controllers/main_ctrl'));
 });

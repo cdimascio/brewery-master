@@ -1,8 +1,13 @@
 define(function (require) {
-    return ['$scope', '$http', 'BreweryService', function($scope, $http, blService) {
+    return ['$scope', '$rootScope', '$http', 'BreweryService', function($scope, $rootScope, $http, blService) {
         $scope.$on('BreweryService.breweries', function() {
             $scope.data = blService.items() && blService.items().data;
         });
-       // $scope.$apply();
+
+        $scope.notifySelect = function(event,brewery) {
+            console.log(brewery);
+            $rootScope.$broadcast('BreweryListController.selected', brewery);
+            event.preventDefault();
+        };
     }];
 });
