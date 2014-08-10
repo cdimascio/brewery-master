@@ -9,8 +9,10 @@ define(function (require) {
         function($scope, $http, $rootScope, blService, locService) {
 
         $scope.$on('BreweryListController.selected', function(event, brewery) {
-            $scope.brewery = brewery;
-            $scope.$apply();
+            if (map) {
+                $scope.brewery = brewery;
+                map.selectMarker(brewery.latitude, brewery.longitude);
+            }
         });
 
         if (!locService.location()) {
@@ -45,9 +47,9 @@ define(function (require) {
         }
 
         function content(brewery) {
-            return '<h4>' + brewery.brewery.name + '</h4>'+
+            return '<div class="mapInfoContainer">'+
                 '<a href="' + brewery.brewery.website + '" target="_blank">' +
-                brewery.brewery.name + '</a>';
+                brewery.brewery.name + '</a></div>';
         }
 
         function clickHandler(brewery) {

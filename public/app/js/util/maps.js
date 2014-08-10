@@ -1,7 +1,8 @@
 define(function (require) {
 
     function map(containerDiv) {
-        var markers = [];
+        var markers = []; // TODO ise idToMarkerMap only
+        var idToMarkerMap = {};
         var map = null;
         var infowindow = new google.maps.InfoWindow();
         return {
@@ -25,6 +26,7 @@ define(function (require) {
                     markers[i].setMap(null);
                 }
                 markers = [];
+                idToMarkerMap = {};
             },
             addMarker : function(lat, long, content, data, clickHandler) {
                 var marker = new google.maps.Marker({
@@ -45,7 +47,9 @@ define(function (require) {
                     };
                 })(data));
 
+                marker._infoContent = content;
                 markers.push(marker);
+                idToMarkerMap['_'+lat+''+long] = marker;
             },
             fitBounds : function() {
                 var bounds = new google.maps.LatLngBounds();
@@ -53,9 +57,12 @@ define(function (require) {
                     bounds.extend(markers[i].position);
                 }
                 map.fitBounds(bounds);
+            },
+            selectMarker : function(lat, long) {
+                var marker = idToMarkerMap['_'+lat+''+long];
+                infowindow.open(map, marker);
             }
-
-    };
+        }
     }
 
     function searchBox(map, handler) {

@@ -31,6 +31,11 @@ h4 {
     border-bottom: 1px solid rgba(0,0,0,.7)
 }
 
+.mapInfoContainer {
+    color: #000;
+    max-height: 40px;
+}
+
 a.list-group-item {
   border: none;
 }
