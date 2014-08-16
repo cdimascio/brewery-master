@@ -28,7 +28,7 @@ define(function (require) {
                 markers = [];
                 idToMarkerMap = {};
             },
-            addMarker : function(lat, long, content, data, clickHandler) {
+            addMarker: function (lat, long, content, data, clickHandler) {
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(lat, long),
                     map: map
@@ -42,24 +42,24 @@ define(function (require) {
                 })(marker, content));
 
                 google.maps.event.addListener(marker, 'click', (function (data) {
-                    return function() {
+                    return function () {
                         clickHandler(data);
                     };
                 })(data));
 
                 marker._infoContent = content;
                 markers.push(marker);
-                idToMarkerMap['_'+lat+''+long] = marker;
+                idToMarkerMap['_' + lat + '' + long] = marker;
             },
-            fitBounds : function() {
+            fitBounds: function () {
                 var bounds = new google.maps.LatLngBounds();
-                for (var i=0; i < markers.length; i++) {
+                for (var i = 0; i < markers.length; i++) {
                     bounds.extend(markers[i].position);
                 }
                 map.fitBounds(bounds);
             },
-            selectMarker : function(lat, long) {
-                var marker = idToMarkerMap['_'+lat+''+long];
+            selectMarker: function (lat, long) {
+                var marker = idToMarkerMap['_' + lat + '' + long];
                 infowindow.open(map, marker);
             }
         }
@@ -82,7 +82,7 @@ define(function (require) {
                 'class': 'btn-sm btn-primary btn-map'})
             .text('Search').appendTo(container);
 
-        google.maps.event.addDomListener(button[0], 'click', function(evt) {
+        google.maps.event.addDomListener(button[0], 'click', function (evt) {
             evt.searchText = $('#mapInput').val();
             handler(evt);
         });

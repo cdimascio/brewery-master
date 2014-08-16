@@ -9,11 +9,19 @@ require.config({
 		angularMocks: '../bower_components/angular-mocks/angular-mocks',
         jquery: '../bower_components/jquery/dist/jquery',
         bootstrap: '../bower_components/bootstrap/dist/js/bootstrap',
-		text: '../bower_components/requirejs-text/text'
+		text: '../bower_components/requirejs-text/text',
+        slick: '../bower_components/slick-carousel/slick/slick',
+        'angular-slick': '../bower_components/angular-slick/dist/slick'
 	},
 	shim: {
         "bootstrap": {
             deps: ["jquery"]
+        },
+        "slick": {
+            deps: ["jquery"]
+        },
+        "angular-slick": {
+            deps: ["slick"]
         },
 		'angular' : {'exports' : 'angular'},
 		'angularRoute': ['angular'],
@@ -37,6 +45,8 @@ require([
 	'app',
     'app-config',
 	'routes',
-    'async!http://maps.google.com/maps/api/js?sensor=false'
+    'async!http://maps.google.com/maps/api/js?sensor=false',
+    'slick',
+    'angular-slick'
 ]);
 

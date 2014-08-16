@@ -1,12 +1,10 @@
 'use strict';
 
-define(['angular', 'app'], function(angular, app) {
-
-	return app.config(['$routeProvider', function($routeProvider) {
+define(['angular', 'app'], function (angular, app) {
+    return app.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/home', {
-            templateUrl: 'app/partials/home.html',
-            controller: 'MainController'
+            templateUrl: 'app/partials/home.html'
         });
-		$routeProvider.otherwise({redirectTo: '/home'});
-	}]);
+        $routeProvider.otherwise({redirectTo: '/home'});
+    }]);
 });

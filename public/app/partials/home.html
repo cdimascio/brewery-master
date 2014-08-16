@@ -1,52 +1,18 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-1"><span
-                            class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
-                            class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="#">
-                        Brewery Master
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a class="navbar-news" href="#">Me</a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome Carmine<strong
-                                    class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#">Logout</a>
-                                </li>
-                                <li>
-                                    <a href="#">Profile</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-
-            </nav>
+            <div ng-include="'app/partials/navbar.html'"></div>
         </div>
     </div>
     <div class="row clearfix">
-        <div class="col-md-2 col-sm-4 column tight-right">
-        <div ng-include="'app/partials/brewery_list.html'"></div>
-            </div>
+        <div class="col-md-2 col-sm-4 column tight-left tight-right">
+            <div ng-include="'app/partials/brewery_list.html'"></div>
+        </div>
         <div class="col-md-5 col-sm-8 column tight-left tight-right">
             <div ng-include="'app/partials/brewery_map.html'"></div>
         </div>
-        <div class="col-md-5 col-sm-12 column">
+        <div class="col-md-5 col-sm-12 column tight-right">
             <div ng-include="'app/partials/brewery_details.html'"></div>
         </div>
-
     </div>
-    </div>
-
 </div>

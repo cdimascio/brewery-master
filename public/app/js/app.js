@@ -7,6 +7,7 @@ define([
 		return angular.module('beerApp', [
 			'ngRoute',
             'beerApp.controllers',
-            'beerApp.services'
+            'beerApp.services',
+            'slick'
 		]);
 });

@@ -1,6 +1,5 @@
 define(function () {
     return function ($http, $q, $rootScope) {
-        // ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
         var res = null;
         return {
             query: query,
@@ -10,9 +9,11 @@ define(function () {
         function query(locality, region) {
             var request = $http({
                 method: "get",
-                url: '/breweries',//?postalCode', //locality="+encodeURIComponent(locality),
+                url: '/breweries',
                 params: {
                     region: locality
+                    //postalCode
+                    //locality
                 }
             });
             return request.then(handleSuccess, handleError);

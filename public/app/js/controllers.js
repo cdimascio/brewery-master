@@ -4,8 +4,9 @@ define(function (require) {
         angular = require('angular'),
         module = angular.module('beerApp.controllers', ['beerApp.services']);
 
-    module.controller('BreweryMapController', require('controllers/brewery_map_ctrl'));
-    module.controller('BreweryListController', require('controllers/brewery_list_ctrl'));
-    module.controller('BrewerySelectedController', require('controllers/brewery_brewery_ctrl'));
-    module.controller('MainController', require('controllers/main_ctrl'));
+    module.controller('BreweryMapController', require('controller/ctrl.brewery.map'));
+    module.controller('BreweryListController', require('controller/ctrl.brewery.list'));
+    module.controller('BrewerySelectedController', require('controller/ctrl.brewery.details'));
+    module.controller('AnswersController', require('controller/ctrl.answers'));
+    module.controller('QuestionController', require('controller/ctrl.question'));
 });

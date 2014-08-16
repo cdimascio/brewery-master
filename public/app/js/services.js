@@ -3,6 +3,7 @@ define(function (require) {
         angular = require('angular'),
         module = angular.module('beerApp.services', []);
 
-    module.service("BreweryService", require('service/brewery_svc'));
-    module.service('LocationService', require('service/location_svc'));
+    module.service("BreweryService", require('service/svc.brewery'));
+    module.service('LocationService', require('service/svc.location'));
+    module.service('QaapiService', require('service/svc.qaapi'));
 });
