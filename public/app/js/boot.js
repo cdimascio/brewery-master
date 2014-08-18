@@ -37,16 +37,20 @@ require.config({
 
 window.name = "NG_DEFER_BOOTSTRAP!";
 
-// Start application
 require([
+    'angular',
+    'angularRoute',
     'jquery',
     'bootstrap',
-	'angular',
-	'app',
-    'app-config',
-	'routes',
+    'app',
+    'controllers',
+    'services',
+    'directives',
+    'filters',
+    'routes',
     'async!http://maps.google.com/maps/api/js?sensor=false',
     'slick',
     'angular-slick'
-]);
-
+], function () {
+    angular.bootstrap(document, ['beerApp']);
+});

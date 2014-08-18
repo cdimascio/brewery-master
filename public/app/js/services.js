@@ -1,7 +1,6 @@
 define(function (require) {
-    var app = require('app'),
-        angular = require('angular'),
-        module = angular.module('beerApp.services', []);
+    require('angular');
+    var module = angular.module('beerApp.services', []);
 
     module.service("BreweryService", require('service/svc.brewery'));
     module.service('LocationService', require('service/svc.location'));

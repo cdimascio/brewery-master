@@ -1,8 +1,8 @@
 'use strict';
+
 define(function (require) {
-    var app = require('app'),
-        angular = require('angular'),
-        module = angular.module('beerApp.controllers', ['beerApp.services']);
+    require('angular');
+    var module = angular.module('beerApp.controllers', ['beerApp.services']);
 
     module.controller('BreweryMapController', require('controller/ctrl.brewery.map'));
     module.controller('BreweryListController', require('controller/ctrl.brewery.list'));
