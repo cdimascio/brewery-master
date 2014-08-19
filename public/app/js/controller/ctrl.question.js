@@ -9,11 +9,10 @@ define(function () {
                     },
                     "questionText": text
                 }
-            }
+            };
 
+            // TODO disable buttons
             qaapiService.query(question).then(function (r) {
-                // TODO disable buttons
-                console.log(r);
                 // TODO enable buttons
             });
         }
