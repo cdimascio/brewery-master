@@ -17,6 +17,8 @@
     "requirejs-text": "~2.0.10",
     "requirejs-plugins": "~1.0.2",
     "html5-boilerplate": "~4.3.0",
-    "bootstrap": "~3.2.0"
+    "bootstrap": "~3.2.0",
+    "angular-ladda": "~0.1.6",
+    "angular-slick": "~0.1.10"
   }
 }

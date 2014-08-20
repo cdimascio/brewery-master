@@ -11,9 +11,9 @@ define(function () {
                 }
             };
 
-            // TODO disable buttons
+            $scope.isLoading = true;
             qaapiService.query(question).then(function (r) {
-                // TODO enable buttons
+                $scope.isLoading = false;
             });
         }
     }];

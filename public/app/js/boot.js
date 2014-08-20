@@ -11,7 +11,9 @@ require.config({
         bootstrap: '../bower_components/bootstrap/dist/js/bootstrap',
 		text: '../bower_components/requirejs-text/text',
         slick: '../bower_components/slick-carousel/slick/slick',
-        'angular-slick': '../bower_components/angular-slick/dist/slick'
+        'angular-slick': '../bower_components/angular-slick/dist/slick',
+        spin: '../bower_components/spin.js/spin',
+        ladda: '../bower_components/ladda/dist/ladda.min'
 	},
 	shim: {
         "bootstrap": {
@@ -22,6 +24,13 @@ require.config({
         },
         "angular-slick": {
             deps: ["slick"]
+        },
+        "spin" : {
+            exports : "Spinner"
+        },
+        "ladda": {
+            deps: ['spin'],
+            exports: "Ladda"
         },
 		'angular' : {'exports' : 'angular'},
 		'angularRoute': ['angular'],
@@ -50,7 +59,9 @@ require([
     'routes',
     'async!http://maps.google.com/maps/api/js?sensor=false',
     'slick',
-    'angular-slick'
+    'angular-slick',
+    'spin',
+    'ladda'
 ], function () {
     angular.bootstrap(document, ['beerApp']);
 });
