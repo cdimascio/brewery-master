@@ -1,10 +1,11 @@
 'use strict';
 
-define(['angular'], function() {
+define(['angular'], function () {
     return angular.module('beerApp', [
         'ngRoute',
         'beerApp.services',
         'beerApp.controllers',
+        'beerApp.ladda',
         'slick'
     ]);
 });

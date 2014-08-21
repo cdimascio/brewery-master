@@ -17,8 +17,8 @@
                                placeholder="What would you like to know beer?" ng-model="text">
 
                         <div class="input-group-btn">
-                            <button class="btn btn-primary ladda-button" type="submit" id="question-submit-button"
-                                    data-style="expand-right" tabindex="-1" ng-click="ask(text)">
+                            <button class="btn btn-primary ladda-button" ladda="isLoading" ng-click="ask(text)"
+                                    data-style="expand-left">
                                 <span class="ladda-label">Ask</span>
                             </button>
                             <button id="samples-dropdown" type="button" class="btn btn-primary dropdown-toggle"
@@ -34,13 +34,19 @@
                     <div ng-show="answers">
                         <section id="features" class="blue" ng-init="index=1">
                             <div class="content">
-                               <slick class="slider single-item" data="answers" init-onload="true" slides-to-show="1" slides-to-scroll="1">
-                                    <div ng-repeat="evidence in answers" class="answer-container">
-                                        <h3>{{ evidence.text }}</h3>
-                                    </div>
+                                <slick id="answer-carousel" class="slider single-item" data="answers"
+                                       init-onload="false" onslides-to-show="1" slides-to-scroll="1" onafter-change="onAfterChange()">
+                                    <!-- <div ng-repeat="evidence in answers" class="answer-container" >
+                                    {{ evidence.text }}
+                                    </div>-->
+                                    <div class="answer-container">{{ answers[0].text }}</div>
+                                    <div class="answer-container">{{ answers[1].text }}</div>
+                                    <div class="answer-container">{{ answers[2].text }}</div>
+                                    <div class="answer-container">{{ answers[3].text }}</div>
+                                    <div class="answer-container">{{ answers[4].text }}</div>
                                 </slick>
-                                </div>
-                            </section>
+                            </div>
+                        </section>
                     </div>
                 </div>
             </div>
