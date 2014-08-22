@@ -5,4 +5,5 @@ define(function (require) {
     module.service("BreweryService", require('service/svc.brewery'));
     module.service('LocationService', require('service/svc.location'));
     module.service('QaapiService', require('service/svc.qaapi'));
+    module.service('TweetService', require('service/svc.tweet'));
 });

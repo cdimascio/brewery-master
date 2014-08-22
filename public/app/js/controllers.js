@@ -9,4 +9,5 @@ define(function (require) {
     module.controller('BrewerySelectedController', require('controller/ctrl.brewery.details'));
     module.controller('AnswersController', require('controller/ctrl.answers'));
     module.controller('QuestionController', require('controller/ctrl.question'));
+    module.controller('TweetController', require('controller/ctrl.tweets'));
 });

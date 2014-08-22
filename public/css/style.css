@@ -60,6 +60,7 @@ a.list-group-item {
 
 .details-jumbotron {
     height: 300px;
+    padding-bottom:0px;
 }
 
 .horizontal-grad {
@@ -88,6 +89,15 @@ a.list-group-item {
     min-height:300px;
 }
 
+.main-column-container {
+    height: 100%;
+}
+
+.brewery-details {
+    margin-right: -1px;
+    margin-left: 0px;
+}
+
 @media (min-width: 768px) {
     #map-canvas {
         min-height:300px;
@@ -97,14 +107,16 @@ a.list-group-item {
     }
     .details-jumbotron {
         height: 300px;
+        padding-bottom:0px;
     }
 
-    .md-tight-left, .tight-left {
+    .lg-tight-left, .tight-left {
         padding-left: 0px;
     }
 
     .tight-right {
         padding-right: 0px;
+        padding-bottom:20px;
     }
 }
 @media (min-width: 992px) {
@@ -116,11 +128,12 @@ a.list-group-item {
     }
     .details-jumbotron {
         height: 600px;
+        padding-bottom:0px;
     }
+
     .tight-left {
         padding-left: 0px;
     }
-
     .tight-right {
         padding-right: 0px;
     }
@@ -134,6 +147,7 @@ a.list-group-item {
     }
     .details-jumbotron {
         height: 600px;
+        padding-bottom:0px;
     }
     .tight-left {
         padding-left: 0px;
@@ -142,10 +156,67 @@ a.list-group-item {
     .tight-right {
         padding-right: 0px;
     }
-
 }
 
 .answer-container {
     overflow: auto;
     max-height: 350px;
+}
+
+/** Twitter **/
+
+.twitter-container {
+
+}
+
+.twitter-article {
+    background-color: rgba(0,0,0,.6);
+
+}
+
+.twitter-pic {
+    float: left;
+    padding: 5px;
+}
+
+.twitter-text {
+
+}
+
+.tweet-profile-link {
+
+}
+
+.tweet-time {
+
+}
+
+.retweet-indicator {
+
+}
+
+.twitter-actions {
+
+}
+
+.intent {
+
+}
+
+.intent-reply {
+
+}
+
+.intent-retweet {
+
+}
+
+.intent-fave {
+
+}
+
+
+.col-xs-1, .col-xs-1, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+    padding-left: 0px;
+    padding-right: 0px;
 }

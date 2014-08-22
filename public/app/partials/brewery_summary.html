@@ -1,0 +1,36 @@
+<div ng-show="brewery.name">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">
+                {{brewery.brewery.name}}
+            </h2>
+        </div>
+        <div class="panel-body">
+            <img class="brewery-details-img" src="{{brewery.brewery.images.medium}}">
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                Description
+            </h4>
+        </div>
+        <div class="panel-body">
+            <p>
+                {{brewery.brewery.description}}
+            </p>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                Address
+            </h4>
+        </div>
+        <div class="panel-body">
+            <p>
+                {{brewery.streetAddress}} {{brewery.locality}} {{brewery.region}} {{brewery.phone}}
+            </p>
+        </div>
+    </div>
+</div>

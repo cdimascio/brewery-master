@@ -1,0 +1,43 @@
+<div ng-controller="TweetController">
+    <div class="twitter-container">
+    <div ng-repeat="tweet in tweets">
+
+        <div class="twitter-article">
+            <div class="twitter-pic">
+                <a ng-href="https://twitter.com/{{tweet.user.screen_name}}" target="_blank">
+                    <img ng-src="{{tweet.user.profile_image_url}}" width="42" height="42"/></a>
+            </div>
+            <div class="twitter-text">
+                <p>
+                    <span class="tweet-profile-link">
+                        <strong>
+                            <a ng-href="https://twitter.com/{{tweet.user.screen_name}}" target="_blank">{{tweet.user.name}}</a>
+                        </strong>
+                        <a ng-href="https://twitter.com/{{tweet.user.screen_name}}" target="_blank">@{{tweet.user.screen_name}}</a>
+                    </span>
+                    <span class="tweet-time">
+                        <a ng-href="https://twitter.com/{{tweet.user.screen_name}}/status/{{tweet.id_str}}" target="_blank">{{tweet.created_at  | date : format}}</a>
+                    </span>
+                    <br/>{{tweet.text}}
+                </p>
+            </div>
+            <div ng-show="tweet.retweeted" class="retweet-indicator"></div>
+            <div id="twitter-actions">
+                <div class="intent intent-reply">
+                    <a ng-href="https://twitter.com/intent/tweet?in_reply_to={{tweet.id_str}}" title="Reply"></a>
+                </div>
+                <div class="intent intent-retweet">
+                    <a ng-href="https://twitter.com/intent/retweet?tweet_id={{tweet.id_str}}" title="Retweet"></a>
+                </div>
+                <div class="intent intent-fave">
+                    <a ng-href="https://twitter.com/intent/favorite?tweet_id={{tweet.id_str}}'" title="Favorite"></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+
+</div>
+

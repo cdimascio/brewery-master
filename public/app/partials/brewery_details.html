@@ -1,56 +1,27 @@
 <div ng-controller="BrewerySelectedController">
-    <div class="main-column-container overflow-container">
-        <div ng-show="brewery.name">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h2 class="panel-title">
-                        {{brewery.brewery.name}}
-                    </h2>
-                </div>
-                <div class="panel-body">
-                    <img class="brewery-details-img" src="{{brewery.brewery.images.medium}}">
-                </div>
+    <div ng-show="brewery.name">
+        <div class="row clearfix main-column-container overflow-container brewery-details">
+            <div class="col-xs-12 col-sm-8 col-md-12 col-lg-12 column">
+                <div ng-include="'app/partials/brewery_summary.html'"></div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Description
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    <p>
-                        {{brewery.brewery.description}}
-                    </p>
-                    <div ng-include="'app/partials/brewery_twitter.html'"></div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Address
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    <p>
-                        {{brewery.streetAddress}} {{brewery.locality}} {{brewery.region}} {{brewery.phone}}
-                    </p>
-                </div>
+            <div class="col-xs-12 col-sm-4 col-md-12 col-lg-12 column">
+                <div ng-include="'app/partials/brewery_tweets.html'"></div>
             </div>
         </div>
-        <div ng-show="!brewery.name">
-            <div class="jumbotron details-jumbotron  horizontal-grad">
-                <h1>
-                    Welcome to Brewery Master
-                </h1>
+    </div>
+    <div ng-show="!brewery.name">
+        <div class="jumbotron details-jumbotron  horizontal-grad">
+            <h1>
+                Welcome to Brewery Master
+            </h1>
 
-                <p>
-                    Select a marker on the map or a item in the list to view details.
-                </p>
+            <p>
+                Select a marker on the map or a item in the list to view details.
+            </p>
 
-                <p>
-                    <a class="btn btn-primary btn-large" href="#">Learn more</a>
-                </p>
-            </div>
+            <p>
+                <a class="btn btn-primary btn-large" href="#">Learn more</a>
+            </p>
         </div>
     </div>
 </div>
