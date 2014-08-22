@@ -5,6 +5,13 @@
                 <div ng-include="'app/partials/brewery_info.html'"></div>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-12 col-lg-12 column">
+                <div ng-controller="TweetController">
+                    <div ng-controller="UserModelBuilderController">
+                    <a href="#" class="btn btn-lg btn-primary btn-brewery-vibe"
+                       data-toggle="modal"
+                       data-target="#umModal" ng-click="build()">What's the Vibe?</a>
+                    </div>
+                </div>
                 <div ng-include="'app/partials/brewery_tweets.html'"></div>
             </div>
         </div>
@@ -16,7 +23,7 @@
             </h1>
 
             <p>
-                Select a marker on the map or a item in the list to view details.
+                Select a marker on the map or a item in the list to learn about the brewery.
             </p>
 
             <p>

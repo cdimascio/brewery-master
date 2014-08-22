@@ -10,4 +10,6 @@ define(function (require) {
     module.controller('AnswersController', require('controller/ctrl.answers'));
     module.controller('QuestionController', require('controller/ctrl.question'));
     module.controller('TweetController', require('controller/ctrl.tweets'));
+    module.controller('UserModelBuilderController', require('controller/ctrl.usermodel.builder'));
+    module.controller('UserModelResultController', require('controller/ctrl.usermodel.result'));
 });

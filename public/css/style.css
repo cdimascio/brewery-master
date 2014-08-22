@@ -1,5 +1,3 @@
-
-
 h1 {
     font-size: 1.7em;
 }
@@ -16,20 +14,57 @@ h4 {
     font-size: 1.2em;
 }
 
+/** General **/
+.overflow-container {
+    overflow:auto;
+    margin-bottom: 0px;
+}
+.main-column-container {
+    height: 300px;
+}
+.main-column-container {
+    height: 100%;
+}
+
+/** Buttons **/
 .ladda-button {
     padding: 8px 18px;
     font-size: 15px;
+}
+/** Vibe **/
+.btn-brewery-vibe {
+
+}
+
+/** Brewery Details **/
+.brewery-details {
+    margin-right: -1px;
+    margin-left: 0px;
 }
 .brewery-details-img {
     margin:auto;
     width: 100%;
     padding: 0px;
 }
-
 .brewery-details-title {
     font-size: 2.1em;
 }
+.details-jumbotron {
+    height: 300px;
+    padding-bottom:0px;
+}
 
+/** Brewery List **/
+.brewery-list-item-container {
+    overflow: hidden;
+    height:100%;
+}
+.brewery-list-icon {
+    float: left;
+    height: 32px;
+    width: 32px;
+    padding: 2px;
+}
 .list-group-item {
     position: relative;
     display: block;
@@ -37,69 +72,86 @@ h4 {
     background-color: #262626;/*#4e5d6c;*/
     border-bottom: 1px solid rgba(0,0,0,.7)
 }
-
-.mapInfoContainer {
-    color: #000;
-    max-height: 40px;
-}
-
-a.list-group-item {
-  border: none;
-}
-
 .list-group-item-alternate {
     background-color:#262626;/* #22313f;  #2b3e50;*/
 }
-
-.brewery-list-item-container {
-    overflow: hidden;
-    height:100%;
+a.list-group-item {
+    border: none;
 }
 
-.overflow-container {
-    overflow:auto;
-    margin-bottom: 0px;
-}
-
-.details-jumbotron {
-    height: 300px;
-    padding-bottom:0px;
-}
-
-.horizontal-grad {
-    background: -moz-linear-gradient(left,  rgba(38,38,38,0.50) 0%, rgba(38,38,38,1) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(38,38,38,0.50)), color-stop(100%,rgba(38,38,38,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(left,  rgba(38,38,38,0.50) 0%,rgba(38,38,38,0.85) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(left,  rgba(38,38,38,0.50) 0%,rgba(38,38,38,1) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(left,  rgba(38,38,38,0.50) 0%,rgba(38,38,38,1) 100%); /* IE10+ */
-    background: linear-gradient(to right,  rgba(38,38,38,0.50) 0%,rgba(38,38,38,1) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4f262626', endColorstr='#d9262626',GradientType=1 ); /* IE6-9 */
-}
-
-.main-column-container {
-    height: 300px;
-    /*border: solid 1px rgba(0,0,0,0.5);*/
-}
-
-.brewery-list-icon {
-    float: left;
-    height: 32px;
-    width: 32px;
-    padding: 2px;
+/** Brewery Map **/
+.mapInfoContainer {
+    color: #000;
+    max-height: 40px;
 }
 
 #map-canvas {
     min-height:300px;
 }
 
-.main-column-container {
-    height: 100%;
+/** Q and A **/
+.answer-container {
+    overflow: auto;
+    max-height: 350px;
 }
 
-.brewery-details {
-    margin-right: -1px;
-    margin-left: 0px;
+/** Twitter **/
+.twitter-container {
+
 }
+.twitter-article {
+    background-color: rgba(38,38,38,0.8);
+    float: left;
+    width: 100%;
+    margin-bottom: 3px;
+}
+.twitter-article a {
+    color: #f0ad4e;
+}
+.twitter-pic {
+    float: left;
+    padding: 5px;
+}
+.twitter-text {
+
+}
+.tweet-profile-link {
+
+}
+.tweet-time {
+
+}
+.retweet-indicator {
+
+}
+.twitter-actions {
+
+}
+.intent {
+
+}
+.intent-reply {
+
+}
+.intent-retweet {
+
+}
+.intent-fave {
+
+}
+
+/** Dialogs **/
+/** User Modeling **/
+.usermodel-modal {
+    width: 85%;
+}
+
+/* Columns */
+.col-xs-1, .col-xs-1, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 
 @media (min-width: 768px) {
     #map-canvas {
@@ -161,71 +213,12 @@ a.list-group-item {
     }
 }
 
-.answer-container {
-    overflow: auto;
-    max-height: 350px;
-}
-
-/** Twitter **/
-
-.twitter-container {
-
-}
-
-.twitter-article {
-    background-color: rgba(38,38,38,0.8);
-    float: left;
-    width: 100%;
-    margin-bottom: 3px;
-}
-
-.twitter-article a {
-    color: #f0ad4e; /*#d9534f;*/
-}
-
-.twitter-pic {
-    float: left;
-    padding: 5px;
-}
-
-.twitter-text {
-
-}
-
-.tweet-profile-link {
-
-}
-
-.tweet-time {
-
-}
-
-.retweet-indicator {
-
-}
-
-.twitter-actions {
-
-}
-
-.intent {
-
-}
-
-.intent-reply {
-
-}
-
-.intent-retweet {
-
-}
-
-.intent-fave {
-
-}
-
-
-.col-xs-1, .col-xs-1, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
-    padding-left: 0px;
-    padding-right: 0px;
+.horizontal-grad {
+    background: -moz-linear-gradient(left,  rgba(38,38,38,0.50) 0%, rgba(38,38,38,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(38,38,38,0.50)), color-stop(100%,rgba(38,38,38,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  rgba(38,38,38,0.50) 0%,rgba(38,38,38,0.85) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  rgba(38,38,38,0.50) 0%,rgba(38,38,38,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  rgba(38,38,38,0.50) 0%,rgba(38,38,38,1) 100%); /* IE10+ */
+    background: linear-gradient(to right,  rgba(38,38,38,0.50) 0%,rgba(38,38,38,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4f262626', endColorstr='#d9262626',GradientType=1 ); /* IE6-9 */
 }

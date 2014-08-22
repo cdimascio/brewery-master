@@ -1,48 +1,30 @@
-<!-- Modal -->
 <div class="modal fade" id="umModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog usermodel-modal">
         <div class="modal-content">
-            <div class="modal-body">
-                <p>Paste some text (>1000 words, preferrably) and click Analyze to run System U analytics.
 
-                <form action="/analyzeText" method="POST" enctype="multipart/form-data">
-                    <textarea name="text" style="width:90%" rows="15">{{text}}</textarea>
-                    <br/>
-                    <input type="submit" class="btn" value="Analyze">
-                </form>
-                </p>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Brewery Model</h4>
             </div>
-            <!-- Commenting out to remove errors - MUST update and include it-->
-            <!-- TODO create generic dialog directive -->
-            <!--<div>
-                {{#msg}}
-                <div><i>{{msg}}</i></div>
-                {{/msg}}
-                <table>
-                    <tr>
-                        <td valign="top">
-                            {{#traits.length}}
-                            <h2>Percentiles</h2>
-                            {{/traits.length}}
-                            <table class="table">
-                                {{#traits}}
+
+            <div class="modal-body">
+                <div ng-controller="UserModelResultController">
+                    <div class="answer-container">
+                        <div ng-repeat="item in analysisFlat">
+                            <table>
                                 <tr>
-                                    <td>
-                                        {{#title}}<b>{{/title}}
-                                        {{id}}
-                                        {{#title}}</b>{{/title}}
-                                    </td>
-                                    <td>{{value}}</td>
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.value}}</td>
                                 </tr>
-                                {{/traits}}
                             </table>
-                        </td>
-                        <td valign="top">
-                            {{#viz}}<h2>Visualization</h2>{{&viz}}{{/viz}}
-                        </td>
-                    </tr>
-                </table>
-            </div>-->
+                        </div>
+                    </div>
+                    <div class="answer-container">
+                        <div ng-bind-html="visualization"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
