@@ -170,8 +170,10 @@ a.list-group-item {
 }
 
 .twitter-article {
-    background-color: rgba(0,0,0,.6);
-
+    background-color: rgba(38,38,38,0.50);
+    float: left;
+    width: 100%;
+    margin-bottom: 3px;
 }
 
 .twitter-pic {
