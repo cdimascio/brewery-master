@@ -6358,7 +6358,8 @@ label,
     border: none;
 }
 .panel-default > .panel-heading {
-    background-color: #333333;
+    /*background-color: #333333;*/
+    background-color: #485563;
     color: #ebebeb;
 }
 .thumbnail {

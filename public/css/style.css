@@ -25,6 +25,11 @@ h4 {
 .brewery-details-img {
     margin:auto;
     width: 100%;
+    padding: 0px;
+}
+
+.brewery-details-title {
+    font-size: 2.1em;
 }
 
 .list-group-item {
