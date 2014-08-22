@@ -1,6 +1,4 @@
-a {
-  color: #00B7FF;
-}
+
 
 h1 {
     font-size: 1.7em;
@@ -175,10 +173,14 @@ a.list-group-item {
 }
 
 .twitter-article {
-    background-color: rgba(38,38,38,0.6);
+    background-color: rgba(38,38,38,0.8);
     float: left;
     width: 100%;
     margin-bottom: 3px;
+}
+
+.twitter-article a {
+    color: #f0ad4e; /*#d9534f;*/
 }
 
 .twitter-pic {
