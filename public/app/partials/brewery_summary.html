@@ -1,15 +1,15 @@
 <div ng-show="brewery.name">
-    <div class="panel panel-danger">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <h2 class="panel-title brewery-details-title">
                 {{brewery.brewery.name}}
             </h2>
         </div>
         <div class="panel-body brewery-details-img">
-            <img class="brewery-details-img" src="{{brewery.brewery.images.medium}}">
+            <img class="brewery-details-img" ng-src="{{brewery.brewery.images.medium}}">
         </div>
     </div>
-    <div class="panel panel-success">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
                 Description
