@@ -3,8 +3,17 @@ define(function () {
         var res = null;
         return {
             query: query,
+            beers: beers,
             items: items
         };
+
+        function beers(breweryId) {
+            var request = $http({
+                method: "get",
+                url: '/brewery/'+breweryId+'/beers'
+            });
+            return request.then(handleSuccess('BreweryService.brewery.beers'), handleError);
+        }
 
         function query(locality, region) {
             var request = $http({
@@ -16,7 +25,7 @@ define(function () {
                     //locality
                 }
             });
-            return request.then(handleSuccess, handleError);
+            return request.then(handleSuccess('BreweryService.breweries'), handleError);
         }
 
         function handleError(response) {
@@ -25,13 +34,20 @@ define(function () {
             }
             return $q.reject(response.data.message);
         }
-
+/*
         function handleSuccess(response) {
             res = response.data;
             $rootScope.$broadcast("BreweryService.breweries");
             return res;
-        }
+        }*/
 
+        function handleSuccess(topic) {
+            return function (response) {
+                res = response.data;
+                $rootScope.$broadcast(topic, res);
+                return res;
+            }
+        }
         function items() {
             return res;
         }

@@ -6,13 +6,15 @@
             </div>
             <div class="col-xs-12 col-sm-4 col-md-12 col-lg-12 column">
                 <div ng-controller="TweetController">
+                    <div ng-show="tweets">
                     <div ng-controller="UserModelBuilderController">
                     <a href="#" class="btn btn-lg btn-primary btn-brewery-vibe"
                        data-toggle="modal"
-                       data-target="#umModal" ng-click="build()">What's the Vibe?</a>
+                       data-target="#umModal" ng-click="build()">How's the Vibe?</a>
                     </div>
                 </div>
                 <div ng-include="'app/partials/brewery_tweets.html'"></div>
+                </div>
             </div>
         </div>
     </div>

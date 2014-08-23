@@ -28,6 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/breweries', brewerydb.breweries);
+app.get('/brewery/:id/beers', brewerydb.breweryBeers);
 app.post('/question', qaapi.question);
 app.post('/um/profile', um.analyze);
 app.post('/um/visualize', um.visualize);

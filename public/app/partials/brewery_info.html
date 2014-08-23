@@ -4,6 +4,7 @@
             <h2 class="panel-title brewery-details-title">
                 {{brewery.brewery.name}}
             </h2>
+            <div><small>{{brewery.streetAddress}} {{brewery.locality}} {{brewery.region}} {{brewery.phone}}</small></div>
         </div>
         <div class="panel-body brewery-details-img">
             <img class="brewery-details-img" ng-src="{{brewery.brewery.images.medium}}">
@@ -24,13 +25,11 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                Address
+                Beers
             </h4>
         </div>
         <div class="panel-body">
-            <p>
-                {{brewery.streetAddress}} {{brewery.locality}} {{brewery.region}} {{brewery.phone}}
-            </p>
+            <div ng-include="'app/partials/brewery_beers.html'"></div>
         </div>
     </div>
 </div>
