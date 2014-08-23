@@ -9,8 +9,8 @@ var twitter = require('twitter'),
     });
 
 exports.tweet = function(req, res) {
-    var text = req.query.text;
-    twit.search(text, req.body.params, function(data) {
+    var q = req.query.q;
+    twit.search(q, req.query, function(data) {
         res.json({
             tweets : data.statuses
         });

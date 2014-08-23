@@ -5,7 +5,6 @@ define(['angular'], function () {
         'ngRoute',
         'beerApp.services',
         'beerApp.controllers',
-        'beerApp.ladda',
-        'slick'
+        'beerApp.directives'
     ]);
 });

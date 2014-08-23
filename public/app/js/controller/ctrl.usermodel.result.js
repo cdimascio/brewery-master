@@ -1,7 +1,7 @@
 'use strict'
 
 define(function () {
-    return ['$scope', '$sce', 'UserModelingService', function ($scope, $sce, userModelingService) {
+    return ['$scope', '$sce', function ($scope, $sce) {
         $scope.$on('UserModelingService.visualization', function (event, visualization) {
             $scope.visualization = $sce.trustAsHtml(visualization);
         });

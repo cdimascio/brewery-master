@@ -6,17 +6,12 @@ exports.analyze = function(req, res) {
         'uri' : userModelingEnv.api_url + 'api/v2/profile',
         'method' : "POST",
         'headers' : {
-            'Content-Type' : 'application/json',
-            'Content-Length': JSON.stringify(req.body).length
+            'Content-Type' : 'application/json'
         },
         auth : {
             user : userModelingEnv.username,
-            pass : userModelingEnv.password,
-            sendImmediately: false
+            pass : userModelingEnv.password
         },
-        rejectUnauthorized: false,
-        requestCert: true,
-        agent: false,
         json : req.body
     }, function(error, response, body) {
         if (error) {
@@ -36,12 +31,8 @@ exports.visualize = function(req, res) {
         },
         auth : {
             user : userModelingEnv.username,
-            pass : userModelingEnv.password,
-            sendImmediately: false
+            pass : userModelingEnv.password
         },
-        rejectUnauthorized: false,
-        requestCert: true,
-        agent: false,
         body : JSON.stringify(req.body)
     }, function(error, response, body) {
         if (error) {

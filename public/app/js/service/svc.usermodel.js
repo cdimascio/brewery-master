@@ -38,9 +38,5 @@ define(function () {
                 return res;
             }
         }
-
-        function items() {
-            return res;
-        }
     }
 });
