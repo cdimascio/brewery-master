@@ -3,7 +3,6 @@ define(function () {
         $scope.$on('BreweryMap.selected', function (event, brewery) {
             $scope.brewery = brewery;
             tweetService.query(brewery.brewery.name);
-            $scope.$apply();
         });
         $scope.$on('BreweryListController.selected', function (event, brewery) {
             $scope.brewery = brewery;
