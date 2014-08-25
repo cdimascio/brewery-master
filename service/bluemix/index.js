@@ -1,5 +1,6 @@
 exports.userModeling = function() {
     return vcapServices()["systemudemoapisl-staging"][0].credentials;
+    //return vcapServices()["systemudemoapisl"][0].credentials;
 }
 
 exports.qaApi = function () {

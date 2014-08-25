@@ -11,9 +11,11 @@ define(function (require) {
             var profileData = require('util/um').
                 tweetsToProfileData($scope.$parent.tweets);
 
-            userModelingService.analyze(profileData).then(function (r) {
-                userModelingService.visualize(r).then(function (r) {
-                });
+	    userModelingService.analyze(profileData).then(function (r) {
+	        var keepTraits = ['Openness', 'Love', 'Anger', 'Anxiety', 'Cheerfulness', 'Excitement', 'Self-enhancement', 'Monday', 'Tuesday', 'Friendliness'];
+	        var r = require('util/um').filterTraits(r,keepTraits);
+	        userModelingService.visualize(r).then(function (r) {
+                })
             });
         }
     }];

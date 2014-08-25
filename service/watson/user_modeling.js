@@ -2,7 +2,8 @@
 var userModelingEnv = require('../bluemix').userModeling();
 
 exports.analyze = function(req, res) {
-    require('request')({
+   console.log('json to be analyzed: ' + JSON.stringify(req.body));
+   require('request')({
         'uri' : userModelingEnv.api_url + 'api/v2/profile',
         'method' : "POST",
         'headers' : {
@@ -22,6 +23,7 @@ exports.analyze = function(req, res) {
 }
 
 exports.visualize = function(req, res) {
+    console.log('json visualize ' + JSON.stringify(req.body));
     require('request')({
         'uri' : userModelingEnv.api_url + 'api/v2/visualize',
         'method' : "POST",

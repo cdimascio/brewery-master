@@ -20,7 +20,33 @@ define(function () {
         return res;
     }
 
+    function filterTraits(umdata,keeptraits) {
+	var local = umdata;
+	function traitExists(object) {
+	  if(keeptraits.indexOf(object.name) >= 0) {
+	   return true;
+	  }
+	  return false;
+	};
+	var f = function(t) {
+	    if(t.children) {
+		for(var i=0; i<t.children.length; i++) {
+	        var element = t.children[i];
+		   if(element.children) {
+		    f(element);
+		   } else {
+		    var newtarr = t.children.filter(traitExists);
+		    t.children = newtarr;
+		   }
+		 }
+	     }
+	};
+     f(local.tree);
+     return local;
+    }
+
     return {
-        tweetsToProfileData: tweetsToProfileData
+        tweetsToProfileData: tweetsToProfileData,
+	filterTraits: filterTraits
     }
 });
