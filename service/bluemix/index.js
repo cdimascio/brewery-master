@@ -28,6 +28,7 @@ function parseVcapServices() {
         JSON.parse(process.env.VCAP_SERVICES);
 }
 
+// TODO remove for class
 var testEnvironment = {
     "Watson QAAPI-0.1": [
         {
@@ -76,21 +77,3 @@ var testEnvironment = {
         }
     ]
 };
-
-
-/*
-
-{
-    "systemudemoapisl": [
-    {
-        "name": "User Modeling-ws",
-        "label": "systemudemoapisl",
-        "plan": "systemudemo_plan_free",
-        "credentials": {
-            "api_url": "http://23.246.192.162:9080/systemu",
-            "username": "cae8dde5-a306-43c3-90e6-085da01022b3",
-            "password": "UchbmkHHCEa1"
-        }
-    }
-]
-}*/

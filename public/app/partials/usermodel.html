@@ -10,18 +10,22 @@
 
             <div class="modal-body">
                 <div ng-controller="UserModelResultController">
-                    <div class="answer-container">
-                        <div ng-repeat="item in analysisFlat">
-                            <table>
-                                <tr>
-                                    <td>{{item.id}}</td>
-                                    <td>{{item.value}}</td>
-                                </tr>
-                            </table>
+                    <div>
+                        <div class="row clearfix">
+                            <div class="col-sm-2 column">
+                                <div ng-repeat="item in analysisFlat">
+                                    <table>
+                                        <tr>
+                                            <td>{{item.id}}</td>
+                                            <td>{{item.value}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-sm-10 column answer-container">
+                                <div ng-bind-html="visualization"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="answer-container">
-                        <div ng-bind-html="visualization"></div>
                     </div>
                 </div>
             </div>
