@@ -1,0 +1,9 @@
+<div ng-controller="BreweryBeersController">
+    <div class="row clearfix" ng-repeat="row in rows track by $index">
+        <div class="col-sm-4 column" ng-repeat="col in cols track by $index">
+            <div><h3>{{beers[$parent.$index * numColumns + $index].name}}</h3></div>
+            <img ng-src="{{beers[$parent.$index * numColumns + $index].labels.icon}}" width="64" height="64">
+            <div>{{beers[$parent.$index * numColumns + $index].style.name}}</div>
+        </div>
+    </div>
+</div>
