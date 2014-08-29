@@ -70,13 +70,13 @@ var testEnvironment = {
     ],
     "systemudemoapisl-staging": [
         {
-            "name": "User Modeling-ht",
+            "name": "User Modeling-cmd",
             "label": "systemudemoapisl-staging",
             "plan": "systemudemo_plan_free",
             "credentials": {
                 "api_url": "https://service-s.platform.watson.ibm.com/systemu/service/",
-                "username": "4a311ebf-4da3-4c08-8d1b-e3032acc024a",
-                "password": "l8AJwDVluNxM"
+                "username": "16cf4b07-6127-4fbc-8a7e-1477b5899e12",
+                "password": "6nRHcV3YXqmm"
             }
         }
     ]
