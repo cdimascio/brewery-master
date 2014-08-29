@@ -7,7 +7,6 @@ define(function () {
             breweryBeers.beers(brewery.breweryId);
         });
         $scope.$on('BreweryService.brewery.beers', function(event, beers) {
-            console.log(beers);
             $scope.beers = beers.data;
         })
 

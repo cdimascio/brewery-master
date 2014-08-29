@@ -10,6 +10,11 @@ exports.machineTranslation = function () {
     return vcapServices()["smt"][0].credentials;
 }
 
+/**
+ * Return the VCAP_SERVICES environment variable
+ * as a JSON object
+ * @returns {*}
+ */
 function vcapServices() {
     var vcapServices = parseVcapServices();
     if (!vcapServices) {

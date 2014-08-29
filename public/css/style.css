@@ -176,13 +176,13 @@ a.list-group-item {
 }
 @media (min-width: 992px) {
     #map-canvas {
-        min-height:600px;
+        height: 85vh;
     }
     .main-column-container {
-        height: 600px;
+        height: 85vh;
     }
     .details-jumbotron {
-        height: 600px;
+        height: 85vh;
         padding-bottom:0px;
     }
 
@@ -195,13 +195,16 @@ a.list-group-item {
 }
 @media (min-width: 1200px) {
     #map-canvas {
-        min-height:600px;
+        /*min-height:600px;*/
+        height: 85vh;
     }
     .main-column-container {
-        height: 600px;
+        /*height: 600px;*/
+        height: 85vh;
     }
     .details-jumbotron {
-        height: 600px;
+        /*height: 600px;*/
+        height: 85vh;
         padding-bottom:0px;
     }
     .tight-left {
