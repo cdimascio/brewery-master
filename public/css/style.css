@@ -172,8 +172,7 @@ a.list-group-item {
     padding-left: 0px;
     padding-right: 0px;
 }
-
-
+/** Media queries **/
 @media (min-width: 768px) {
     #map-canvas {
         min-height:300px;
@@ -205,6 +204,7 @@ a.list-group-item {
     .details-jumbotron {
         height: 85vh;
         padding-bottom:0px;
+        margin-bottom: 0px;
     }
 
     .tight-left {
@@ -212,21 +212,20 @@ a.list-group-item {
     }
     .tight-right {
         padding-right: 0px;
+        padding-bottom: 0px;
     }
 }
 @media (min-width: 1200px) {
     #map-canvas {
-        /*min-height:600px;*/
         height: 85vh;
     }
     .main-column-container {
-        /*height: 600px;*/
         height: 85vh;
     }
     .details-jumbotron {
-        /*height: 600px;*/
         height: 85vh;
         padding-bottom:0px;
+        margin-bottom: 0px;
     }
     .tight-left {
         padding-left: 0px;
@@ -234,7 +233,25 @@ a.list-group-item {
 
     .tight-right {
         padding-right: 0px;
+        padding-bottom: 0px;
     }
+}
+
+/** Chrome scrollbars **/
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(38,38,38,0.7);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(38,38,38, .8);
+    -webkit-box-shadow: inset 0 0 2px 1px rgba(255,255,255,.7);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255,255,255,0.3);
 }
 
 .horizontal-grad {
