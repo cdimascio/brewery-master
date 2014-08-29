@@ -12,12 +12,13 @@ define(function (require) {
 
             $scope.analysis = filteredAnalysis;
             $scope.analysisFlat = (umUtil.flatten(filteredAnalysis.tree));
+
             userModelingService.visualize(filteredAnalysis);
         });
     }];
 
     function traits() {
-        return ['Openness', 'Love', 'Anger', 'Anxiety', 'Cheerfulness',
-            'Excitement', 'Self-enhancement', 'Monday', 'Tuesday', 'Friendliness'];
+        return ['Extraversion', 'Openness', 'Excitement', 'Friendliness',
+            'Love', 'Anger', 'Cheerfulness'];
     }
 });

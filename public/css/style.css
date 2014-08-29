@@ -141,9 +141,30 @@ a.list-group-item {
 }
 
 /** Dialogs **/
-/** User Modeling **/
-.usermodel-modal {
+.usermodel-modal, .qa-modal {
     width: 85%;
+    margin: 30px auto;
+}
+
+/** User Modeling **/
+.um-characteristic-title {
+    font-weight: 900;
+    font-size: 1.5em;
+    width: 120px;
+}
+
+.um-visualization {
+    margin-top: -175px;
+}
+
+.um-data-container {
+    overflow: auto;
+    height: 75vh;
+}
+
+/** QA **/
+.qa-answer-section {
+    padding-top: 30px;
 }
 
 /* Columns */
