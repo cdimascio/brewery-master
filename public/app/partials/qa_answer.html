@@ -1,0 +1,14 @@
+<div ng-controller="AnswersController">
+    <div ng-show="answers">
+        <section id="features" class="qa-answer-section" ng-init="index=1">
+            <div class="content">
+                <slick id="answer-carousel" class="slider single-item" data="answers"
+                       init-onload="false" onslides-to-show="1" slides-to-scroll="1" onafter-change="onAfterChange()">
+                    <div ng-repeat="evidence in answers">
+                        <div class="answer-container" >{{ evidence.text }}</div>
+                    </div>
+                </slick>
+            </div>
+        </section>
+    </div>
+</div>
