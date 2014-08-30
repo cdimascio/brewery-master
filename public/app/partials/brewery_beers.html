@@ -1,9 +1,17 @@
 <div ng-controller="BreweryBeersController">
     <div class="row clearfix" ng-repeat="row in rows track by $index">
-        <div class="col-sm-4 column" ng-repeat="col in cols track by $index">
-            <div><h3>{{beers[$parent.$index * numColumns + $index].name}}</h3></div>
-            <img ng-src="{{beers[$parent.$index * numColumns + $index].labels.icon}}" width="64" height="64">
-            <div>{{beers[$parent.$index * numColumns + $index].style.name}}</div>
+        <div class="col-sm-4 column beer-square" ng-repeat="col in cols track by $index">
+            <div style="height: 30px; text-align: center">
+                <h3>{{beers[$parent.$index * numColumns + $index].name}}</h3>
+            </div>
+            <div style="height: 64px;">
+                <img class="beer-icon invert" ng-show="beers[$parent.$index * numColumns + $index].name && !beers[$parent.$index * numColumns + $index].labels.icon"
+                     src="img/glyphicons_274_beer.png" width="46" height="48">
+                <img class="beer-icon" ng-show="beers[$parent.$index * numColumns + $index].labels.icon"
+                     ng-src="{{beers[$parent.$index * numColumns + $index].labels.icon}}" width="64" height="64">
+            </div>
+            <div style="height: 40px; text-align: center; padding-top: 5px;">{{beers[$parent.$index * numColumns + $index].style.name}}
+            </div>
         </div>
     </div>
 </div>
