@@ -60,6 +60,7 @@ define(function (require) {
             },
             selectMarker: function (lat, long) {
                 var marker = idToMarkerMap['_' + lat + '' + long];
+                infowindow.setContent(marker._infoContent);
                 infowindow.open(map, marker);
             }
         }

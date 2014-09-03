@@ -15,11 +15,7 @@ var app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
-// JK added html engine
-app.set('view engine', 'html');
-app.engine('html', hogan);
-app.set('views',__dirname + '/public');
-// end JK
+
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());

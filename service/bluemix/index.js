@@ -1,15 +1,13 @@
+/**
+ * Returns credentials for the Watson User Modeling service
+ * @returns {*}
+ */
 exports.userModeling = function() {
+    // TODO return the credentials object for the user modeling service
     return vcapServices()["systemudemoapisl-staging"][0].credentials;
 }
 
-exports.qaApi = function () {
-    return vcapServices()["Watson QAAPI-0.1"][0].credentials;
-}
-
-exports.machineTranslation = function () {
-    return vcapServices()["smt"][0].credentials;
-}
-
+// TODO REMOVE EVERYTHING BELOW FOR CLASS
 /**
  * Return the VCAP_SERVICES environment variable
  * as a JSON object
@@ -32,7 +30,6 @@ function parseVcapServices() {
         JSON.parse(process.env.VCAP_SERVICES);
 }
 
-// TODO remove for class
 var testEnvironment = {
     "Watson QAAPI-0.1": [
         {

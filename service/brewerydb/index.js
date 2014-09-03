@@ -1,3 +1,5 @@
+// PLEASE DO NOT USE THESE CREDENTIALS:
+// These credentials belong to dimascio@us.ibm.com
 var rootService = 'http://api.brewerydb.com/v2/',
     apiKey = 'af18a74e17637d102ee846d2f3b30d0f';
 

@@ -8,6 +8,7 @@ define(function (require) {
         'LocationService',
         function ($scope, $http, $rootScope, blService, locService) {
 
+            // Handle brewery list selection
             $scope.$on('BreweryListController.selected', function (event, brewery) {
                 if (map) {
                     $scope.brewery = brewery;
@@ -15,24 +16,35 @@ define(function (require) {
                 }
             });
 
+            // Fetch nearby breweries and render using Google maps
             if (!locService.location()) {
                 locService.query().then(function (r) {
-                    fetchLocalBreweries(r)
+                    fetchLocalBreweries(r, renderMap);
                 });
             }
 
-            function fetchLocalBreweries(loc, force) {
+            /**
+             * Find breweries near a given location
+             * @param loc The location
+             * @param callback The callback function to invoke after fetching breweries
+             * @param force Force a server query
+             */
+            function fetchLocalBreweries(loc, callback, force) {
                 if (!blService.items() || force) {
                     blService.query(loc.region)// TODO loc.region, zip? locality?
                         .then(
                         function (r) {
-                            renderMap(r);
+                            callback(r);
                         });
                 } else {
-                    renderMap(blService.items);
+                    callback(blService.items);
                 }
             }
 
+            /**
+             * Displays breweries on Google Maps
+             * @param r The BreweryDB /breweries response object
+             */
             function renderMap(r) {
                 if (!map) {
                     map = require('util/maps')(document.getElementById('map-canvas'));
@@ -60,7 +72,7 @@ define(function (require) {
                 var loc = {
                     region: evt.searchText
                 };
-                fetchLocalBreweries(loc, true);
+                fetchLocalBreweries(loc, renderMap, true);
             }
         }];
 });
