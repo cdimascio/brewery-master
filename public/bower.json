@@ -1,6 +1,6 @@
 {
-    "name": "Beer App",
-    "description": "Beer application",
+    "name": "Brewery Master",
+    "description": "Brewery Master application",
     "version": "0.1.0",
     "ignore": [
         "**/.*",
