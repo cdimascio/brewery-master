@@ -10,7 +10,7 @@ recommend you edit this and include text for license terms under which you're
 making your code available. A good resource for open source licenses is the 
 [Open Source Initiative](http://opensource.org/).
 
-Be sure to update your project's profile with a short description and 
+Be sure to update your paroject's profile with a short description and
 eye-catching graphic.
 
 Finally, consider defining a timeline and work items on the "Current Work" tab 
