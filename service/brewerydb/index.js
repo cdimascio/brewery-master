@@ -1,10 +1,8 @@
-// PLEASE DO NOT USE THESE CREDENTIALS:
-// These credentials belong to dimascio@us.ibm.com
 var rootService = 'http://api.brewerydb.com/v2/',
-    apiKey = 'af18a74e17637d102ee846d2f3b30d0f';
+    p = require('../util').brewerydb();
 
 exports.breweryBeers = function(req, res) {
-    var uri = rootService+'brewery/'+req.params.id+'/beers?key='+apiKey+
+    var uri = rootService+'brewery/'+req.params.id+'/beers?'+p+
         '&'+require('url').parse(req.url).query;
     require('request')({
         'uri' : uri,
@@ -18,7 +16,7 @@ exports.breweryBeers = function(req, res) {
 }
 
 exports.breweries = function(req, res) {
-    var uri = rootService+'locations?key='+apiKey+
+    var uri = rootService+'locations?'+p+
         '&'+require('url').parse(req.url).query;
     require('request')({
         'uri' : uri,
