@@ -9,6 +9,9 @@ define(function () {
         function analyze(userData) {
             var request = $http({
                 method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 url: '/um/profile',
                 data : userData
             });
@@ -18,6 +21,9 @@ define(function () {
         function visualize(profileData) {
             var request = $http({
                 method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 url: '/um/visualize',
                 data : profileData
             });
