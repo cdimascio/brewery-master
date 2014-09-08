@@ -6,9 +6,9 @@ var endpoint = {
 
 exports.question = function(req, res) {
     require("request")({
-        'uri' : endpoint.host + endpoint.instance,
-        'method' : "POST",
-        'headers' : {
+        uri : endpoint.host + endpoint.instance,
+        method : "POST",
+        headers : {
             'Content-Type' : 'application/json',
             'X-SyncTimeout' : '30',
             'Authorization' : endpoint.auth
@@ -16,8 +16,8 @@ exports.question = function(req, res) {
         rejectUnauthorized: false,
         requestCert: true,
         agent: false,
-        'json' : req.body
+        body : JSON.stringify(req.body)
     }, function(error, response, body) {
-        res.json(body);
+        res.send(body);
     });
 };

@@ -9,6 +9,9 @@ define(function () {
         function query(question) {
             var request = $http({
                 method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 url: '/question',
                 data : question
             });
