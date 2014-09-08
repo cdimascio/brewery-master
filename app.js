@@ -8,7 +8,7 @@ var favicon = require('static-favicon'),
     twitter = require('./service/twitter'),
     brewerydb = require('./service/brewerydb'),
     qaapi = require('./service/watson/qaapi'),
-    um = require('./service/watson/user_modeling');
+    um = require('./service/watson/usermodeling');
 
 var app = express();
 
