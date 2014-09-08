@@ -1,7 +1,7 @@
 // Read in UserModeling service environment
 var userModelingEnv = require('../bluemix').userModeling();
 
-exports.analyze = function(req, res) {
+exports.profile = function(req, res) {
    require('request')({
        uri : userModelingEnv.api_url + 'api/v2/profile',
        method : "POST",

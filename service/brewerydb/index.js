@@ -5,9 +5,9 @@ exports.breweryBeers = function(req, res) {
     var uri = rootService+'brewery/'+req.params.id+'/beers?'+p+
         '&'+require('url').parse(req.url).query;
     require('request')({
-        'uri' : uri,
-        'method' : "GET",
-        'headers' : {
+        uri : uri,
+        method : "GET",
+        headers : {
             'Content-Type' : 'application/json'
         }
     }, function(error, response, body) {
@@ -19,9 +19,9 @@ exports.breweries = function(req, res) {
     var uri = rootService+'locations?'+p+
         '&'+require('url').parse(req.url).query;
     require('request')({
-        'uri' : uri,
-        'method' : "GET",
-        'headers' : {
+        uri : uri,
+        method : "GET",
+        headers : {
             'Content-Type' : 'application/json'
         }
     }, function(error, response, body) {
