@@ -11,6 +11,7 @@ define(function () {
                 }
             };
 
+            // Invoke the qaapi service and show progress
             $scope.isLoading = true;
             qaapiService.query(question).then(function (r) {
                 $scope.isLoading = false;

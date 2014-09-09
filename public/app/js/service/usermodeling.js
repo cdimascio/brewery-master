@@ -2,11 +2,11 @@ define(function () {
     return function ($http, $q, $rootScope) {
         var res = null;
         return {
-            analyze: analyze,
+            profile: profile,
             visualize: visualize
         };
 
-        function analyze(userData) {
+        function profile(userData) {
             var request = $http({
                 method: "post",
                 headers: {
@@ -15,7 +15,7 @@ define(function () {
                 url: '/um/profile',
                 data : userData
             });
-            return request.then(handleSuccess('UserModelingService.analysis'), handleError);
+            return request.then(handleSuccess('UserModelingService.profile'), handleError);
         }
 
         function visualize(profileData) {

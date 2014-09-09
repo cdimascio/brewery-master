@@ -6,7 +6,7 @@ define(function (require) {
             $scope.visualization = $sce.trustAsHtml(visualization);
         });
 
-        $scope.$on('UserModelingService.analysis', function (event, analysis) {
+        $scope.$on('UserModelingService.profile', function (event, analysis) {
             var umUtil = require('util/um'),
                 filteredAnalysis = umUtil.filterTraits(analysis,traits());
 

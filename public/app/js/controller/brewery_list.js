@@ -1,7 +1,10 @@
 define(function () {
-    return ['$scope', '$rootScope', '$http', 'BreweryService', function ($scope, $rootScope, $http, blService) {
+    return ['$scope', '$rootScope', '$http', 'BreweryService', function ($scope, $rootScope, $http, breweryService) {
+
+        // Listen for brewery list
         $scope.$on('BreweryService.breweries', function () {
-            var data = blService.items() && blService.items().data;
+            var data = breweryService.items() && breweryService.items().data;
+            // Sort brewery list alphabetically
             $scope.data = data.sort(function(a, b) {
                 if (a.brewery.name < b.brewery.name) {
                     return -1;

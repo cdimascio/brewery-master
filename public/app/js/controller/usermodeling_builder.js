@@ -8,10 +8,13 @@ define(function (require) {
                 return;
             }
 
+            // Convert tweets to a format compatible for
+            // the user modeling service
             var profileData = require('util/um').
                 tweetsToProfileData($scope.$parent.tweets);
 
-	    userModelingService.analyze(profileData);
+            // Invoke user modeling service
+	        userModelingService.profile(profileData);
         }
     }];
 });
