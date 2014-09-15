@@ -6,7 +6,7 @@ define(function (require) {
         '$rootScope',
         'BreweryService',
         'LocationService',
-        function ($scope, $http, $rootScope, breweryService, locationService) {
+        function ($scope, $http, $rootScope, BreweryService, LocationService) {
 
             // Handle brewery list selection
             $scope.$on('BreweryListController.selected', function (event, brewery) {
@@ -17,8 +17,8 @@ define(function (require) {
             });
 
             // Fetch nearby breweries and render using Google maps
-            if (!locationService.location()) {
-                locationService.query().then(function (r) {
+            if (!LocationService.location()) {
+                LocationService.query().then(function (r) {
                     fetchLocalBreweries(r, renderMap);
                 });
             }
@@ -30,14 +30,14 @@ define(function (require) {
              * @param force Force a server query
              */
             function fetchLocalBreweries(loc, callback, force) {
-                if (!breweryService.items() || force) {
-                    breweryService.query(loc.region)// TODO loc.region, zip? locality?
+                if (!BreweryService.items() || force) {
+                    BreweryService.query(loc.region)// TODO loc.region, zip? locality?
                         .then(
                         function (r) {
                             callback(r);
                         });
                 } else {
-                    callback(breweryService.items);
+                    callback(BreweryService.items);
                 }
             }
 

@@ -1,5 +1,5 @@
 define(function () {
-    return function ($http, $q, $rootScope) {
+    return ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
         var res = null;
         return {
             query: query,
@@ -52,5 +52,5 @@ define(function () {
             return res;
         }
 
-    }
+    }];
 });

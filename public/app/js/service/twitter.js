@@ -1,5 +1,5 @@
 define(function () {
-    return function ($http, $q, $rootScope) {
+    return['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
         return {
             query : query
         };
@@ -28,5 +28,5 @@ define(function () {
             $rootScope.$broadcast("TweetService.tweets", res);
             return res;
         }
-    };
+    }];
 });

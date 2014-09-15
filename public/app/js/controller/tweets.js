@@ -1,5 +1,5 @@
 define(function () {
-    return ['$scope', 'TweetService', function ($scope, tweetService) {
+    return ['$scope', 'TweetService', function ($scope, TweetService) {
 
         // Handle available tweets
         $scope.$on('TweetService.tweets', function (event, tweets) {
@@ -17,7 +17,7 @@ define(function () {
         });
 
         function handleSelect(brewery) {
-            tweetService.query(brewery.brewery.name);
+            TweetService.query(brewery.brewery.name);
         }
     }];
 });

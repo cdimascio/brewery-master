@@ -1,7 +1,7 @@
 'use strict';
 
 define(function (require) {
-    return ['$scope', 'UserModelingService', function ($scope, userModelingService) {
+    return ['$scope', 'UserModelingService', function ($scope, UserModelingService) {
         $scope.build = function () {
             if (!$scope.$parent.tweets) {
                 console.log('no profile data');
@@ -14,7 +14,7 @@ define(function (require) {
                 tweetsToProfileData($scope.$parent.tweets);
 
             // Invoke user modeling service
-	        userModelingService.profile(profileData);
+	        UserModelingService.profile(profileData);
         }
     }];
 });
