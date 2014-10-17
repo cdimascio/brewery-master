@@ -3,7 +3,7 @@ define(function () {
         var res = null;
         return {
             fetchBreweries: fetchBreweries,
-            fetchBeers: fetchBreweries,
+            fetchBeers: fetchBeers,
             breweries: breweries
         };
 
