@@ -3,7 +3,7 @@ define(function () {
 
         // Listen for brewery list
         $scope.$on('BreweryService.breweries', function () {
-            var data = BreweryService.items() && BreweryService.items().data;
+            var data = BreweryService.breweries() && BreweryService.breweries().data;
             // Sort brewery list alphabetically
             $scope.data = data.sort(function(a, b) {
                 if (a.brewery.name < b.brewery.name) {
