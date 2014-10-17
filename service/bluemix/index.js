@@ -4,7 +4,7 @@
  */
 exports.userModeling = function() {
     // TODO return the credentials object for the user modeling service
-    return vcapServices()["systemudemoapisl-staging"][0].credentials;
+    return vcapServices()["user_modeling"][0].credentials;
 }
 
 // TODO REMOVE EVERYTHING BELOW FOR CLASS
@@ -65,15 +65,15 @@ var testEnvironment = {
             }
         }
     ],
-    "systemudemoapisl-staging": [
+    "user_modeling": [
         {
-            "name": "User Modeling-cmd",
-            "label": "systemudemoapisl-staging",
-            "plan": "systemudemo_plan_free",
+            "name": "bm-User Modeling",
+            "label": "user_modeling",
+            "plan": "user_modeling_free_plan",
             "credentials": {
-                "api_url": "https://service-s.platform.watson.ibm.com/systemu/service/",
-                "username": "1702526d-5475-4cae-bc7d-a94c05ca8292",
-                "password": "46SzKKVGNABb"
+                "url": "https://gateway.watsonplatform.net/systemu/service/",
+                "username": "84f594d4-cf3b-41d4-aa6b-32f67b34a341",
+                "password": "vpFicDdgGzg8"
             }
         }
     ]
