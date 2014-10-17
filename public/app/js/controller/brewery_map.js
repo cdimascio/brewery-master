@@ -30,8 +30,8 @@ define(function (require) {
              * @param force Force a server query
              */
             function fetchLocalBreweries(loc, callback, force) {
-                if (!BreweryService.items() || force) {
-                    BreweryService.query(loc.region)// TODO loc.region, zip? locality?
+                if (!BreweryService.breweries() || force) {
+                    BreweryService.fetchBreweries(loc.region)// TODO loc.region, zip? locality?
                         .then(
                         function (r) {
                             callback(r);
