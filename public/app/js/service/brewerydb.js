@@ -2,12 +2,12 @@ define(function () {
     return ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
         var res = null;
         return {
-            query: query,
-            beers: beers,
-            items: items
+            fetchBreweries: fetchBreweries,
+            fetchBeers: fetchBreweries,
+            breweries: breweries
         };
 
-        function beers(breweryId) {
+        function fetchBeers(breweryId) {
             var request = $http({
                 method: "get",
                 url: '/brewery/'+breweryId+'/beers'
@@ -15,7 +15,7 @@ define(function () {
             return request.then(handleSuccess('BreweryService.brewery.beers'), handleError);
         }
 
-        function query(locality, region) {
+        function fetchBreweries(locality, region) {
             var request = $http({
                 method: "get",
                 url: '/breweries',
@@ -34,12 +34,6 @@ define(function () {
             }
             return $q.reject(response.data.message);
         }
-/*
-        function handleSuccess(response) {
-            res = response.data;
-            $rootScope.$broadcast("BreweryService.breweries");
-            return res;
-        }*/
 
         function handleSuccess(topic) {
             return function (response) {
@@ -48,7 +42,12 @@ define(function () {
                 return res;
             }
         }
-        function items() {
+
+        /**
+         * Return any previously fetched breweries
+         * @returns {*}
+         */
+        function breweries() {
             return res;
         }
 
