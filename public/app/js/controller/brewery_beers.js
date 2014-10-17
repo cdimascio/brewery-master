@@ -2,12 +2,12 @@ define(function () {
     return ['$scope', 'BreweryService', function ($scope, BreweryService) {
         // Handle brewery map selection
         $scope.$on('BreweryMap.selected', function (event, brewery) {
-            BreweryService.beers(brewery.breweryId);
+            BreweryService.fetchBeers(brewery.breweryId);
         });
 
         // Handle brewery list selection
         $scope.$on('BreweryListController.selected', function (event, brewery) {
-            BreweryService.beers(brewery.breweryId);
+            BreweryService.fetchBeers(brewery.breweryId);
         });
 
         // Handle brewery beers available
