@@ -1,7 +1,7 @@
 var endpoint = {
-    host : 'https://watson.ihost.com',
-    instance : '/instance/8/deepqa/v1/question',
-    auth : 'Basic dHJpZGVudDh1c2VyMTpzaGFkNzRyYWNr'
+    host : 'https://watson.ihost.com',// 'https://watson.ihost.com',
+    instance : '/instance/63/deepqa/v1/question',//predeploy/WatsonExperienceManager#//'/instance/8/deepqa/v1/question',
+    auth : 'Basic a3hhX2F1dGhvcjE6QXNGYkN3QTE=' //'Basic dHJpZGVudDh1c2VyMTpzaGFkNzRyYWNr'
 };
 
 exports.question = function(req, res) {
