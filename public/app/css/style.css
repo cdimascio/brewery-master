@@ -92,8 +92,10 @@ a.list-group-item {
 
 /** Q and A **/
 .answer-container {
+    font-size: 1.2em;
     overflow: auto;
-    max-height: 350px;
+    height: 200px;
+    max-height: 550px;
 }
 
 /** Twitter **/
@@ -160,7 +162,7 @@ a.list-group-item {
 
 .um-data-container {
     overflow: auto;
-    height: 75vh;
+    height: 550px;
 }
 
 /** QA **/
@@ -197,13 +199,13 @@ a.list-group-item {
 }
 @media (min-width: 992px) {
     #map-canvas {
-        height: 85vh;
+        height: 650px;
     }
     .main-column-container {
-        height: 85vh;
+        height: 650px;
     }
     .details-jumbotron {
-        height: 85vh;
+        height: 650px;
         padding-bottom:0px;
         margin-bottom: 0px;
     }
@@ -218,13 +220,13 @@ a.list-group-item {
 }
 @media (min-width: 1200px) {
     #map-canvas {
-        height: 85vh;
+        height: 650px;
     }
     .main-column-container {
-        height: 85vh;
+        height: 650px;
     }
     .details-jumbotron {
-        height: 85vh;
+        height: 650px;
         padding-bottom:0px;
         margin-bottom: 0px;
     }

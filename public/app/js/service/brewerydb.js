@@ -21,8 +21,9 @@ define(function () {
                 url: '/breweries',
                 params: {
                     region: locality
-                    //postalCode
-                    //locality
+                    //region: locality // by state
+                    //postalCode // by zipcode
+                    //locality // by city
                 }
             });
             return request.then(handleSuccess('BreweryService.breweries'), handleError);
