@@ -74,7 +74,7 @@ h4 {
     border-bottom: 1px solid rgba(0,0,0,.7)
 }
 .list-group-item-alternate {
-    background-color:#262626;/* #22313f;  #2b3e50;*/
+    background-color:#262626;
 }
 a.list-group-item {
     border: none;
@@ -94,8 +94,22 @@ a.list-group-item {
 .answer-container {
     font-size: 1.2em;
     overflow: auto;
-    height: 200px;
+    height: 210px;
     max-height: 550px;
+}
+.answer-container a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+.answer-header {
+    font-size: 1.3em;
+}
+.answer-footer {
+    font-size: 1.0em;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    margin-top: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 /** Twitter **/

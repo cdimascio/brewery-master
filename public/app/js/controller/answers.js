@@ -1,9 +1,9 @@
 define(function (require) {
-    return ['$scope', function ($scope) {
+    return ['$scope', '$sce', function ($scope, $sce) {
         var oldVal;
         require('slick');
         $scope.$watch(function() {
-            return $scope.answers
+            return $scope.result//$scope.answers
         }, function (newVal) {
             if (newVal && oldVal) {
                 $('slick').slickGoTo(0);
@@ -11,8 +11,17 @@ define(function (require) {
             oldVal = newVal;
         });
 
+        $scope.onAfterChange = function() {
+            $('div.answer-container a[href^="http://"]').attr('target', '_blank');
+        };
+
         $scope.$on('QaapiService.answers', function (event, answers) {
-            $scope.answers = answers.question.evidencelist;
+            $scope.result = answers.question;
         });
+
+        $scope.formattedAnswerText = function(i) {
+            var html = $scope.result.answers[i].formattedText;
+            return  $sce.trustAsHtml(html);
+        }
     }];
 });

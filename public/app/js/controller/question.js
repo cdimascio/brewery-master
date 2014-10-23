@@ -7,6 +7,7 @@ define(function () {
                     "evidenceRequest": {
                         "items": 5
                     },
+                    "formattedAnswer": true,
                     "questionText": text
                 }
             };

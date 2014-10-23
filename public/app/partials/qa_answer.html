@@ -1,17 +1,47 @@
 <div ng-controller="AnswersController">
-    <div ng-show="answers">
+    <div ng-show="result">
         <section id="features" class="qa-answer-section" ng-init="index=1">
             <div class="content">
-                <slick id="answer-carousel" class="slider single-item" data="answers"
-                       init-onload="false" onslides-to-show="1" slides-to-scroll="1" onafter-change="onAfterChange()">
-                    <!--<div ng-repeat="evidence in answers">
-                        <div class="answer-container" >{{ evidence.text }}</div>
+                <slick id="answer-carousel" class="slider single-item" data="result"
+                       init-onload="false" onslides-to-show="1" slides-to-scroll="1" onafter-change="{{onAfterChange()}}">
+                    <!-- <div ng-repeat="evidence in result.evidencelist">
+                        <div>
+                            <p class="answer-container">{{ evidence.text }}</p>
+                            <p class="answer-footer"> Confidence:{{evidence.value | number:2}}%<br>
+                                Section: {{evidence.metadataMap.title}}<br>
+                                Filename: {{evidence.metadataMap.fileName}}</p>
+                        </div>
                     </div>-->
-                    <div class="answer-container">{{ answers[0].text }}</div>
-                    <div class="answer-container">{{ answers[1].text }}</div>
-                    <div class="answer-container">{{ answers[2].text }}</div>
-                    <div class="answer-container">{{ answers[3].text }}</div>
-                    <div class="answer-container">{{ answers[4].text }}</div>
+                    <div>
+                        <div ng-bind-html="formattedAnswerText(0)" class="answer-container"></div>
+                        <p class="answer-footer"> Confidence:{{result.evidencelist[0].value | number:2}}%<br>
+                            Section: {{result.evidencelist[0].metadataMap.title}}<br>
+                            Filename: {{result.evidencelist[0].metadataMap.fileName}}</p>
+                    </div>
+                    <div>
+                        <div ng-bind-html="formattedAnswerText(1)" class="answer-container"></div>
+                        <p class="answer-footer"> Confidence:{{result.evidencelist[1].value | number:2}}%<br>
+                            Section: {{result.evidencelist[1].metadataMap.title}}<br>
+                            Filename: {{result.evidencelist[1].metadataMap.fileName}}</p>
+                    </div>
+                    <div>
+                        <div ng-bind-html="formattedAnswerText(2)" class="answer-container"></div>
+                        <p class="answer-footer"> Confidence:{{result.evidencelist[2].value | number:2}}%<br>
+                            Section: {{result.evidencelist[2].metadataMap.title}}<br>
+                            Filename: {{result.evidencelist[2].metadataMap.fileName}}</p>
+                    </div>
+                    <div>
+                        <div ng-bind-html="formattedAnswerText(3)" class="answer-container"></div>
+                        <p class="answer-footer"> Confidence:{{result.evidencelist[3].value | number:2}}%<br>
+                            Section: {{result.evidencelist[3].metadataMap.title}}<br>
+                            Filename: {{result.evidencelist[3].metadataMap.fileName}}</p>
+                    </div>
+                    <div>
+                        <div ng-bind-html="formattedAnswerText(4)" class="answer-container"></div>
+                        <p class="answer-footer"> Confidence:{{result.evidencelist[4].value | number:2}}%<br>
+                            Section: {{result.evidencelist[4].metadataMap.title}}<br>
+                            Filename: {{result.evidencelist[4].metadataMap.fileName}}</p>
+                    </div>
                 </slick>
             </div>
         </section>
