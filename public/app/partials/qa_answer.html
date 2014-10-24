@@ -7,38 +7,38 @@
                     <!-- <div ng-repeat="evidence in result.evidencelist">
                         <div>
                             <p class="answer-container">{{ evidence.text }}</p>
-                            <p class="answer-footer"> Confidence:{{evidence.value | number:2}}%<br>
+                            <p class="answer-footer"> Confidence:{{evidence.value * 100 | number:2}}%<br>
                                 Section: {{evidence.metadataMap.title}}<br>
                                 Filename: {{evidence.metadataMap.originalfile}}</p>
                         </div>
                     </div>-->
                     <div>
                         <div ng-bind-html="formattedAnswerText(0)" class="answer-container"></div>
-                        <p class="answer-footer"> Confidence:{{result.evidencelist[0].value | number:2}}%<br>
+                        <p class="answer-footer"> Confidence:{{result.evidencelist[0].value * 100 | number:2}}%<br>
                             Section: {{result.evidencelist[0].metadataMap.title}}<br>
                             Filename: {{result.evidencelist[0].metadataMap.originalfile}}</p>
                     </div>
                     <div>
                         <div ng-bind-html="formattedAnswerText(1)" class="answer-container"></div>
-                        <p class="answer-footer"> Confidence:{{result.evidencelist[1].value | number:2}}%<br>
+                        <p class="answer-footer"> Confidence:{{result.evidencelist[1].value * 100  | number:2}}%<br>
                             Section: {{result.evidencelist[1].metadataMap.title}}<br>
                             Filename: {{result.evidencelist[1].metadataMap.originalfile}}</p>
                     </div>
                     <div>
                         <div ng-bind-html="formattedAnswerText(2)" class="answer-container"></div>
-                        <p class="answer-footer"> Confidence:{{result.evidencelist[2].value | number:2}}%<br>
+                        <p class="answer-footer"> Confidence:{{result.evidencelist[2].value * 100  | number:2}}%<br>
                             Section: {{result.evidencelist[2].metadataMap.title}}<br>
                             Filename: {{result.evidencelist[2].metadataMap.originalfile}}</p>
                     </div>
                     <div>
                         <div ng-bind-html="formattedAnswerText(3)" class="answer-container"></div>
-                        <p class="answer-footer"> Confidence:{{result.evidencelist[3].value | number:2}}%<br>
+                        <p class="answer-footer"> Confidence:{{result.evidencelist[3].value * 100  | number:2}}%<br>
                             Section: {{result.evidencelist[3].metadataMap.title}}<br>
                             Filename: {{result.evidencelist[3].metadataMap.originalfile}}</p>
                     </div>
                     <div>
                         <div ng-bind-html="formattedAnswerText(4)" class="answer-container"></div>
-                        <p class="answer-footer"> Confidence:{{result.evidencelist[4].value | number:2}}%<br>
+                        <p class="answer-footer"> Confidence:{{result.evidencelist[4].value * 100  | number:2}}%<br>
                             Section: {{result.evidencelist[4].metadataMap.title}}<br>
                             Filename: {{result.evidencelist[4].metadataMap.originalfile}}</p>
                     </div>
