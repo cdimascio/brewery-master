@@ -7,6 +7,10 @@ define(function (require) {
         });
 
         $scope.$on('UserModelingService.profile', function (event, analysis) {
+            if (analysis.error_code) {
+                $scope.error = analysis.user_message;
+                return;
+            }
             var umUtil = require('util/um'),
                 filteredAnalysis = umUtil.filterTraits(analysis,traits());
 

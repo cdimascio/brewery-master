@@ -16,6 +16,7 @@ exports.profile = function(req, res) {
     }, function(error, response, body) {
         if (error) {
             console.log(error);
+            res.send(error);
         }
         res.send(body);
     });

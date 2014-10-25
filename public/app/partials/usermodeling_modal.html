@@ -10,7 +10,8 @@
 
             <div class="modal-body um-data-container">
                 <div ng-controller="UserModelResultController">
-                    <div>
+                    <div ng-show="error">Sorry. A brewery profile was not generated: {{error}}</div>
+                    <div ng-show="!error">
                         <div class="row clearfix">
                             <div class="col-sm-2 column">
                                 <table>
