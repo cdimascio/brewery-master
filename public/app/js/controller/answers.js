@@ -20,6 +20,7 @@ define(function (require) {
         });
 
         $scope.formattedAnswerText = function(i) {
+            if (!$scope.result) return;
             var html = $scope.result.answers[i].formattedText;
             return  $sce.trustAsHtml(html);
         }
