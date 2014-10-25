@@ -15,7 +15,8 @@ define(function () {
                 url: '/um/profile',
                 data : userData
             });
-            return request.then(handleSuccess('UserModelingService.profile'), handleError);
+            return request.then(handleSuccess('UserModelingService.profile'),
+                handleError('UserModelingService.profile'));
         }
 
         function visualize(profileData) {
@@ -27,14 +28,18 @@ define(function () {
                 url: '/um/visualize',
                 data : profileData
             });
-            return request.then(handleSuccess('UserModelingService.visualization'), handleError);
+            return request.then(handleSuccess('UserModelingService.visualization'),
+                handleError('UserModelingService.visualization'));
         }
 
-        function handleError(response) {
-            if (!angular.isObject(response.data) || !response.data.message) {
-                return $q.reject("An unknown error occurred.");
+        function handleError(topic) {
+            return function(response) {
+                if (!angular.isObject(response.data) || !response.data.user_message) {
+                    return $q.reject("An unknown error occurred.");
+                }
+                $rootScope.$broadcast(topic, response.data);
+                return $q.reject(response.data.user_message);
             }
-            return $q.reject(response.data.message);
         }
 
         function handleSuccess(topic) {

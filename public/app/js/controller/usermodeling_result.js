@@ -14,6 +14,7 @@ define(function (require) {
             var umUtil = require('util/um'),
                 filteredAnalysis = umUtil.filterTraits(analysis,traits());
 
+            $scope.error = undefined;
             $scope.analysis = filteredAnalysis;
             $scope.analysisFlat = (umUtil.flatten(filteredAnalysis.tree));
 
