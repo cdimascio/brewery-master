@@ -32,9 +32,6 @@ exports.visualize = function(req, res) {
         },
         body : JSON.stringify(req.body)
     }, function(error, response, body) {
-        if (error) {
-            console.log(error);
-        }
-        res.send(body);
+        res.status(response.statusCode).send(body);
     });
 }
