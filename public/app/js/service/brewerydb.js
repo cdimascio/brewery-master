@@ -15,16 +15,17 @@ define(function () {
             return request.then(handleSuccess('BreweryService.brewery.beers'), handleError);
         }
 
-        function fetchBreweries(locality, region) {
+        function fetchBreweries(loc) {
+            //region: loc.region // by state
+            //postalCode loc.postal// by zipcode
+            //locality loc.city // by city
+            var params = {};
+            if (loc.city) params.locality = loc.city;
+            if (loc.region) params.region = loc.region;
             var request = $http({
                 method: "get",
                 url: '/breweries',
-                params: {
-                    region: locality
-                    //region: locality // by state
-                    //postalCode // by zipcode
-                    //locality // by city
-                }
+                params: params
             });
             return request.then(handleSuccess('BreweryService.breweries'), handleError);
         }

@@ -11,14 +11,17 @@ define(function (require) {
                 $scope.error = analysis.user_message;
                 return;
             }
-            var umUtil = require('util/um'),
-                filteredAnalysis = umUtil.filterTraits(analysis,traits());
+            var umUtil = require('util/um');
+            // TODO Traits can be filtered, however /visualize endpoint
+            // To keep only traits returned by traits()
+            // Uncomment the following line and replace all values 'analysis' with 'filteredAnalysis'
+            //var filteredAnalysis = umUtil.filterTraits(analysis,traits());
+            $scope.analysis = analysis;
 
             $scope.error = undefined;
-            $scope.analysis = filteredAnalysis;
-            $scope.analysisFlat = (umUtil.flatten(filteredAnalysis.tree));
+            $scope.analysisFlat = (umUtil.flatten(analysis.tree));
 
-            UserModelingService.visualize(filteredAnalysis);
+            UserModelingService.visualize(analysis);
         });
     }];
 

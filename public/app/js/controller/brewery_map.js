@@ -31,7 +31,7 @@ define(function (require) {
              */
             function fetchLocalBreweries(loc, callback, force) {
                 if (!BreweryService.breweries() || force) {
-                    BreweryService.fetchBreweries(loc.region)// TODO loc.region, zip? locality?
+                    BreweryService.fetchBreweries(loc)
                         .then(
                         function (r) {
                             callback(r);
@@ -70,7 +70,7 @@ define(function (require) {
 
             function searchHandler(evt) {
                 var loc = {
-                    region: evt.searchText
+                    city: evt.searchText // region: for state
                 };
                 fetchLocalBreweries(loc, renderMap, true);
             }

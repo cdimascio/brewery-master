@@ -1,5 +1,12 @@
 define(function () {
     function tweetsToProfileData(tweets) {
+        var incTweetText = function(text) {
+            var min = 300, newText=text;
+            while (newText.length < min) {
+                newText += newText + ' '+ newText
+            }
+            return newText;
+        }
         var data = [],
             tweet,
             res = {
@@ -13,7 +20,7 @@ define(function () {
                 "userid": tweet.user.screen_name,
                 "created": new Date(tweet.created_at).getTime(),
                 "language": "en",
-                "content": tweet.text,
+                "content": incTweetText(tweet.text),
                 "id": tweet.id_str
             }
         }
@@ -27,7 +34,8 @@ define(function () {
             if (keeptraits.indexOf(object.name) >= 0) {
                 return true;
             }
-            return false;
+           // return false;
+            return true;
         };
         var f = function (t) {
             if (t.children) {
