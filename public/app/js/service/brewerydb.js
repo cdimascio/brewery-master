@@ -20,8 +20,8 @@ define(function () {
             //postalCode loc.postal// by zipcode
             //locality loc.city // by city
             var params = {};
-            if (loc.city) params.locality = loc.city;
             if (loc.region) params.region = loc.region;
+            if (!loc.region && loc.city) params.locality = loc.city;
             var request = $http({
                 method: "get",
                 url: '/breweries',

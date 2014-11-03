@@ -94,8 +94,7 @@ a.list-group-item {
 .answer-container {
     font-size: 1.2em;
     overflow: auto;
-    height: 210px;
-    max-height: 550px;
+    max-height: 45vh;
 }
 .answer-container a {
     color: #ffffff;
@@ -163,6 +162,12 @@ a.list-group-item {
     margin: 30px auto;
 }
 
+/*
+.modal-body {
+    height: 75vh;
+}
+*/
+
 /** User Modeling **/
 .um-characteristic-title {
     font-weight: 900;
@@ -176,13 +181,14 @@ a.list-group-item {
 
 .um-data-container {
     overflow: auto;
-    height: 550px;
+    height: 75vh;
     margin-bottom: 20px;
 }
 
 /** QA **/
 .qa-answer-section {
     padding-top: 30px;
+    height: 65vh;
 }
 
 /* Columns */
@@ -214,13 +220,13 @@ a.list-group-item {
 }
 @media (min-width: 992px) {
     #map-canvas {
-        height: 650px;
+        height: 85vh;
     }
     .main-column-container {
-        height: 650px;
+        height: 85vh;
     }
     .details-jumbotron {
-        height: 650px;
+        height: 85vh;
         padding-bottom:0px;
         margin-bottom: 0px;
     }
@@ -235,13 +241,13 @@ a.list-group-item {
 }
 @media (min-width: 1200px) {
     #map-canvas {
-        height: 650px;
+        height: 85vh;
     }
     .main-column-container {
-        height: 650px;
+        height: 85vh;
     }
     .details-jumbotron {
-        height: 650px;
+        height: 85vh;
         padding-bottom:0px;
         margin-bottom: 0px;
     }
