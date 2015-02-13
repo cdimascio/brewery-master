@@ -1,32 +1,40 @@
-define(function () {
-    return['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
-        return {
-            query : query
-        };
+/*global angular:false */
+(function () {
+    'use strict';
 
-        function query(text) {
-            var request = $http({
-                method: "get",
-                url: '/tweet',
-                params: {
-                    q: text,
-                    count: 100
-                }
-            });
-            return request.then(handleSuccess, handleError);
-        }
+    angular.module('beerApp.services.TweetService', [])
+        .factory('TweetService', service());
 
-        function handleError(response) {
-            if (!angular.isObject(response.data) || !response.data.message) {
-                return $q.reject("An unknown error occurred.");
+    function service() {
+        return['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
+            return {
+                query: query
+            };
+
+            function query(text) {
+                var request = $http({
+                    method: "get",
+                    url: '/tweet',
+                    params: {
+                        q: text,
+                        count: 100
+                    }
+                });
+                return request.then(handleSuccess, handleError);
             }
-            return $q.reject(response.data.message);
-        }
 
-        function handleSuccess(response) {
-            var res = response.data.tweets;
-            $rootScope.$broadcast("TweetService.tweets", res);
-            return res;
-        }
-    }];
-});
+            function handleError(response) {
+                if (!angular.isObject(response.data) || !response.data.message) {
+                    return $q.reject("An unknown error occurred.");
+                }
+                return $q.reject(response.data.message);
+            }
+
+            function handleSuccess(response) {
+                var res = response.data.tweets;
+                $rootScope.$broadcast("TweetService.tweets", res);
+                return res;
+            }
+        }];
+    }
+}());

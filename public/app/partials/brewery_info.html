@@ -6,7 +6,7 @@
             </h2>
             <div><small>{{brewery.streetAddress}} {{brewery.locality}} {{brewery.region}} {{brewery.phone}}</small></div>
         </div>
-        <div class="panel-body brewery-details-img">
+        <div ng-show="brewery.brewery.images" class="panel-body brewery-details-img">
             <img class="brewery-details-img" ng-src="{{brewery.brewery.images.medium}}">
         </div>
     </div>

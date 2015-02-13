@@ -1,10 +1,11 @@
-'use strict';
+/*global $:false, angular:false */
+(function () {
+    'use strict';
 
-define(function (require) {
-    require('angular');
-    require('spin');
-    var Ladda = require('ladda');
-    return function () {
+    angular.module('beerApp.directives.ladda', [])
+        .directive('ladda', direct);
+
+   function direct() {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
@@ -21,4 +22,4 @@ define(function (require) {
             }
         };
     };
-});
+}());

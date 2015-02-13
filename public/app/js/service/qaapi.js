@@ -1,38 +1,46 @@
-define(function () {
-    return ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
-        var res = null;
-        return {
-            query: query,
-            items: items
-        };
+/*global angular:false */
+(function () {
+    'use strict';
 
-        function query(question) {
-            var request = $http({
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                url: '/question',
-                data : question
-            });
-            return request.then(handleSuccess, handleError);
-        }
+    angular.module('beerApp.services.QaapiService', [])
+        .factory('QaapiService', service());
 
-        function handleError(response) {
-            if (!angular.isObject(response.data) || !response.data.message) {
-                return $q.reject("An unknown error occurred.");
+    function service() {
+        return ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
+            var res = null;
+            return {
+                query: query,
+                items: items
+            };
+
+            function query(question) {
+                var request = $http({
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    url: '/question',
+                    data: question
+                });
+                return request.then(handleSuccess, handleError);
             }
-            return $q.reject(response.data.message);
-        }
 
-        function handleSuccess(response) {
-            res = response.data;
-            $rootScope.$broadcast("QaapiService.answers", res);
-            return res;
-        }
+            function handleError(response) {
+                if (!angular.isObject(response.data) || !response.data.message) {
+                    return $q.reject("An unknown error occurred.");
+                }
+                return $q.reject(response.data.message);
+            }
 
-        function items() {
-            return res;
-        }
-    }];
-});
+            function handleSuccess(response) {
+                res = response.data;
+                $rootScope.$broadcast("QaapiService.answers", res);
+                return res;
+            }
+
+            function items() {
+                return res;
+            }
+        }];
+    }
+}());
