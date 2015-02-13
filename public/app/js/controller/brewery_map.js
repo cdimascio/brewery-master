@@ -16,11 +16,22 @@ define(function (require) {
                 }
             });
 
+            $rootScope.$on('BreweryService.breweries', function (event, result) {
+                   renderMap(result)
+            });
+
+
             // Fetch nearby breweries and render using Google maps
             if (!LocationService.location()) {
-                LocationService.query().then(function (r) {
-                    fetchLocalBreweries(r, renderMap);
-                });
+                    LocationService.query().then(function (r) {
+//                    r = { city_override : 'San Jose' };
+                        r.local = true;
+//                    if(navigator.userAgent.match(/(iPhone|iPad|iPod)/i)) {
+//                        setTimeout(fetchLocalBreweries(r, renderMap), 1000);
+//                    } else {
+                        fetchLocalBreweries(r, renderMap)
+//                    }
+                    });
             }
 
             /**
@@ -31,11 +42,7 @@ define(function (require) {
              */
             function fetchLocalBreweries(loc, callback, force) {
                 if (!BreweryService.breweries() || force) {
-                    BreweryService.fetchBreweries(loc)
-                        .then(
-                        function (r) {
-                            callback(r);
-                        });
+                    BreweryService.fetchBreweries(loc);
                 } else {
                     callback(BreweryService.items);
                 }

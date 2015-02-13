@@ -14,20 +14,30 @@ define(function () {
             });
             return request.then(handleSuccess('BreweryService.brewery.beers'), handleError);
         }
-
         function fetchBreweries(loc) {
+            return fetchBreweriesH(loc);
+        }
+
+        function fetchBreweriesH(loc, tryNum) {
             //region: loc.region // by state
             //postalCode loc.postal// by zipcode
             //locality loc.city // by city
             var params = {};
-            if (loc.region) params.region = loc.region;
-            if (!loc.region && loc.city) params.locality = loc.city;
+
+            if (loc.city_override) {
+                params.locality = loc.city_override;
+            } else {
+                if (loc.city) params.locality = loc.city;
+                if (!loc.city && loc.region) params.region = loc.region;
+            }
+//            if (loc.region) params.region = loc.region;
+//            if (!loc.region && loc.city) params.locality = loc.city;
             var request = $http({
                 method: "get",
                 url: '/breweries',
                 params: params
             });
-            return request.then(handleSuccess('BreweryService.breweries'), handleError);
+            return request.then(handleSuccess('BreweryService.breweries', loc, tryNum), handleError);
         }
 
         function handleError(response) {
@@ -37,9 +47,18 @@ define(function () {
             return $q.reject(response.data.message);
         }
 
-        function handleSuccess(topic) {
+        function handleSuccess(topic, loc, tryNum) {
             return function (response) {
-                res = response.data;
+                    if ((!tryNum || tryNum == 0) && !response.data.data) {
+                        if (loc.local) {
+                            fetchBreweries({region: loc.region}, 1);
+                        } else {
+                            fetchBreweries({region: loc.city}, 1);
+                        }
+                        return response.data;
+                    }
+                    res = response.data;
+
                 $rootScope.$broadcast(topic, res);
                 return res;
             }

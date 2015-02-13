@@ -56,7 +56,8 @@ require([
     'async!http://maps.google.com/maps/api/js?sensor=false',
     'slick',
     'spin',
-    'ladda'
+    'ladda',
+    'text'
 ], function () {
     angular.bootstrap(document, ['beerApp']);
 });
