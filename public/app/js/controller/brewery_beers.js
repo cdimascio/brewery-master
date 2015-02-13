@@ -21,8 +21,9 @@
                 $scope.beers = beers.data;
             })
 
+            var cols = $(window).width() < 768 ? 2 : 3;
             // Track rows and columns
-            $scope.numColumns = 3;
+            $scope.numColumns = cols;
             $scope.beers = [];
             $scope.rows = [];
             $scope.cols = [];
