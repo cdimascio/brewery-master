@@ -5,6 +5,7 @@ var endpoint = {
 };
 
 exports.question = function(req, res) {
+
     require("request")({
         uri : endpoint.host + endpoint.instance,
         method : "POST",
@@ -18,6 +19,10 @@ exports.question = function(req, res) {
         agent: false,
         body : JSON.stringify(req.body)
     }, function(error, response, body) {
+        // Log to Cloudant asynchronously
+        require("../cloudant").insertQAResponse(JSON.parse(body));
+
+        // Send response
         res.send(body);
     });
 };

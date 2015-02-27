@@ -8,7 +8,8 @@ var favicon = require('static-favicon'),
     twitter = require('./service/twitter'),
     brewerydb = require('./service/brewerydb'),
     qaapi = require('./service/watson/qaapi'),
-    um = require('./service/watson/usermodeling');
+    um = require('./service/watson/usermodeling'),
+    cloudant = require('./service/cloudant');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.post('/um/profile', um.profile);
 app.post('/um/visualize', um.visualize);
 app.get('/tweet', twitter.tweet);
 
+app.get('/allquestions', cloudant.getAllQuestions);
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));

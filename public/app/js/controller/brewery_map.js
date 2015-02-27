@@ -31,13 +31,9 @@
                 // Fetch nearby breweries and render using Google maps
                 if (!LocationService.location()) {
                     LocationService.query().then(function (r) {
-//                    r = { city_override : 'San Jose' };
+//                      r = { city_override : 'San Jose' };
                         r.local = true;
-//                    if(navigator.userAgent.match(/(iPhone|iPad|iPod)/i)) {
-//                        setTimeout(fetchLocalBreweries(r, renderMap), 1000);
-//                    } else {
                         fetchLocalBreweries(r, renderMap)
-//                    }
                     });
                 }
 
