@@ -3,7 +3,7 @@ var userModelingEnv = require('../bluemix').userModeling();
 
 exports.profile = function(req, res) {
    require('request')({
-       uri : userModelingEnv.url + 'api/v2/profile',
+       uri : userModelingEnv.url + '/v2/profile',
        method : "POST",
        headers : {
            "Content-Type": "application/json"
@@ -12,7 +12,8 @@ exports.profile = function(req, res) {
             user : userModelingEnv.username,
             pass : userModelingEnv.password
        },
-       body : JSON.stringify(req.body)
+       //body : JSON.stringify(req.body)
+       json : req.body
     }, function(error, response, body) {
         res.status(response.statusCode).send(body);
     });
@@ -20,7 +21,7 @@ exports.profile = function(req, res) {
 
 exports.visualize = function(req, res) {
     require('request')({
-       uri : userModelingEnv.url + 'api/v2/visualize',
+       uri : userModelingEnv.url + '/v2/visualize',
        method : "POST",
        headers : {
           "Content-Type": "application/json",

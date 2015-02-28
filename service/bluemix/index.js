@@ -4,7 +4,7 @@
  */
 exports.userModeling = function() {
     // TODO return the credentials object for the user modeling service
-    return vcapServices()["user_modeling"][0].credentials;
+    return vcapServices()["personality_insights"][0].credentials;
 }
 
 // TODO REMOVE EVERYTHING BELOW FOR CLASS
@@ -31,15 +31,15 @@ function parseVcapServices() {
 }
 
 var testEnvironment = {
-    "user_modeling": [
+    "personality_insights": [
         {
-            "name": "bm-User Modeling",
-            "label": "user_modeling",
-            "plan": "user_modeling_free_plan",
+            "name": "Brewery_Personality_Insights",
+            "label": "personality_insights",
+            "plan": "IBM Watson Personality Insights Monthly Plan",
             "credentials": {
-                "url": "https://gateway.watsonplatform.net/systemu/service/",
-                "username": "84f594d4-cf3b-41d4-aa6b-32f67b34a341",
-                "password": "vpFicDdgGzg8"
+                "url": "https://gateway.watsonplatform.net/personality-insights/api",
+                "username": "68b028d8-095b-4580-a646-9ea2faa07083",
+                "password": "xSEu53ojoDis"
             }
         }
     ]
