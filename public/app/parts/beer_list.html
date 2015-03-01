@@ -1,0 +1,31 @@
+<!--<div class="container" id="section1">-->
+<!--<div class="col-sm-8 col-sm-offset-2 text-center">-->
+<!--<h1>Nearby Breweries</h1>-->
+<!--</div>-->
+<!--</div>-->
+<div ng-controller="BreweryBeersController">
+    <div class="row animate-hide">
+        <table class="table table-striped table-hover brewery-list-table">
+
+            <tr ng-click="notifySelect($event, item)" ng-repeat="item in beers">
+                <td>
+                    <img class="brewery-list-icon" ng-src="{{item.labels.icon}}">
+                </td>
+                <td class="col-sm-8">
+                    <p class="brewery-list-title">{{item.name}}</p>
+
+                    <p class="brewery-list-main">
+                        <sm>{{item.style.name}}</sm>
+                    </p>
+
+                    <p class="brewery-list-sub">
+                        <sm>Available {{item.available.name}}</sm>
+                    </p>
+                </td>
+                <td class="col-sm-2">
+                    <sm>{{item.abv}} abv</sm>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

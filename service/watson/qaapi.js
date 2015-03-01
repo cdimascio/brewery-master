@@ -20,7 +20,7 @@ exports.question = function(req, res) {
         body : JSON.stringify(req.body)
     }, function(error, response, body) {
         // Log to Cloudant asynchronously
-        require("../cloudant").insertQAResponse(JSON.parse(body));
+      //  require("../cloudant").insertQAResponse(JSON.parse(body));
 
         // Send response
         res.send(body);

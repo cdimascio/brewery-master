@@ -1,0 +1,57 @@
+<div class="container">
+    <h1>Ask Watson</h1>
+
+    <div ng-controller="QuestionController">
+        <div id="question-view" class="input-group sample-questions">
+            <span class="input-group-addon">Q</span>
+            <input type="text" class="form-control" id="search-term"
+                   placeholder="What would you like to know about beer?" ng-model="text">
+
+            <div class="input-group-btn">
+                <button class="btn btn-primary ladda-button" ladda="isLoading" ng-click="ask(text)"
+                        data-style="expand-left">
+                    <span class="ladda-label">Ask</span>
+                </button>
+                <!--button id="samples-dropdown" type="button" class="btn btn-primary dropdown-toggle"
+                        data-toggle="dropdown" tabindex="-1">
+                    <span class="caret"></span> <span class="sr-only">Sample Questions Dropdown</span>
+                </button>
+                <ul class="dropdown-menu pull-right" role="menu">
+                </ul-->
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div ng-controller="AnswersController" ng-show="result">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div ng-repeat="e in result.evidencelist track by $index">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading{{$index}}">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion"
+                               href="/home?page=askwatson#collapse{{$index}}"
+                               aria-expanded="{{$index === 0 ? 'true' : 'false'}}" aria-controls="collapse{{$index}}">
+                                {{($index === 0) ? 'Top Answer - ' : ''}}Confidence {{e.value * 100 | number:2}}%
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse{{$index}}" class="panel-collapse collapse {{$index == 0 ? 'in' : ''}}"
+                         role="tabpanel"
+                         aria-labelledby="heading{{$index}}">
+                        <div class="panel-body">
+                            <div ng-bind-html="formattedAnswerText($index)" class="answer-container"></div>
+
+                            <p class="answer-footer"> Confidence: {{e.value * 100 | number:2}}%<br>
+                                Section: {{e.metadataMap.title}}<br>
+                                Filename: {{e.metadataMap.originalfile}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>

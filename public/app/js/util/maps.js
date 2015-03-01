@@ -14,6 +14,7 @@
             return {
                 init: function (searchHandler) {
                     map = new google.maps.Map(containerDiv, {
+                        zoom: 15,
                         mapTypeId: google.maps.MapTypeId.ROADMAP,
                         navigationControl: true,
                         navigationControlOptions: {

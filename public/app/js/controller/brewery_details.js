@@ -5,7 +5,7 @@
         controller('BrewerySelectedController', ctrl());
 
     function ctrl() {
-        return ['$scope', function ($scope) {
+        return ['$scope', '$location', function ($scope, $location) {
 
             // Handle a selection from the Brewery Map
             $scope.$on('BreweryMap.selected', function (event, brewery) {
@@ -18,6 +18,8 @@
             });
 
             function handleSelect(brewery) {
+                //  $scope.page = '/brewery';
+                $location.search('page','brewery');
                 $scope.brewery = brewery;
             }
         }];

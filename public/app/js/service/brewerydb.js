@@ -11,7 +11,8 @@
             return {
                 fetchBreweries: fetchBreweries,
                 fetchBeers: fetchBeers,
-                breweries: breweries
+                breweries: breweries,
+                notify : notify
             };
 
             function fetchBeers(breweryId) {
@@ -75,6 +76,10 @@
                     $rootScope.$broadcast(topic, res);
                     return res;
                 }
+            }
+
+            function notify() {
+                $rootScope.$broadcast('BreweryService.breweries', breweries());
             }
 
             /**

@@ -1,0 +1,46 @@
+<div class="container" id="section1">
+    <div class="col-sm-8 col-sm-offset-2 text-center">
+        <h1>Nearby Breweries</h1>
+        </div>
+    </div>
+<div class="row">
+        <div ng-controller="BreweryListController">
+
+                <ul class="horizontal-slide">
+                        <li class="span list-group-item"  ng-repeat="item in data">
+                            <a href="#" ng-click="notifySelect($event, item)">
+                                <div class="brewery-list-item">
+                                        <p class="list-group-item-heading">
+                                            <img class="brewery-list-icon" ng-src="{{item.brewery.images.icon}}">
+                                            <b>{{item.brewery.name}}</b></p>
+                                        <p class="list-group-item-text">
+                                            {{item.brewery.address}}
+                                        </p>
+                                </div>
+                            </a>
+                        </li>
+
+                </ul>
+
+        </div>
+
+        <hr>
+
+        <div ng-controller="BreweryMapController">
+            <div id="map-canvas"></div>
+        </div>
+
+</div>
+<!--<div class="row">-->
+
+    <!--<div class="container">-->
+        <!--<div class="page-header text-center">-->
+            <!--<h1>Nearby Breweries</h1>-->
+        <!--</div>-->
+
+
+    <!--</div>-->
+    <!--<div ng-controller="BreweryMapController">-->
+        <!--<div id="map-canvas"></div>-->
+    <!--</div>-->
+<!--</div>-->

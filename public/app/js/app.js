@@ -23,11 +23,19 @@
         'beerApp.controllers.UserModelBuilderController',
         'beerApp.controllers.UserModelResultController',
         'beerApp.directives.slick',
-        'beerApp.directives.ladda'
+        'beerApp.directives.ladda',
+        'beerApp.controllers.MainController'
     ]).config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/home', {
-            templateUrl: 'app/partials/home.html'
+            templateUrl: 'app/parts/home.html',
+            reloadOnSearch: false
+        });
+
+        $routeProvider.when('/brewery', {
+            templateUrl: 'app/parts/home.html#brewery',
+            reloadOnSearch: false
         });
         $routeProvider.otherwise({redirectTo: '/home'});
     }]);
+
 }());

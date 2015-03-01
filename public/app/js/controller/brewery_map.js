@@ -27,6 +27,9 @@
                     renderMap(result)
                 });
 
+                $scope.reRender = function() {
+                  renderMap(BreweryService.breweries());
+                };
 
                 // Fetch nearby breweries and render using Google maps
                 if (!LocationService.location()) {
@@ -35,6 +38,9 @@
                         r.local = true;
                         fetchLocalBreweries(r, renderMap)
                     });
+                } else {
+                    map = null;
+                    fetchLocalBreweries(LocationService.location(), renderMap)
                 }
 
                 /**
@@ -47,7 +53,8 @@
                     if (!BreweryService.breweries() || force) {
                         BreweryService.fetchBreweries(loc);
                     } else {
-                        callback(BreweryService.items);
+                        callback(BreweryService.breweries());
+                        BreweryService.notify();
                     }
                 }
 
