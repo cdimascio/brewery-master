@@ -23,7 +23,7 @@
 
             });
             $scope.notifySelect = function (event, brewery) {
-                $location.search('page','brewery');
+//                $location.search('page','brewery');
                 $rootScope.$broadcast('BreweryListController.selected', brewery);
                 event.preventDefault();
             };

@@ -5,7 +5,7 @@
         controller('BrewerySelectedController', ctrl());
 
     function ctrl() {
-        return ['$scope', '$location', function ($scope, $location) {
+        return ['$scope', '$location', "$anchorScroll", function ($scope, $location, $anchorScroll) {
 
             // Handle a selection from the Brewery Map
             $scope.$on('BreweryMap.selected', function (event, brewery) {
@@ -20,6 +20,10 @@
             function handleSelect(brewery) {
                 //  $scope.page = '/brewery';
                 $location.search('page','brewery');
+                $location.hash('section1');
+
+                // call $anchorScroll()
+                $anchorScroll();
                 $scope.brewery = brewery;
             }
         }];

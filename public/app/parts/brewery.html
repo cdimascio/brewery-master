@@ -1,37 +1,48 @@
 <div class="row">
     <div ng-controller="BrewerySelectedController">
-    <div ng-show="brewery.name">
-        <div class="panel panel-default panel-brewery-title">
-            <div class="blur" style="height: 110px; background-size:cover;background-image: url('{{brewery.brewery.images.large}}');"></div>
-                <div class="no-blur-content" >
-                <h2 class="panel-title brewery-title">
-                    {{brewery.brewery.name}}
-                </h2>
+        <div ng-show="brewery.name">
+            <div class="panel panel-default panel-brewery-title">
+                <div class="blur"
+                     style="height: 110px; background-size:cover;background-image: url('{{brewery.brewery.images.large}}');"></div>
+                <div class="no-blur-content">
+                    <h2 class="panel-title brewery-title">
+                        {{brewery.brewery.name}}
+                    </h2>
                     <small>{{brewery.streetAddress}} {{brewery.locality}} {{brewery.region}} {{brewery.phone}}</small>
                 </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    Description
-                </h4>
             </div>
-            <div class="panel-body">
-                <p>
-                    {{brewery.brewery.description}}
-                </p>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Description
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        {{brewery.brewery.description}}
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    Beers
-                </h4>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        The Vibe
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <div ng-include="'app/parts/pi.html'"></div>
+                </div>
             </div>
-            <div class="panel-body">
-                <div ng-include="'app/parts/beer_list.html'"></div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Beers
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <div ng-include="'app/parts/beer_list.html'"></div>
+                </div>
             </div>
         </div>
     </div>
-        </div>
 </div>

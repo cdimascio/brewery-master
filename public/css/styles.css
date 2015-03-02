@@ -86,6 +86,10 @@ header h1,header h2,header h3 a,header a,header a:hover {
     font-size:1.3em;
 }
 
+header h1 {
+    font-size: 1.5em;
+}
+
 header h3 {
   font-family: 'Kreon', serif;
   background: #ffcc33;
@@ -357,3 +361,11 @@ ul.horizontal-slide li[class*="span"]:first-child {
     padding-top: 10px;
     margin-bottom: 00px;
 }
+
+.lead {
+    font-size: 1em;
+}
+
+.list-col1, .list-col2, .list-col3 a:visited {color: black;}   /* visited link */
+.list-col1, .list-col2, .list-col3 a:hover {color: black;}     /* mouse over link */
+.list-col1, .list-col2, .list-col3 a:active {color: black;}

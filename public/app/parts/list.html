@@ -11,10 +11,12 @@
         <table class="table table-striped table-hover brewery-list-table">
 
             <tr ng-click="notifySelect($event, item)" ng-repeat="item in data">
-                <td>
+                <td><a ng-click="" href="" class="list-col1">
                     <img class="brewery-list-icon" ng-src="{{item.brewery.images.icon}}">
+                    </a>
                 </td>
                 <td class="col-sm-8">
+                    <a ng-click="" href="" class="list-col2">
                     <p class="brewery-list-title">{{item.brewery.name}}</p>
 
                     <p class="brewery-list-main">
@@ -24,9 +26,12 @@
                     <p class="brewery-list-sub">
                         <sm>{{item.locationTypeDisplay}}</sm>
                     </p>
+                        </a>
                 </td>
                 <td class="col-sm-2">
+                    <a ng-click="" href="" class="list-col3">
                     0.2mi
+                    </a>
                 </td>
             </tr>
         </table>

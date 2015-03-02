@@ -29,7 +29,7 @@
             });
 
             $scope.page = 'search';//$location.path() ;
-
+                $location.search('page', $scope.page);
             $scope.$watch("page", function(newVal, oldVal) {
                if (newVal != oldVal) {
                    $scope.page = newVal;

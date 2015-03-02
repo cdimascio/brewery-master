@@ -24,8 +24,15 @@
         'beerApp.controllers.UserModelResultController',
         'beerApp.directives.slick',
         'beerApp.directives.ladda',
-        'beerApp.controllers.MainController'
+        'beerApp.controllers.MainController',
+        'beerApp.controllers.TweetPersonalityController'
     ]).config(['$routeProvider', function ($routeProvider) {
+
+        $routeProvider.when('/home?page=brewery', {
+            redirectTo: 'app/parts/home.html?page=search',
+       //    reloadOnSearch: false
+        });
+
         $routeProvider.when('/home', {
             templateUrl: 'app/parts/home.html',
             reloadOnSearch: false

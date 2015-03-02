@@ -92,7 +92,7 @@
             return local;
         }
 
-        function flatten(tree) {
+        function categories(tree) {
             var cats = {};
             var arr = [],
                 f = function (t, level) {
@@ -132,6 +132,11 @@
                 };
             f(tree, 0);
 
+
+            return cats; //cats; //arr
+        }
+
+        function flatten(cats) {
             var res = [
                 cats['personality'],
                 cats['needs'],
@@ -145,12 +150,13 @@
                     return -1;
                 });
             });
-            return res; //cats; //arr
+            return res;
         }
 
         return {
             tweetsToProfileData: tweetsToProfileData,
             filterTraits: filterTraits,
+            categories : categories,
             flatten: flatten
         }
     }

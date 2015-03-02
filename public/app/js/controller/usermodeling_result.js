@@ -11,8 +11,8 @@
             });
 
             $scope.$on('UserModelingService.profile', function (event, analysis) {
-                if (analysis.error_code) {
-                    $scope.error = analysis.user_message;
+                if (analysis.error_code || (analysis.code && analysis.code != 200)) {
+                    $scope.error = analysis.user_message || analysis.error;
                     return;
                 }
                 // TODO Traits can be filtered, however /visualize endpoint
@@ -22,7 +22,8 @@
                 $scope.analysis = analysis;
 
                 $scope.error = undefined;
-                $scope.analysisFlat = (UmService.flatten(analysis.tree));
+                $scope.categories = UmService.categories(analysis.tree);
+                $scope.analysisFlat = (UmService.flatten($scope.categories));
                 $scope.analysisKeys = Object.keys($scope.analysisFlat);
 
                 UserModelingService.visualize(analysis);

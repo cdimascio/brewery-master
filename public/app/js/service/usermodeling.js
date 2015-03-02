@@ -41,6 +41,7 @@
             function handleError(topic) {
                 return function (response) {
                     if (!angular.isObject(response.data) || !response.data.user_message) {
+                        $rootScope.$broadcast(topic, response.data);
                         return $q.reject("An unknown error occurred.");
                     }
                     $rootScope.$broadcast(topic, response.data);
