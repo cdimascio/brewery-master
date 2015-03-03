@@ -31,13 +31,14 @@
                   renderMap(BreweryService.breweries());
                 };
 
+                $scope.$on('LocationService.location', function(event,r){
+                    //r = { city_override : 'San Jose' };
+                    r.local = true;
+                    fetchLocalBreweries(r, renderMap, true)
+                });
                 // Fetch nearby breweries and render using Google maps
                 if (!LocationService.location()) {
-                    LocationService.query().then(function (r) {
-//                      r = { city_override : 'San Jose' };
-                        r.local = true;
-                        fetchLocalBreweries(r, renderMap)
-                    });
+                    LocationService.query();
                 } else {
                     map = null;
                     fetchLocalBreweries(LocationService.location(), renderMap)

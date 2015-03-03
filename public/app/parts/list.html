@@ -5,6 +5,9 @@
 <!--</div>-->
 <div ng-controller="BreweryListController">
     <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="toggleMap()">
+        <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="locate()">
         <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
     </button>
     <div class="row animate-hide" ng-hide="showMap">
@@ -29,8 +32,8 @@
                         </a>
                 </td>
                 <td class="col-sm-2">
-                    <a ng-click="" href="" class="list-col3">
-                    0.2mi
+                    <a ng-show="item.distance" ng-click="" href="" class="list-col3">
+                    {{item.distance}}mi
                     </a>
                 </td>
             </tr>
@@ -42,4 +45,6 @@
         </div>
     </div>
 
+</div>
+<div class="location-progress-overlay">
 </div>

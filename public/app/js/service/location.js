@@ -15,8 +15,34 @@
             };
 
             function query() {
-                var request = $http.jsonp('http://ipinfo.io?callback=JSON_CALLBACK');
-                return request.then(handleSuccess, handleError);
+                $rootScope.$broadcast("LocationService.searching");
+                if(navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        $rootScope.$broadcast("LocationService.location", {
+                            loc: position.coords.latitude+","+position.coords.longitude
+                        });
+
+//                        var pos = new google.maps.LatLng(position.coords.latitude,
+//                            position.coords.longitude);
+//
+//                        var infowindow = new google.maps.InfoWindow({
+//                            map: map,
+//                            position: pos,
+//                            content: 'Location found using HTML5.'
+//                        });
+//
+//                        map.setCenter(pos);
+                    }, function() {
+                        var request = $http.jsonp('http://ipinfo.io?callback=JSON_CALLBACK');
+                        return request.then(handleSuccess, handleError);
+                    });
+                } else {
+                    // USE IP
+                    // browser doesn't support geolocation
+                    //handleNoGeolocation(false);
+                    var request = $http.jsonp('http://ipinfo.io?callback=JSON_CALLBACK');
+                    return request.then(handleSuccess, handleError);
+                }
             }
 
             function handleError(response) {

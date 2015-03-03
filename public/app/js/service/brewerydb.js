@@ -28,25 +28,29 @@
             }
 
             function fetchBreweriesH(loc, tryNum) {
-                //region: loc.region // by state
-                //postalCode loc.postal// by zipcode
-                //locality loc.city // by city
                 var params = {};
-
-                if (loc.city_override) {
-                    params.locality = loc.city_override;
+                var ll = loc.loc && loc.loc.split(',');
+                if (ll && ll.length == 2) {
+                    params.lat = ll[0];
+                    params.lng = ll[1];
+                    var request = $http({
+                        method: "get",
+                        url: '/breweries/nearby',
+                        params: params
+                    });
+                    return request.then(handleSuccess('BreweryService.breweries', loc, tryNum), handleError);
                 } else {
+                    if (loc.city_override) params.locality = loc.city_override;
                     if (loc.city) params.locality = loc.city;
                     if (!loc.city && loc.region) params.region = loc.region;
+
+                    var request = $http({
+                        method: "get",
+                        url: '/breweries',
+                        params: params
+                    });
+                    return request.then(handleSuccess('BreweryService.breweries', loc, tryNum), handleError);
                 }
-//            if (loc.region) params.region = loc.region;
-//            if (!loc.region && loc.city) params.locality = loc.city;
-                var request = $http({
-                    method: "get",
-                    url: '/breweries',
-                    params: params
-                });
-                return request.then(handleSuccess('BreweryService.breweries', loc, tryNum), handleError);
             }
 
             function handleError(response) {

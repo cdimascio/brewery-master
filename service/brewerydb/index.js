@@ -28,3 +28,17 @@ exports.breweries = function(req, res) {
         res.send(body);
     });
 };
+
+exports.breweriesNearby = function(req, res) {
+    var uri = rootService+'search/geo/point?'+p+
+        '&'+require('url').parse(req.url).query;
+    require('request')({
+        uri : uri,
+        method : "GET",
+        headers : {
+            'Content-Type' : 'application/json'
+        }
+    }, function(error, response, body) {
+        res.send(body);
+    });
+};
