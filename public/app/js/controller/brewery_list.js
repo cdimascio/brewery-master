@@ -51,7 +51,14 @@
 
             $scope.search = function(text) {
                 dim();
-                LocationService.lookup(text);
+
+                if (LocationParserService.isState(text.trim())) {
+                    BreweryService.fetchBreweries({
+                        region : text.trim()
+                    });
+                } else {
+                    LocationService.lookup(text);
+                }
             };
 
             $('.brewery-list-table > tr').click($scope.notifySelect);

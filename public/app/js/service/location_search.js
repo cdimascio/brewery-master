@@ -8,62 +8,48 @@
     function service() {
         return [function () {
             return {
-                parse: parse
+                parse: parse,
+                isState : isState
             };
 
             function parse(ss) {
                 var nums = /[0-9]/;
-//
-//                ss = ss.trim();
-//
-//                if (ss.match(nums)) {
-//                    throw Error('number found')
-//                }
-//
-//                var cityState = []
-//                if (ss.indexOf(',') > -1) {
-//                    cityState = ss.split(',').map(function(x) {
-//                        return x.trim();
-//                    });
-//
-//                    // check if state is an abbrev
-//                    var stateCandidate = cityState[1],
-//                        state = lookupStateByAbbrev[stateCandidate];
-//
-//                    if (state) {
-//                        cityState[1] = state;
-//                    }
-//                }
-//
-//                if (cityState.length === 0) {
-//                    var state = getState(ss);
-//                    if (state) {
-//                        cityState.push(undefined);
-//                        cityState.push(state);
-//                    } else {
-//                        cityState.push(ss);
-//                    }
-//                }
 
-                var geocoder = new google.maps.Geocoder();
-                var address = ss;
-                var latlng;
-                geocoder.geocode( {
+                ss = ss.trim();
 
-                    'address': ss}, function(results, status) {
-                    console.log(results[0].geometry.location.lng());
-                    console.log(results[0].geometry.location.lat());
-                    latlng = results[0].geometry.location.lat() +","+ results[0].geometry.location.lng();
+                if (ss.match(nums)) {
+                    throw Error('number found')
+                }
 
-                });
+                var cityState = []
+                if (ss.indexOf(',') > -1) {
+                    cityState = ss.split(',').map(function(x) {
+                        return x.trim();
+                    });
+
+                    // check if state is an abbrev
+                    var stateCandidate = cityState[1],
+                        state = lookupStateByAbbrev[stateCandidate];
+
+                    if (state) {
+                        cityState[1] = state;
+                    }
+                }
+
+                if (cityState.length === 0) {
+                    var state = getState(ss);
+                    if (state) {
+                        cityState.push(undefined);
+                        cityState.push(state);
+                    } else {
+                        cityState.push(ss);
+                    }
+                }
 
                 return {
-                    loc : latlng
+                    city : cityState[0],
+                    region : cityState[1]
                 };
-//                return {
-//                    city : cityState[0],
-//                    region : cityState[1]
-//                };
 
             }
 
@@ -80,6 +66,13 @@
                 return undefined;
             }
 
+            function isState(s) {
+                var state = s.trim().toUpperCase();
+                if (lookupAbbrevByState(state)) {
+                    return true;
+                }
+                return false;
+            }
             function lookupStateByAbbrev(s) {
                 var abbrevToState = {
                     "AL": "Alabama",
