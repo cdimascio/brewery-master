@@ -14,17 +14,19 @@
             </button>
         </div>
         <div class="col-xs-8">
+            <form name="locationSearch">
             <div id="location-search" class="input-group">
-                <input type="text" class="form-control" id="location-search-term"
-                       placeholder="Enter a location" ng-model="text">
+                <input type="text" class="form-control" name="location"
+                       placeholder="Enter a location" ng-model="text" required />
 
                 <div class="input-group-btn">
                     <button class="btn btn-primary ladda-button" ladda="isLoading" ng-click="search(text)"
-                            data-style="expand-left">
+                            data-style="expand-left" ng-disabled="locationSearch.$invalid">
                         <span class="ladda-label">Go</span>
                     </button>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 
@@ -41,7 +43,8 @@
                     <p class="brewery-list-title">{{item.brewery.name}}</p>
 
                     <p class="brewery-list-main">
-                        <sm>{{item.streetAddress}}, {{item.locality}}</sm>
+                        <sm ng-show="item.streetAddress">{{item.streetAddress}}, {{item.locality}}</sm>
+                        <sm ng-show="!item.streetAddress">{{item.locality}}</sm>
                     </p>
 
                     <p class="brewery-list-sub">

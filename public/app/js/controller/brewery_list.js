@@ -84,7 +84,7 @@
 
             overlay.css({
                 position: "absolute", left: position.left, top: top,
-                width: $(window).width(), //element.width(),
+                width: $(window).width(),
                 height: height,
                 background: "#fff",
                 opacity:0.6
