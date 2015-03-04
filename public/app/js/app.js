@@ -12,6 +12,7 @@
         'beerApp.services.MapService',
         'beerApp.services.UmService',
         'beerApp.services.UserModelingService',
+        'beerApp.services.LocationParserService',
         'beerApp.controllers.AnswersController',
         'beerApp.controllers.BreweryBeersController',
         'beerApp.controllers.BrewerySelectedController',

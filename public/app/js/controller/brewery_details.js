@@ -21,7 +21,6 @@
                 //  $scope.page = '/brewery';
                 $location.search('page','brewery');
                 $location.hash('section1');
-
                 // call $anchorScroll()
                 $anchorScroll();
                 $scope.brewery = brewery;

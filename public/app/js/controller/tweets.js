@@ -10,6 +10,7 @@
             // Handle available tweets
             $scope.$on('TweetService.tweets', function (event, tweets) {
                 $scope.tweets = tweets;
+                $scope.isLoading = false;
             });
 
             // Handle brewery map selection
@@ -23,6 +24,8 @@
             });
 
             function handleSelect(brewery) {
+                $scope.isLoading = true;
+                $scope.tweets = undefined;
                 TweetService.query(brewery.brewery.name);
             }
         }];

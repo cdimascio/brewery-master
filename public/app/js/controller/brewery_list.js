@@ -5,8 +5,8 @@
         controller('BreweryListController', ctrl());
 
     function ctrl() {
-        return ['$scope', '$rootScope', '$http', '$location', 'LocationService','BreweryService',
-            function ($scope, $rootScope, $http, $location, LocationService, BreweryService) {
+        return ['$scope', '$rootScope', '$http', '$location', 'LocationService','LocationParserService', 'BreweryService',
+            function ($scope, $rootScope, $http, $location, LocationService, LocationParserService, BreweryService) {
 
             $scope.$on('LocationService.searching', function(){
                 dim();
@@ -16,6 +16,10 @@
             $scope.$on('BreweryService.breweries', function () {
                 var data = BreweryService.breweries() && BreweryService.breweries().data;
                 // Sort brewery list alphabetically
+                if (!data) {
+                    light();
+                    return;
+                }
                 $scope.data = data.sort(function (a, b) {
                     if (a.distance) {
                         // try to sort by distance
@@ -43,7 +47,12 @@
             $scope.locate = function() {
                 LocationService.query();
                 dim();
-            }
+            };
+
+            $scope.search = function(text) {
+                dim();
+                LocationService.lookup(text);
+            };
 
             $('.brewery-list-table > tr').click($scope.notifySelect);
         }];
@@ -75,7 +84,7 @@
 
             overlay.css({
                 position: "absolute", left: position.left, top: top,
-                width: element.width(),
+                width: $(window).width(), //element.width(),
                 height: height,
                 background: "#fff",
                 opacity:0.6
@@ -83,6 +92,7 @@
             });
 
             overlay.show();
+
             var opts = {
                 lines: 10, // The number of lines to draw
                 length: 20, // The length of each line
@@ -98,11 +108,15 @@
                 hwaccel: false, // Whether to use hardware acceleration
                 className: 'spinner',//, // The CSS class to assign to the spinner
                 /*    zIndex: 2e9, // The z-index (defaults to 2000000000)*/
-                 top: percentDist+'%' // Top position relative to parent
-                 /*left: '50%' // Left position relative to parent*/
+                top: percentDist+'%' // Top position relative to parent
+                /*left: '50%' // Left position relative to parent*/
             };
+            if (spinner) {
+                spinner.stop()
+            }
+            spinner = new Spinner(opts);
+            spinner = spinner.spin(overlay[0]);
 
-            spinner = new Spinner(opts).spin(overlay[0]);
         }
     }
 }());

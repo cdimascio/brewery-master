@@ -1,11 +1,13 @@
-<div ng-controller="TweetController">
-    <div ng-hide="tweets">Sorry. Not enough information to sense the vibe.</div>
-    <div ng-show="tweets">
+<!--<div ng-controller="TweetController">-->
+    <!--<div ng-show="isLoading">Loading...</div>-->
+    <!--<div ng-show="tweets && !isLoading">-->
         <div ng-controller="TweetPersonalityController">
+            <!--<div ng-show="isLoading">Loading...</div>-->
             <div ng-controller="UserModelResultController">
-                <div ng-show="error">Sorry. Not enough information to sense the vibe.</div>
-                <div ng-show="!error">
-                    <div class="row">
+                <div ng-show="isLoading">Loading...</div>
+                <div ng-show="error && isLoading === false">Sorry. Not enough information to sense the vibe.</div>
+                <div ng-show="!error && isLoading === false">
+                    <div class="row vibe">
                         <div class="col-xs-6">
                             <table class="table table-striped table-condensed">
                                 <thead>
@@ -56,6 +58,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->

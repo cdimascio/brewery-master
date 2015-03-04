@@ -21,6 +21,7 @@
                     url: '/um/profile',
                     data: userData
                 });
+                $rootScope.$broadcast('UserModelingService.profiling');
                 return request.then(handleSuccess('UserModelingService.profile'),
                     handleError('UserModelingService.profile'));
             }

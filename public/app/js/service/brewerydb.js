@@ -40,16 +40,16 @@
                     });
                     return request.then(handleSuccess('BreweryService.breweries', loc, tryNum), handleError);
                 } else {
-                    if (loc.city_override) params.locality = loc.city_override;
-                    if (loc.city) params.locality = loc.city;
-                    if (!loc.city && loc.region) params.region = loc.region;
-
-                    var request = $http({
-                        method: "get",
-                        url: '/breweries',
-                        params: params
-                    });
-                    return request.then(handleSuccess('BreweryService.breweries', loc, tryNum), handleError);
+//                    if (loc.city_override) params.locality = loc.city_override;
+//                    if (loc.city) params.locality = loc.city;
+//                    if (!loc.city && loc.region) params.region = loc.region;
+//
+//                    var request = $http({
+//                        method: "get",
+//                        url: '/breweries',
+//                        params: params
+//                    });
+//                    return request.then(handleSuccess('BreweryService.breweries', loc, tryNum), handleError);
                 }
             }
 
@@ -63,18 +63,18 @@
             function handleSuccess(topic, loc, tryNum) {
                 return function (response) {
 
-                    if ((!tryNum || tryNum == 0) && !response.data.data) {
-                        if (!loc) {
-                            console.log('no location');
-                            return response.data;
-                        }
-                        if (loc.local) {
-                            fetchBreweries({region: loc.region}, 1);
-                        } else {
-                            fetchBreweries({region: loc.city}, 1);
-                        }
-                        return response.data;
-                    }
+//                    if ((!tryNum || tryNum == 0) && !response.data.data) {
+//                        if (!loc) {
+//                            console.log('no location');
+//                            return response.data;
+//                        }
+//                        if (loc.local) {
+//                            fetchBreweries({region: loc.region}, 1);
+//                        } else {
+//                            fetchBreweries({region: loc.city}, 1);
+//                        }
+//                        return response.data;
+//                    }
                     res = response.data;
 
                     $rootScope.$broadcast(topic, res);

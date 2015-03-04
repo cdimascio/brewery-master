@@ -12,8 +12,9 @@
             '$rootScope',
             'BreweryService',
             'LocationService',
+            'LocationParserService',
             'MapService',
-            function ($scope, $http, $rootScope, BreweryService, LocationService, MapService) {
+            function ($scope, $http, $rootScope, BreweryService, LocationService, LocationParserService, MapService) {
 
                 // Handle brewery list selection
                 $scope.$on('BreweryListController.selected', function (event, brewery) {
@@ -87,9 +88,11 @@
                 }
 
                 function searchHandler(evt) {
-                    var loc = {
-                        city: evt.searchText // region: for state
-                    };
+//                    var loc = {
+//                        city: evt.searchText // region: for state
+//                    };
+                    var loc = LocationParserService.parse(evt.searchText);
+
                     fetchLocalBreweries(loc, renderMap, true);
                 }
             }];

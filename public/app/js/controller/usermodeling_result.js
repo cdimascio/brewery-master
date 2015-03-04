@@ -10,11 +10,17 @@
                 $scope.visualization = $sce.trustAsHtml(visualization);
             });
 
+            $scope.$on('UserModelingService.profiling', function (event, analysis) {
+                $scope.isLoading = true;
+            });
+
             $scope.$on('UserModelingService.profile', function (event, analysis) {
+                $scope.isLoading = false;
                 if (analysis.error_code || (analysis.code && analysis.code != 200)) {
                     $scope.error = analysis.user_message || analysis.error;
                     return;
                 }
+
                 // TODO Traits can be filtered, however /visualize endpoint
                 // To keep only traits returned by traits()
                 // Uncomment the following line and replace all values 'analysis' with 'filteredAnalysis'
@@ -26,7 +32,7 @@
                 $scope.analysisFlat = (UmService.flatten($scope.categories));
                 $scope.analysisKeys = Object.keys($scope.analysisFlat);
 
-                UserModelingService.visualize(analysis);
+               // UserModelingService.visualize(analysis);
             });
         }];
 
