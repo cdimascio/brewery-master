@@ -6,6 +6,7 @@
         'ngRoute',
         'beerApp.services.BreweryService',
         'beerApp.services.LocationService',
+        'beerApp.services.LocationParserService',
         'beerApp.services.QaapiService',
         'beerApp.services.TweetService',
         'beerApp.services.UserModelingService',

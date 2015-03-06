@@ -11,12 +11,40 @@
 
             return {
                 location: location,
-                query: query
+                locate: query,
+                lookup : lookup
             };
 
+            function lookup(address) {
+                var geocoder = new google.maps.Geocoder();
+                var latlng;
+                geocoder.geocode( {
+                    'address': address
+                }, function(results, status) {
+                    latlng = results[0].geometry.location.lat() +","+ results[0].geometry.location.lng();
+                    $rootScope.$broadcast("LocationService.location", {
+                        loc : latlng
+                    });
+                });
+
+            }
             function query() {
-                var request = $http.jsonp('http://ipinfo.io?callback=JSON_CALLBACK');
-                return request.then(handleSuccess, handleError);
+                $rootScope.$broadcast("LocationService.searching");
+                if(navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        $rootScope.$broadcast("LocationService.location", {
+                            loc: position.coords.latitude+","+position.coords.longitude
+                        });
+                    }, function() {
+                        var request = $http.jsonp('http://ipinfo.io?callback=JSON_CALLBACK');
+                        return request.then(handleSuccess, handleError);
+                    });
+                } else {
+                    // Use Ip Address to detect location
+                    // Browser doesn't support geolocation
+                    var request = $http.jsonp('http://ipinfo.io?callback=JSON_CALLBACK');
+                    return request.then(handleSuccess, handleError);
+                }
             }
 
             function handleError(response) {
