@@ -11,7 +11,7 @@
 
             return {
                 location: location,
-                query: query,
+                locate: query,
                 lookup : lookup
             };
 
@@ -40,9 +40,8 @@
                         return request.then(handleSuccess, handleError);
                     });
                 } else {
-                    // USE IP
-                    // browser doesn't support geolocation
-                    //handleNoGeolocation(false);
+                    // Use Ip Address to detect location
+                    // Browser doesn't support geolocation
                     var request = $http.jsonp('http://ipinfo.io?callback=JSON_CALLBACK');
                     return request.then(handleSuccess, handleError);
                 }

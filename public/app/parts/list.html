@@ -1,8 +1,3 @@
-<!--<div class="container" id="section1">-->
-<!--<div class="col-sm-8 col-sm-offset-2 text-center">-->
-<!--<h1>Nearby Breweries</h1>-->
-<!--</div>-->
-<!--</div>-->
 <div ng-controller="BreweryListController">
     <div class="row">
         <div class="col-xs-4">
@@ -15,17 +10,17 @@
         </div>
         <div class="col-xs-8">
             <form name="locationSearch">
-            <div id="location-search" class="input-group">
-                <input type="text" class="form-control" name="location"
-                       placeholder="Enter a location" ng-model="text" required />
+                <div id="location-search" class="input-group">
+                    <input type="text" class="form-control" name="location"
+                           placeholder="Enter a location" ng-model="text" required/>
 
-                <div class="input-group-btn">
-                    <button class="btn btn-primary ladda-button" ladda="isLoading" ng-click="search(text)"
-                            data-style="expand-left" ng-disabled="locationSearch.$invalid">
-                        <span class="ladda-label">Go</span>
-                    </button>
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary ladda-button" ladda="isLoading" ng-click="search(text)"
+                                data-style="expand-left" ng-disabled="locationSearch.$invalid">
+                            <span class="ladda-label">Go</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
             </form>
         </div>
     </div>

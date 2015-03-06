@@ -45,7 +45,7 @@
             };
 
             $scope.locate = function() {
-                LocationService.query();
+                LocationService.locate();
                 dim();
             };
 

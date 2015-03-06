@@ -29,37 +29,20 @@
                 });
 
                 $scope.reRender = function() {
-                  renderMap(BreweryService.breweries());
+                    renderMap(BreweryService.breweries());
                 };
 
                 $scope.$on('LocationService.location', function(event,r){
-                    //r = { city_override : 'San Jose' };
-                    r.local = true;
-                    fetchLocalBreweries(r, renderMap, true)
+                    BreweryService.fetchBreweries(r);
                 });
+
                 // Fetch nearby breweries and render using Google maps
                 if (!LocationService.location()) {
-                    LocationService.query();
+                    LocationService.locate();
                 } else {
                     map = null;
-                    fetchLocalBreweries(LocationService.location(), renderMap)
+                    BreweryService.fetchBreweries(LocationService.location());
                 }
-
-                /**
-                 * Find breweries near a given location
-                 * @param loc The location
-                 * @param callback The callback function to invoke after fetching breweries
-                 * @param force Force a server query
-                 */
-                function fetchLocalBreweries(loc, callback, force) {
-                    if (!BreweryService.breweries() || force) {
-                        BreweryService.fetchBreweries(loc);
-                    } else {
-                        callback(BreweryService.breweries());
-                        BreweryService.notify();
-                    }
-                }
-
                 /**
                  * Displays breweries on Google Maps
                  * @param r The BreweryDB /breweries response object
@@ -88,12 +71,14 @@
                 }
 
                 function searchHandler(evt) {
-//                    var loc = {
-//                        city: evt.searchText // region: for state
-//                    };
-                    var loc = LocationParserService.parse(evt.searchText);
-
-                    fetchLocalBreweries(loc, renderMap, true);
+                    var text = evt.searchText.trim();
+                    if (LocationParserService.isState(text.trim())) {
+                        BreweryService.fetchBreweries({
+                            region : text.trim()
+                        });
+                    } else {
+                        LocationService.lookup(text);
+                    }
                 }
             }];
     }
