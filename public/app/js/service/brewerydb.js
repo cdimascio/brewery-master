@@ -11,7 +11,8 @@
             return {
                 fetchBreweries: fetchBreweries,
                 fetchBeers: fetchBeers,
-                breweries: breweries
+                breweries: breweries,
+                notify : notify
             };
 
             function fetchBeers(breweryId) {
@@ -23,29 +24,29 @@
             }
 
             function fetchBreweries(loc) {
-                return fetchBreweriesH(loc);
-            }
-
-            function fetchBreweriesH(loc, tryNum) {
-                //region: loc.region // by state
-                //postalCode loc.postal// by zipcode
-                //locality loc.city // by city
                 var params = {};
-
-                if (loc.city_override) {
-                    params.locality = loc.city_override;
+                var ll = loc.loc && loc.loc.split(',');
+                if (ll && ll.length == 2) {
+                    params.lat = ll[0];
+                    params.lng = ll[1];
+                    var request = $http({
+                        method: "get",
+                        url: '/breweries/nearby',
+                        params: params
+                    });
+                    return request.then(handleSuccess('BreweryService.breweries'), handleError);
                 } else {
+                    if (loc.city_override) params.locality = loc.city_override;
                     if (loc.city) params.locality = loc.city;
                     if (!loc.city && loc.region) params.region = loc.region;
+
+                    var request = $http({
+                        method: "get",
+                        url: '/breweries',
+                        params: params
+                    });
+                    return request.then(handleSuccess('BreweryService.breweries'), handleError);
                 }
-//            if (loc.region) params.region = loc.region;
-//            if (!loc.region && loc.city) params.locality = loc.city;
-                var request = $http({
-                    method: "get",
-                    url: '/breweries',
-                    params: params
-                });
-                return request.then(handleSuccess('BreweryService.breweries', loc, tryNum), handleError);
             }
 
             function handleError(response) {
@@ -55,26 +56,16 @@
                 return $q.reject(response.data.message);
             }
 
-            function handleSuccess(topic, loc, tryNum) {
+            function handleSuccess(topic) {
                 return function (response) {
-
-                    if ((!tryNum || tryNum == 0) && !response.data.data) {
-                        if (!loc) {
-                            console.log('no location');
-                            return response.data;
-                        }
-                        if (loc.local) {
-                            fetchBreweries({region: loc.region}, 1);
-                        } else {
-                            fetchBreweries({region: loc.city}, 1);
-                        }
-                        return response.data;
-                    }
                     res = response.data;
-
                     $rootScope.$broadcast(topic, res);
                     return res;
                 }
+            }
+
+            function notify() {
+                $rootScope.$broadcast('BreweryService.breweries', breweries());
             }
 
             /**
