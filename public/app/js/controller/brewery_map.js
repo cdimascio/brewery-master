@@ -15,6 +15,7 @@
             'LocationParserService',
             'MapService',
             function ($scope, $http, $rootScope, BreweryService, LocationService, LocationParserService, MapService) {
+                $scope.isLoading = true;
 
                 // Handle brewery list selection
                 $scope.$on('BreweryListController.selected', function (event, brewery) {
@@ -25,7 +26,8 @@
                 });
 
                 $rootScope.$on('BreweryService.breweries', function (event, result) {
-                    renderMap(result)
+                    renderMap(result);
+                    $scope.isLoading = false;
                 });
 
                 $scope.reRender = function() {
@@ -34,6 +36,10 @@
 
                 $scope.$on('LocationService.location', function(event,r){
                     BreweryService.fetchBreweries(r);
+                });
+
+                $scope.$on('LocationService.searching', function(event, r) {
+                    $scope.isLoading == true;
                 });
 
                 // Fetch nearby breweries and render using Google maps
