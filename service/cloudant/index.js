@@ -43,7 +43,7 @@ exports.getAllQuestions = function(req, res) {
         headers : {
             'Content-Type' : 'application/json'
         },
-        json : questionsQuery,
+        json : questionsQuery
     }, function(error, response, body) {
         res.send(body);
     });
