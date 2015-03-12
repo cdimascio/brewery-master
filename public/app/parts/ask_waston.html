@@ -1,47 +1,60 @@
 <div class="container">
-    <h1>Ask Watson</h1>
+    <div class="row">
+        <h1>Ask Watson</h1>
 
-    <div ng-controller="QuestionController">
-        <form name="askWatsonForm">
-            <div id="question-view" class="input-group sample-questions">
-                <span class="input-group-addon">Q</span>
-                <input type="text" class="form-control" id="search-term"
-                       placeholder="What would you like to know about beer?" ng-model="text" required/>
+        <div ng-controller="QuestionController">
+            <form name="askWatsonForm">
+                <div id="question-view" class="input-group sample-questions">
+                    <span class="input-group-addon">Q</span>
+                    <input type="text" class="form-control" id="search-term"
+                           placeholder="What would you like to know about beer?" ng-model="text" required/>
 
-                <div class="input-group-btn">
-                    <button class="btn btn-primary ladda-button" ladda="isLoading" ng-click="ask(text)"
-                            data-style="expand-left" ng-disabled="askWatsonForm.$invalid">
-                        <span class="ladda-label">Ask</span>
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <div class="divider"></div>
-
-    <div ng-controller="AnswersController" ng-show="result">
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            <div ng-repeat="e in result.evidencelist track by $index">
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="heading{{$index}}">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion"
-                               href="/home?page=askwatson#collapse{{$index}}"
-                               aria-expanded="{{$index === 0 ? 'true' : 'false'}}" aria-controls="collapse{{$index}}">
-                                {{($index === 0) ? 'Top Answer - ' : ''}}Confidence {{e.value * 100 | number:2}}%
-                            </a>
-                        </h4>
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary ladda-button" ladda="isLoading" ng-click="ask(text)"
+                                data-style="expand-left" ng-disabled="askWatsonForm.$invalid">
+                            <span class="ladda-label">Ask</span>
+                        </button>
                     </div>
-                    <div id="collapse{{$index}}" class="panel-collapse collapse {{$index == 0 ? 'in' : ''}}"
-                         role="tabpanel"
-                         aria-labelledby="heading{{$index}}">
-                        <div class="panel-body">
-                            <div ng-bind-html="formattedAnswerText($index)" class="answer-container"></div>
+                </div>
+            </form>
+        </div>
 
-                            <p class="answer-footer"> Confidence: {{e.value * 100 | number:2}}%<br>
-                                Section: {{e.metadataMap.title}}<br>
-                                Filename: {{e.metadataMap.originalfile}}</p>
+        <div class="divider"></div>
+
+        <div ng-controller="AnswersController">
+            <div ng-hide="result">
+                <p></p><b>A note about IBM Watson:</b></p>
+                <p>Before IBM Watson can answer questions, it must have a knowledge base or corpus.
+                    Watson formulates correct answers by using its corpus.
+                    This particular corpus is comprised of a <em>small set of documents</em> about beers, brewing, and
+                    the like.</p>
+
+                <p>Please feel free to ask Watson your question in natural language.</p>
+                <div class="large-vertical-placeholder"></div>
+            </div>
+            <div ng-show="result" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div ng-repeat="e in result.evidencelist track by $index">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading{{$index}}">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="/home?page=askwatson#collapse{{$index}}"
+                                   aria-expanded="{{$index === 0 ? 'true' : 'false'}}"
+                                   aria-controls="collapse{{$index}}">
+                                    {{($index === 0) ? 'Top Answer - ' : ''}}Confidence {{e.value * 100 | number:2}}%
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse{{$index}}" class="panel-collapse collapse {{$index == 0 ? 'in' : ''}}"
+                             role="tabpanel"
+                             aria-labelledby="heading{{$index}}">
+                            <div class="panel-body">
+                                <div ng-bind-html="formattedAnswerText($index)" class="answer-container"></div>
+
+                                <p class="answer-footer"> Confidence: {{e.value * 100 | number:2}}%<br>
+                                    Section: {{e.metadataMap.title}}<br>
+                                    Filename: {{e.metadataMap.originalfile}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -50,4 +63,3 @@
     </div>
 </div>
 
-</div>

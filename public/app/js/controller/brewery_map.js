@@ -80,6 +80,18 @@
                         LocationService.lookup(text);
                     }
                 }
+
+//                function() {
+//                    var dist = $('#footer').offset().top - $('#search').offset().top,
+//                        percentDist = 50,
+//                        height = element.height() == 0 ? dist : element.height();
+//
+//
+//
+//                    if (element.height() > dist) {
+//                        percentDist = Math.abs(dist / element.height()) * 100;
+//                        percentDist = perce
+//                }
             }];
     }
 }());

@@ -16,13 +16,14 @@
             $('body').scrollspy({ target: '#nav' })
 
             $('.scroll-top').click(function () {
-                $('body,html').animate({scrollTop: 0}, 1000);
+                $('body,html').animate({scrollTop: 60}, 1000);
             })
 
             $('#nav .navbar-nav li>a').click(function () {
                 var link = $(this).attr('href');
-                var posi = $(link).offset().top + 20;
-                $('body,html').animate({scrollTop: posi}, 700);
+//                var posi = $(link).offset().top + 20;
+//                $('body,html').animate({scrollTop: posi}, 700);
+                $(".navbar-toggle").click();
             });
 
             $scope.page = 'search';
@@ -42,7 +43,19 @@
 
             $scope.toggleMap = function() {
                 $scope.showMap = !$scope.showMap;
-            }
+            };
+
+            $scope.showaMap = function() {
+                $scope.showMap = true;
+            };
+
+            $scope.showList = function() {
+                $scope.showMap = false;
+            };
+
+            $scope.locate = function() {
+                LocationService.locate();
+            };
         }];
     }
 }());

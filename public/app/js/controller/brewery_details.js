@@ -17,12 +17,12 @@
                 handleSelect(brewery);
             });
 
+            $scope.$on('BreweryService.brewery.beers', function (event, beers) {
+                $('#mytop').animate({scrollTop: 0}, 0);
+            });
+
             function handleSelect(brewery) {
-                //  $scope.page = '/brewery';
                 $location.search('page','brewery');
-                $location.hash('section1');
-                // call $anchorScroll()
-                $anchorScroll();
                 $scope.brewery = brewery;
             }
         }];

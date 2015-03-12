@@ -1,87 +1,118 @@
-<!-- Wrap all page content here -->
-<div id="wrap">
-
-<header class="masthead">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <h1><a href="#" title="Brewery Master">Brewery Master</a>
-
-                    <p class="lead">Beer and Breweries, cognitive style</p></h1>
-            </div>
-            <div class="col-sm-6">
-                <!--<div class="pull-right  hidden-xs">-->
-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown"><h3><i-->
-                            <!--class="glyphicon glyphicon-cog"></i></h3></a>-->
-                    <!--<ul class="dropdown-menu">-->
-                        <!--<li><a href="#"><i class="glyphicon glyphicon-chevron-right"></i> Link</a></li>-->
-                        <!--<li><a href="#"><i class="glyphicon glyphicon-user"></i> Link</a></li>-->
-                        <!--<li><a href="#"><i class="glyphicon glyphicon-lock"></i> Link</a></li>-->
-                        <!--<li><a href="#"><i class="glyphicon glyphicon-cog"></i> Link</a></li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            </div>
-        </div>
-    </div>
-</header>
-
-
-<!-- Fixed navbar -->
 <div ng-controller="MainController">
-<div class="navbar navbar-custom navbar-inverse navbar-static-top" id="nav">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <!--class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">-->
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#/home?page=search">Home</a>
+    <!-- Wrap all page content here -->
+    <div id="wrap">
+
+        <header class="masthead">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h1><a href="#" title="Brewery Master">Brewery Master</a>
+
+                            <p class="lead">Beer and Breweries, cognitive style</p></h1>
+                    </div>
+                    <div class="col-sm-6">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- Fixed navbar -->
+        <div class="navbar navbar-custom navbar-inverse navbar-static-top" id="nav">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#nav-header-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#/home?page=search">Brewery Master</a>
+                </div>
+                <div class="collapse navbar-collapse" id="nav-header-collapse">>
+                    <ul class="nav navbar-nav">
+                        <li><a href="#/home?page=search"><strong>Search</strong></a></li>
+                        <li><a href="#/home?page=askwatson">Ask Watson</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+            <!--/.container -->
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">>
-            <ul class="nav navbar-nav">
-                <li><a href="#/home?page=search"><strong>Search</strong></a></li>
-                <li><a href="#/home?page=askwatson">Ask Watson</a></li>
-                <!--<li><a href="#section5">Contact</a></li>-->
-                <!--<li class="dropdown">-->
-                <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>-->
-                <!--<ul class="dropdown-menu">-->
-                <!--<li><a href="#">Action</a></li>-->
-                <!--<li><a href="#">Another action</a></li>-->
-                <!--<li><a href="#">Something else here</a></li>-->
-                <!--<li><a href="#">Separated link</a></li>-->
-                <!--<li><a href="#">One more separated link</a></li>-->
-                <!--</ul>-->
-                <!--</li>-->
-            </ul>
+
+        <!--/.navbar -->
+
+        <!-- Begin page content -->
+        <!--<a name="section1"></a>-->
+        <div id="mytop"></div>
+        <div class="divider" ></div>
+        <div id="search"  ng-show="page == 'search'">
+            <div ng-include="'app/parts/list.html'"></div>
         </div>
-        <!--/.nav-collapse -->
+        <div  ng-show="page == 'brewery'">
+            <div ng-include="'app/parts/brewery.html'"></div>
+        </div>
+        <div ng-show="page == 'askwatson'">
+            <div ng-include="'app/parts/ask_waston.html'"></div>
+        </div>
+
+
     </div>
-    <!--/.container -->
-</div>
+    <!--/wrap-->
 
-<!--/.navbar -->
-
-<!-- Begin page content -->
-<div class="divider" id="section1"></div>
-<div id="search">
-<div ng-include="'app/parts/list.html'" ng-show="page == 'search'"></div>
-</div>
-<div ng-include="'app/parts/brewery.html'" ng-show="page == 'brewery'"></div>
-
-<div ng-include="'app/parts/ask_waston.html'" ng-show="page == 'askwatson'"></div>
+    <!-- Footer -->
 
 
-</div>
-<!--/wrap-->
-</div>
-<div id="footer">
-    <div class="container">
-        <p class="text-muted">For demonstration. Enjoy!</p>
+    <div id="footer" class="footer">
+        <div class="container">
+            <div ng-show="page == 'search'">
+                <div class="row">
+                    <div class="col-xs-12 flush-lr" style="text-align: center;">
+                        <button type="button" class="btn btn-default btn-wide" aria-label="Left Align"
+                                ng-click="showList()">
+                            <i class="fa fa-list fa-color fa-lg"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-default btn-wide " aria-label="Left Align"
+                                ng-click="showaMap()">
+                            <i class="fa fa-map-marker fa-color fa-lg"></i>
+                        </button>
+                        <button type="button" class="btn btn-default btn-wide " aria-label="Left Align"
+                                ng-click="locate()">
+                            <i class="fa fa-location-arrow fa-color fa-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-show="page == 'brewery'">
+            <div class="row">
+                <div class="col-xs-12 " style="text-align: center;">
+                    <a type="button" class="btn btn-default btn-full-wide" aria-label="Left Align"
+                       onclick="history.go(-1);">
+                        <!--<div  class="fa-color">Back</div>-->
+                        <i class="fa fa-arrow-circle-left fa-color fa-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div ng-show="page == 'askwatson'">
+            <div class="row">
+                <div class="col-xs-12 " style="text-align: center;">
+                    <a type="button" class="btn btn-default btn-full-wide" aria-label="Left Align"
+                       onclick="history.go(-1);">
+                        <i class="fa fa-arrow-circle-left fa-color fa-lg"></i>
+                        <!--<div  class="fa-color">Back</div>-->
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <ul class="nav pull-right scroll-top">
-    <li><a href="#/home?page=search" title="Scroll to top"><i class="glyphicon glyphicon-chevron-up"></i></a></li>
+    <li><a href="#/home?page=search" title="Top"><i class="glyphicon glyphicon-chevron-up"></i></a></li>
 </ul>
+</div>

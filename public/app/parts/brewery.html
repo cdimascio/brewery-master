@@ -18,7 +18,8 @@
                     </h4>
                 </div>
                 <div class="panel-body">
-                    <p>
+                    <div ng-show="!brewery.brewery.description">Sorry. Description not available.</div>
+                    <p ng-show="brewery.brewery.description">
                         {{brewery.brewery.description}}
                     </p>
                 </div>

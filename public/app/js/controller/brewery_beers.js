@@ -6,19 +6,24 @@
 
     function ctrl() {
         return ['$scope', 'BreweryService', function ($scope, BreweryService) {
+            $scope.isLoading = false;
+
             // Handle brewery map selection
             $scope.$on('BreweryMap.selected', function (event, brewery) {
+                $scope.isLoading = true;
                 BreweryService.fetchBeers(brewery.breweryId);
             });
 
             // Handle brewery list selection
             $scope.$on('BreweryListController.selected', function (event, brewery) {
+                $scope.isLoading = true;
                 BreweryService.fetchBeers(brewery.breweryId);
             });
 
             // Handle brewery beers available
             $scope.$on('BreweryService.brewery.beers', function (event, beers) {
                 $scope.beers = beers.data;
+                $scope.isLoading = false;
             })
 
             var cols = $(window).width() < 768 ? 2 : 3;

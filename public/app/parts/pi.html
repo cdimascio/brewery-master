@@ -1,8 +1,7 @@
-<!--<div ng-controller="TweetController">-->
-    <!--<div ng-show="isLoading">Loading...</div>-->
-    <!--<div ng-show="tweets && !isLoading">-->
+
         <div ng-controller="TweetPersonalityController">
-            <!--<div ng-show="isLoading">Loading...</div>-->
+            <div ng-show="isLoading">Loading...</div>
+            <div ng-hide="isLoading">
             <div ng-controller="UserModelResultController">
                 <div ng-show="isLoading">Loading...</div>
                 <div ng-show="error && isLoading === false">Sorry. Not enough information to sense the vibe.</div>
@@ -58,6 +57,4 @@
                     </div>
                 </div>
             </div>
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
+</div>

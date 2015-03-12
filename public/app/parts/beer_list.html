@@ -1,12 +1,8 @@
-<!--<div class="container" id="section1">-->
-<!--<div class="col-sm-8 col-sm-offset-2 text-center">-->
-<!--<h1>Nearby Breweries</h1>-->
-<!--</div>-->
-<!--</div>-->
 <div ng-controller="BreweryBeersController">
-    <div class="row animate-hide">
+    <div ng-show="isLoading">Loading...</div>
+    <div ng-show="!isLoading && !beers">Sorry. Beer list is not available.</div>
+    <div class="row" ng-hide="isLoading">
         <table class="table table-striped table-hover brewery-list-table">
-
             <tr ng-click="notifySelect($event, item)" ng-repeat="item in beers">
                 <td>
                     <img class="brewery-list-icon" ng-src="{{item.labels.icon}}">
