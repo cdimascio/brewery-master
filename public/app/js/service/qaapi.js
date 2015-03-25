@@ -6,6 +6,7 @@
         .factory('QaapiService', service());
 
     function service() {
+        var baseUrl = 'http://brewerymaster.mybluemix.net';
         return ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
             var res = null;
             return {
@@ -19,7 +20,7 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    url: '/question',
+                    url: baseUrl+'/question',
                     data: question
                 });
                 return request.then(handleSuccess, handleError);

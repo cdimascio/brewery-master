@@ -7,6 +7,7 @@
     function service() {
         return ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
             var res = null;
+            var baseUrl = 'http://brewerymaster.mybluemix.net';
             return {
                 profile: profile,
                 visualize: visualize
@@ -18,7 +19,7 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    url: '/um/profile',
+                    url: baseUrl+'/um/profile',
                     data: userData
                 });
                 $rootScope.$broadcast('UserModelingService.profiling');
@@ -32,7 +33,7 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    url: '/um/visualize',
+                    url: baseUrl+'/um/visualize',
                     data: profileData
                 });
                 return request.then(handleSuccess('UserModelingService.visualization'),

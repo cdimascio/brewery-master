@@ -6,6 +6,7 @@
         .factory('BreweryService', service());
 
     function service() {
+        var baseUrl = 'http://brewerymaster.mybluemix.net';
         return ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
             var res = null;
             return {
@@ -18,7 +19,7 @@
             function fetchBeers(breweryId) {
                 var request = $http({
                     method: "get",
-                    url: '/brewery/' + breweryId + '/beers'
+                    url: baseUrl+'/brewery/' + breweryId + '/beers'
                 });
                 return request.then(handleSuccess('BreweryService.brewery.beers'), handleError);
             }
@@ -31,7 +32,7 @@
                     params.lng = ll[1];
                     var request = $http({
                         method: "get",
-                        url: '/breweries/nearby',
+                        url: baseUrl+'/breweries/nearby',
                         params: params
                     });
                     return request.then(handleSuccess('BreweryService.breweries'), handleError);
@@ -42,7 +43,7 @@
 
                     var request = $http({
                         method: "get",
-                        url: '/breweries',
+                        url: baseUrl+'/breweries',
                         params: params
                     });
                     return request.then(handleSuccess('BreweryService.breweries'), handleError);

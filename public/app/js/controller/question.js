@@ -7,7 +7,8 @@
     function ctrl() {
         return ['$scope', 'QaapiService', function ($scope, QaapiService) {
             $scope.text = '';
-            $scope.ask = function (text) {
+            $scope.ask = function (text, event) {
+                event.target.focus();
                 var question = {
                     "question": {
                         "evidenceRequest": {

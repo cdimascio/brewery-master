@@ -49,8 +49,9 @@
                 dim();
             };
 
-            $scope.search = function(text) {
+            $scope.search = function(text, event) {
                 dim();
+                event.target.focus();
 
                 if (LocationParserService.isState(text.trim())) {
                     BreweryService.fetchBreweries({

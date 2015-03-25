@@ -7,7 +7,7 @@
                            placeholder="Enter an address e.g. Boston, MA" ng-model="text" required/>
 
                     <div class="input-group-btn">
-                        <button class="btn btn-primary ladda-button" ladda="isLoading" ng-click="search(text)"
+                        <button class="btn btn-primary ladda-button" ladda="isLoading" ng-click="search(text, $event)"
                                 data-style="expand-left" ng-disabled="locationSearch.$invalid">
                             <span class="ladda-label">Go</span>
                         </button>
