@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.carminedimascio.brewery" version="0.0.1" xmlns="http://www.w3.org/ns/widgets"
+        xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Brewery Master</name>
+    <description>
+        Brewery Master - beer, cognitive style
+    </description>
+    <author email="cdimascio@gmail.com" href="http://brewerymaster.mybluemix.net">
+        Carmine DiMascio
+    </author>
+    <content src="index.html"/>
+    <access origin="*"/>
+
+    <icon src="app/img/beer-mug.png"  width="57" height="57"/>
+
+    <gap:splash src="app/img/beer-mug.png"  value="splash" width="57" height="57" />
+
+    <preference name="show-splash-screen-spinner" value="true" />
+
+    <gap:plugin name="org.apache.cordova.geolocation" />
+
+    <feature name="Geolocation">
+        <param name="ios-package" value="CDVLocation" />
+    </feature>
+
+    <feature name="Geolocation">
+        <param name="android-package" value="org.apache.cordova.geolocation.GeoBroker" />
+    </feature>
+    <!--<preference name="permissions" value="none"/>-->
+
+</widget>
+
