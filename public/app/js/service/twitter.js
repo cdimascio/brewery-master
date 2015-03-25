@@ -6,8 +6,7 @@
         .factory('TweetService', service());
 
     function service() {
-        return['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
-            var baseUrl = 'http://brewerymaster.mybluemix.net';
+        return['$http', '$q', '$rootScope', 'CONFIG', function ($http, $q, $rootScope, CONFIG) {
             return {
                 query: query
             };
@@ -15,7 +14,7 @@
             function query(text) {
                 var request = $http({
                     method: "get",
-                    url: baseUrl+'/tweet',
+                    url: CONFIG.apiBase+'/tweet',
                     params: {
                         q: text,
                         count: 100

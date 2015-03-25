@@ -6,8 +6,8 @@
         .factory('BreweryService', service());
 
     function service() {
-        var baseUrl = 'http://brewerymaster.mybluemix.net';
-        return ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
+        return ['$http', '$q', '$rootScope', 'CONFIG', function ($http, $q, $rootScope, CONFIG) {
+            var baseUrl = CONFIG.apiBase;
             var res = null;
             return {
                 fetchBreweries: fetchBreweries,

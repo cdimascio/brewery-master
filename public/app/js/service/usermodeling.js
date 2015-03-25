@@ -5,9 +5,8 @@
     angular.module('beerApp.services.UserModelingService', [])
         .factory('UserModelingService', service());
     function service() {
-        return ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
+        return ['$http', '$q', '$rootScope', 'CONFIG', function ($http, $q, $rootScope, CONFIG) {
             var res = null;
-            var baseUrl = 'http://brewerymaster.mybluemix.net';
             return {
                 profile: profile,
                 visualize: visualize
@@ -19,7 +18,7 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    url: baseUrl+'/um/profile',
+                    url: CONFIG.apiBase+'/um/profile',
                     data: userData
                 });
                 $rootScope.$broadcast('UserModelingService.profiling');
@@ -33,7 +32,7 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    url: baseUrl+'/um/visualize',
+                    url: CONFIG.apiBase+'/um/visualize',
                     data: profileData
                 });
                 return request.then(handleSuccess('UserModelingService.visualization'),
