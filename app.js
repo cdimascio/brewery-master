@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/breweries', brewerydb.breweries);
 app.get('/breweries/nearby', brewerydb.breweriesNearby);
-app.get('/brewery/:id/beers', brewerydb.breweryBeers);
+app.get('/breweries/:id/beers', brewerydb.breweryBeers);
 app.post('/question', qaapi.question);
 app.post('/um/profile', um.profile);
 app.post('/um/visualize', um.visualize);

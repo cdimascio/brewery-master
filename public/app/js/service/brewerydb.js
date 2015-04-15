@@ -19,7 +19,7 @@
             function fetchBeers(breweryId) {
                 var request = $http({
                     method: "get",
-                    url: baseUrl+'/brewery/' + breweryId + '/beers'
+                    url: baseUrl+'/breweries/' + breweryId + '/beers'
                 });
                 return request.then(handleSuccess('BreweryService.brewery.beers'), handleError);
             }
