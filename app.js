@@ -9,7 +9,8 @@ var favicon = require('static-favicon'),
     brewerydb = require('./service/brewerydb'),
     qaapi = require('./service/watson/qaapi'),
     um = require('./service/watson/usermodeling'),
-    cloudant = require('./service/cloudant');
+    cloudant = require('./service/cloudant'),
+    cors = require('cors');
 
 var app = express();
 
@@ -22,6 +23,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(cors({
+    origin: true,
+    methods: ['GET', 'PUT', 'POST'],
+    allowHeaders: ['Content-Type']
+}));
 
 app.get('/breweries', brewerydb.breweries);
 app.get('/breweries/nearby', brewerydb.breweriesNearby);

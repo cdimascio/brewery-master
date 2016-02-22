@@ -29,24 +29,9 @@
 
             }
 
-            function isPhoneGap() {
-                return  document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
-            }
-
             function query() {
                 $rootScope.$broadcast("LocationService.searching");
-
-                if (isPhoneGap()) {
-                    var onReady = function onDeviceReady() {
-                      currentLocation();
-                    }
-
-                    $(function(){
-                        document.addEventListener("deviceready", onReady, false);
-                    });
-                } else {
-                    currentLocation();
-                }
+                currentLocation();
             }
 
             function currentLocation() {
@@ -55,9 +40,13 @@
                         $rootScope.$broadcast("LocationService.location", {
                             loc: position.coords.latitude+","+position.coords.longitude
                         });
-                    }, function() {
+                    }, function(err) {
                         var request = $http.jsonp('http://ipinfo.io?callback=JSON_CALLBACK');
                         return request.then(handleSuccess, handleError);
+                    }, {
+                        enableHighAccuracy : false,
+                        timeout : 4000,
+                        maximumAge: 0 // Number.POSITIVE_INFINITY
                     });
                 } else {
                     // Use Ip Address to detect location

@@ -69,6 +69,9 @@
                     var marker = idToMarkerMap['_' + lat + '' + long];
                     infowindow.setContent(marker._infoContent);
                     infowindow.open(map, marker);
+                },
+                resize: function() {
+                    google.maps.event.trigger(map,'resize')
                 }
             }
         }

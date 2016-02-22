@@ -17,7 +17,8 @@
         </div>
     </div>
 
-    <div class="row" ng-hide="showMap">
+    <div class="row">
+        <div  ng-hide="showMap" class="col-md-6">
         <div class="divider"></div>
         <table class="table table-striped table-hover brewery-list-table">
 
@@ -42,16 +43,17 @@
                 </td>
                 <td class="col-sm-2">
                     <a ng-show="item.distance" ng-click="" href="" class="list-col3">
-                    {{item.distance}}mi
+                    {{item.distance}}
                     </a>
                 </td>
             </tr>
         </table>
-    </div>
-    <div>
-        <div ng-controller="BreweryMapController">
-            <div style="padding-top: 10px"></div>
-            <div id="map-canvas" ></div>
+        </div>
+        <div id="mapContainer" ng-class="showMap ? 'col-md-12' : 'col-md-6'">
+            <div ng-controller="BreweryMapController">
+                <div style="padding-top: 10px"></div>
+                <div id="map-canvas" ></div>
+            </div>
         </div>
     </div>
 

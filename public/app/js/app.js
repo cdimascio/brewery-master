@@ -3,6 +3,9 @@
     'use strict';
 
     var base = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+    if (!base.match("^http")) {
+        base = 'https://brewerymaster.mybluemix.net';
+    }
     angular.module('beerApp', [
         'ngRoute',
         'beerApp.services.BreweryService',
@@ -35,7 +38,7 @@
     config(['$routeProvider', function ($routeProvider) {
 
         $routeProvider.when('/home?page=brewery', {
-            redirectTo: 'app/parts/home.html?page=search' //,
+            redirectTo: 'app/parts/home.html?page=search'
        //    reloadOnSearch: false
         });
 
@@ -51,33 +54,4 @@
         $routeProvider.otherwise({redirectTo: '/home'});
     }]);
 
-
-
-    function isPhoneGap() {
-        return  document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
-    }
-
-    if (isPhoneGap()) {
-        var onReady = function onDeviceReady() {
-            currentLocation();
-        }
-
-        $(function(){
-            document.addEventListener("deviceready", onReady, false);
-        });
-    }
-
-
-    function currentLocation() {
-        if(navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-//                $rootScope.$broadcast("LocationService.location", {
-//                    loc: position.coords.latitude+","+position.coords.longitude
-//                });
-            }, function() {
-//                var request = $http.jsonp('http://ipinfo.io?callback=JSON_CALLBACK');
-//                return request.then(handleSuccess, handleError);
-            });
-        }
-    }
 }());

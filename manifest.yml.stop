@@ -1,0 +1,11 @@
+---
+applications:
+- name: brewery-test
+  memory: 256M
+  disk_quota: 256M
+  instances: 1
+  timeout: 180
+  host: brewery-test
+  domain: mybluemix.net
+  services:
+  - PersonalityInsights_1

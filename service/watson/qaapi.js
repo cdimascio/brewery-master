@@ -1,7 +1,11 @@
+//https://dal09x-gateway.watsonplatform.net/instance/258/predeploy/WatsonExperienceManager
+//  swamchan / Jn92Jj3F
+
+//https://dal09x-gateway.watsonplatform.net/instance/258/deepqa/v1/question
 var endpoint = {
-    host : 'https://watson.ihost.com',// 'https://watson.ihost.com',
-    instance : '/instance/63/deepqa/v1/question',//predeploy/WatsonExperienceManager#//'/instance/8/deepqa/v1/question',
-    auth : 'Basic a3hhX2F1dGhvcjE6QXNGYkN3QTE=' //'Basic dHJpZGVudDh1c2VyMTpzaGFkNzRyYWNr'
+    host : 'https://dal09x-gateway.watsonplatform.net', //https://watson.ihost.com',
+    instance : '/instance/258/deepqa/v1/question', //'/instance/63/deepqa/v1/question',
+    auth : 'Basic c3dhbWNoYW46Sm45MkpqM0Y='//Basic c3dhbWNoYW46RVFUeHBPcUk='
 };
 
 exports.question = function(req, res) {
@@ -20,7 +24,7 @@ exports.question = function(req, res) {
         body : JSON.stringify(req.body)
     }, function(error, response, body) {
         // Log to Cloudant asynchronously
-        require("../cloudant").insertQAResponse(JSON.parse(body));
+        //require("../cloudant").insertQAResponse(JSON.parse(body));
 
         // Send response
         res.send(body);

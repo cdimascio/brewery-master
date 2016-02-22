@@ -32,6 +32,13 @@
                     renderMap(BreweryService.breweries());
                 };
 
+
+                $scope.$watch('showMap', function() {
+                    if (map) {
+                        map.resize();
+                    }
+                });
+
                 $scope.$on('LocationService.location', function(event,r){
                     BreweryService.fetchBreweries(r);
                 });
@@ -80,6 +87,10 @@
                         LocationService.lookup(text);
                     }
                 }
+                //
+                //$( window ).resize(function() {
+                //    map.resize();
+                //});
 
 //                function() {
 //                    var dist = $('#footer').offset().top - $('#search').offset().top,
