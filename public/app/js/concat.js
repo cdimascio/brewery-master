@@ -2,17 +2,17 @@
 (function () {
     'use strict';
 
-    var app = angular.module('beerApp', [
+    angular.module('beerApp', [
         'ngRoute',
         'beerApp.services.BreweryService',
         'beerApp.services.LocationService',
+        'beerApp.services.LocationParserService',
         'beerApp.services.QaapiService',
         'beerApp.services.TweetService',
         'beerApp.services.UserModelingService',
         'beerApp.services.MapService',
         'beerApp.services.UmService',
         'beerApp.services.UserModelingService',
-        'beerApp.services.LocationParserService',
         'beerApp.controllers.AnswersController',
         'beerApp.controllers.BreweryBeersController',
         'beerApp.controllers.BrewerySelectedController',
@@ -24,31 +24,13 @@
         'beerApp.controllers.UserModelBuilderController',
         'beerApp.controllers.UserModelResultController',
         'beerApp.directives.slick',
-        'beerApp.directives.ladda',
-        'beerApp.controllers.MainController',
-        'beerApp.controllers.TweetPersonalityController'
-    ]);
-
-    app.config(['$routeProvider', function ($routeProvider) {
-
-        $routeProvider.when('/home?page=brewery', {
-            redirectTo: 'app/parts/home.html?page=search',
-       //    reloadOnSearch: false
-        });
-
+        'beerApp.directives.ladda'
+    ]).config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/home', {
-            templateUrl: 'app/parts/home.html',
-            reloadOnSearch: false
-        });
-
-        $routeProvider.when('/brewery', {
-            templateUrl: 'app/parts/home.html#brewery',
-            reloadOnSearch: false
+            templateUrl: 'app/partials/home.html'
         });
         $routeProvider.otherwise({redirectTo: '/home'});
     }]);
-
-    app.constant(API_BASE, 'http://brewerymaster.mybluemix.net');
 }());
 /*global $:false, angular:false, console:false */
 (function () {
@@ -91,24 +73,19 @@
 
     function ctrl() {
         return ['$scope', 'BreweryService', function ($scope, BreweryService) {
-            $scope.isLoading = false;
-
             // Handle brewery map selection
             $scope.$on('BreweryMap.selected', function (event, brewery) {
-                $scope.isLoading = true;
                 BreweryService.fetchBeers(brewery.breweryId);
             });
 
             // Handle brewery list selection
             $scope.$on('BreweryListController.selected', function (event, brewery) {
-                $scope.isLoading = true;
                 BreweryService.fetchBeers(brewery.breweryId);
             });
 
             // Handle brewery beers available
             $scope.$on('BreweryService.brewery.beers', function (event, beers) {
                 $scope.beers = beers.data;
-                $scope.isLoading = false;
             })
 
             var cols = $(window).width() < 768 ? 2 : 3;
@@ -135,7 +112,7 @@
         controller('BrewerySelectedController', ctrl());
 
     function ctrl() {
-        return ['$scope', '$location', "$anchorScroll", function ($scope, $location, $anchorScroll) {
+        return ['$scope', function ($scope) {
 
             // Handle a selection from the Brewery Map
             $scope.$on('BreweryMap.selected', function (event, brewery) {
@@ -147,12 +124,7 @@
                 handleSelect(brewery);
             });
 
-            $scope.$on('BreweryService.brewery.beers', function (event, beers) {
-                $('#mytop').animate({scrollTop: 0}, 0);
-            });
-
             function handleSelect(brewery) {
-                $location.search('page','brewery');
                 $scope.brewery = brewery;
             }
         }];
@@ -164,131 +136,29 @@
         controller('BreweryListController', ctrl());
 
     function ctrl() {
-        return ['$scope', '$rootScope', '$http', '$location', 'LocationService','LocationParserService', 'BreweryService',
-            function ($scope, $rootScope, $http, $location, LocationService, LocationParserService, BreweryService) {
-
-            $scope.$on('LocationService.searching', function(){
-                dim();
-            });
+        return ['$scope', '$rootScope', '$http', 'BreweryService', function ($scope, $rootScope, $http, BreweryService) {
 
             // Listen for brewery list
             $scope.$on('BreweryService.breweries', function () {
                 var data = BreweryService.breweries() && BreweryService.breweries().data;
                 // Sort brewery list alphabetically
-                if (!data) {
-                    light();
-                    return;
-                }
                 $scope.data = data.sort(function (a, b) {
-                    if (a.distance) {
-                        // try to sort by distance
-                        if (a.distance < b.distance) return -1;
-                        else return 1;
-                    } else {
-                        // otherwise sort by name
-                        if (a.brewery.name < b.brewery.name) {
-                            return -1;
-                        } else if (a.brewery.name > b.brewery.name) {
-                            return 1;
-                        }
+                    if (a.brewery.name < b.brewery.name) {
+                        return -1;
+                    } else if (a.brewery.name > b.brewery.name) {
+                        return 1;
                     }
                     return 0;
-
                 });
-
-                light();
             });
+
             $scope.notifySelect = function (event, brewery) {
                 $rootScope.$broadcast('BreweryListController.selected', brewery);
                 event.preventDefault();
             };
-
-            $scope.locate = function() {
-                LocationService.locate();
-                dim();
-            };
-
-            $scope.search = function(text, event) {
-                dim();
-                event.target.focus();
-
-                if (LocationParserService.isState(text.trim())) {
-                    BreweryService.fetchBreweries({
-                        region : text.trim()
-                    });
-                } else {
-                    LocationService.lookup(text);
-                }
-            };
-
-            $('.brewery-list-table > tr').click($scope.notifySelect);
         }];
-
-        // TODO move to separate controller
-        var spinner;
-        function light() {
-            if (spinner) spinner.stop();
-            $('.location-progress-overlay').hide();
-        }
-        function dim() {
-            var element =  $('.brewery-list-table'), // element to cover
-                overlay = $('.location-progress-overlay'),
-                position = element.offset(),
-                top = position.top + Number(element.css("padding-top").replace(/px/,''));
-
-            var dist = $('#footer').offset().top - $('#search').offset().top,
-                percentDist = 50,
-                height = element.height() == 0 ? dist : element.height();
-
-
-
-            if (element.height() > dist) {
-                percentDist = Math.abs(dist / element.height()) * 100;
-                percentDist = percentDist / 2; // half the dist of prev calculation should be the middle
-            }
-
-            percentDist *= .8;
-
-            overlay.css({
-                position: "absolute", left: position.left, top: top,
-                width: $(window).width(),
-                height: height,
-                background: "#fff",
-                opacity:0.6
-
-            });
-
-            overlay.show();
-
-            var opts = {
-                lines: 10, // The number of lines to draw
-                length: 20, // The length of each line
-                width: 10, // The line thickness
-                radius: 10, // The radius of the inner circle
-                corners: 1, // Corner roundness (0..1)
-                rotate: 85, // The rotation offset
-                direction: 1, // 1: clockwise, -1: counterclockwise
-                color: '#666',//'008cba', // #rgb or #rrggbb or array of colors
-                speed: 1, // Rounds per second
-                trail: 60, // Afterglow percentage
-                shadow: false, // Whether to render a shadow
-                hwaccel: false, // Whether to use hardware acceleration
-                className: 'spinner',//, // The CSS class to assign to the spinner
-                /*    zIndex: 2e9, // The z-index (defaults to 2000000000)*/
-                top: percentDist+'%' // Top position relative to parent
-                /*left: '50%' // Left position relative to parent*/
-            };
-            if (spinner) {
-                spinner.stop()
-            }
-            spinner = new Spinner(opts);
-            spinner = spinner.spin(overlay[0]);
-
-        }
     }
 }());
-
-
 /*global $:false, angular:false, console:false */
 (function () {
     'use strict';
@@ -306,6 +176,7 @@
             'LocationParserService',
             'MapService',
             function ($scope, $http, $rootScope, BreweryService, LocationService, LocationParserService, MapService) {
+                $scope.isLoading = true;
 
                 // Handle brewery list selection
                 $scope.$on('BreweryListController.selected', function (event, brewery) {
@@ -316,7 +187,8 @@
                 });
 
                 $rootScope.$on('BreweryService.breweries', function (event, result) {
-                    renderMap(result)
+                    renderMap(result);
+                    $scope.isLoading = false;
                 });
 
                 $scope.reRender = function() {
@@ -325,6 +197,10 @@
 
                 $scope.$on('LocationService.location', function(event,r){
                     BreweryService.fetchBreweries(r);
+                });
+
+                $scope.$on('LocationService.searching', function(event, r) {
+                    $scope.isLoading == true;
                 });
 
                 // Fetch nearby breweries and render using Google maps
@@ -371,129 +247,99 @@
                         LocationService.lookup(text);
                     }
                 }
-
-//                function() {
-//                    var dist = $('#footer').offset().top - $('#search').offset().top,
-//                        percentDist = 50,
-//                        height = element.height() == 0 ? dist : element.height();
-//
-//
-//
-//                    if (element.height() > dist) {
-//                        percentDist = Math.abs(dist / element.height()) * 100;
-//                        percentDist = perce
-//                }
             }];
     }
 }());
-/*global $:false, angular:false, console:false */
-(function () {
-    'use strict';
-    angular.module('beerApp.controllers.MainController', ['ngRoute']).
-        controller('MainController', ctrl());
 
-    function ctrl() {
-        return ['$scope', '$location', 'BreweryService',
-            'LocationService', function ($scope, $location, BreweryService, LocationService) {
-            $('#nav').affix({
-                offset: {
-                    top: $('header').height() - $('#nav').height()
-                }
-            });
-
-            $('body').scrollspy({ target: '#nav' })
-
-            $('.scroll-top').click(function () {
-                $('body,html').animate({scrollTop: 60}, 1000);
-            })
-
-            $('#nav .navbar-nav li>a').click(function () {
-                var link = $(this).attr('href');
-//                var posi = $(link).offset().top + 20;
-//                $('body,html').animate({scrollTop: posi}, 700);
-                $(".navbar-toggle").click();
-            });
-
-            $scope.page = 'search';
-            $location.search('page', $scope.page);
-
-            $scope.$watch("page", function(newVal, oldVal) {
-               if (newVal != oldVal) {
-                   $scope.page = newVal;
-               }
-            });
-
-            $scope.$on('$routeUpdate', function(scope, next, current) {
-                // console.log(current);console.log(next);
-                $scope.page = next.params.page;
-
-            });
-
-            $scope.toggleMap = function() {
-                $scope.showMap = !$scope.showMap;
-            };
-
-            $scope.showaMap = function() {
-                $scope.showMap = true;
-            };
-
-            $scope.showList = function() {
-                $scope.showMap = false;
-            };
-
-            $scope.locate = function() {
-                LocationService.locate();
-            };
-        }];
-    }
-}());/*global $:false, angular:false, console:false */
-(function () {
-    'use strict';
-    angular.module('beerApp.controllers.TweetPersonalityController', ['ngRoute']).
-        controller('TweetPersonalityController', ctrl());
-
-    function ctrl() {
-        return ['$scope', 'UserModelingService', 'UmService', 'TweetService', function ($scope, UserModelingService, UmService, TweetService) {
-            $scope.$on('TweetService.tweets', function(event,tweets) {
-                if (!tweets) {
-                    console.log('no profile data');
-                    return;
-                }
-
-                $scope.isLoading = false;
-
-                // Convert tweets to a format compatible for
-                // the user modeling service
-                var profileData = UmService.tweetsToProfileData(tweets);
-
-                // Invoke user modeling service
-                UserModelingService.profile(profileData);
-            });
-
-//            // Handle available tweets
-//            $scope.$on('TweetService.tweets', function (event, tweets) {
-//                $scope.tweets = tweets;
-//                $scope.isLoading = false;
-//            });
-
-            // Handle brewery map selection
-            $scope.$on('BreweryMap.selected', function (event, brewery) {
-                handleSelect(brewery);
-            });
-
-            // Handle brewery list selection
-            $scope.$on('BreweryListController.selected', function (event, brewery) {
-                handleSelect(brewery);
-            });
-
-            function handleSelect(brewery) {
-                $scope.isLoading = true;
-                $scope.tweets = undefined;
-                TweetService.query(brewery.brewery.name);
-            }
-        }];
-    }
-}());
+///*global $:false, angular:false, console:false */
+//(function () {
+//    'use strict';
+//    angular.module('beerApp.controllers.BreweryMapController', ['ngRoute']).
+//        controller('BreweryMapController', ctrl());
+//
+//    function ctrl() {
+//        var map = null;
+//        return [
+//            '$scope',
+//            '$http',
+//            '$rootScope',
+//            'BreweryService',
+//            'LocationService',
+//            'MapService',
+//            function ($scope, $http, $rootScope, BreweryService, LocationService, MapService) {
+//
+//                // Handle brewery list selection
+//                $scope.$on('BreweryListController.selected', function (event, brewery) {
+//                    if (map) {
+//                        $scope.brewery = brewery;
+//                        map.selectMarker(brewery.latitude, brewery.longitude);
+//                    }
+//                });
+//
+//                $rootScope.$on('BreweryService.breweries', function (event, result) {
+//                    renderMap(result)
+//                });
+//
+//
+//                // Fetch nearby breweries and render using Google maps
+//                if (!LocationService.location()) {
+//                    LocationService.query().then(function (r) {
+////                      r = { city_override : 'San Jose' };
+//                        r.local = true;
+//                        fetchLocalBreweries(r, renderMap)
+//                    });
+//                }
+//
+//                /**
+//                 * Find breweries near a given location
+//                 * @param loc The location
+//                 * @param callback The callback function to invoke after fetching breweries
+//                 * @param force Force a server query
+//                 */
+//                function fetchLocalBreweries(loc, callback, force) {
+//                    if (!BreweryService.breweries() || force) {
+//                        BreweryService.fetchBreweries(loc);
+//                    } else {
+//                        callback(BreweryService.items);
+//                    }
+//                }
+//
+//                /**
+//                 * Displays breweries on Google Maps
+//                 * @param r The BreweryDB /breweries response object
+//                 */
+//                function renderMap(r) {
+//                    if (!map) {
+//                        map = MapService.map(document.getElementById('map-canvas'));
+//                        map.init(searchHandler);
+//                    } else {
+//                        map.clearMarkers();
+//                    }
+//                    $.each(r.data, function (i, brewery) {
+//                        map.addMarker(brewery.latitude, brewery.longitude, content(brewery), brewery, clickHandler);
+//                    });
+//                    map.fitBounds();
+//                }
+//
+//                function content(brewery) {
+//                    return '<div class="mapInfoContainer">' +
+//                        '<a href="' + brewery.brewery.website + '" target="_blank">' +
+//                        brewery.brewery.name + '</a></div>';
+//                }
+//
+//                function clickHandler(brewery) {
+//                    $rootScope.$broadcast('BreweryMap.selected', brewery);
+//                }
+//
+//                function searchHandler(evt) {
+//                    var loc = {
+//                        city: evt.searchText // region: for state
+//                    };
+//                    fetchLocalBreweries(loc, renderMap, true);
+//                }
+//            }];
+//    }
+//}());
 /*global $:false, angular:false, console:false */
 (function () {
     'use strict';
@@ -503,8 +349,7 @@
     function ctrl() {
         return ['$scope', 'QaapiService', function ($scope, QaapiService) {
             $scope.text = '';
-            $scope.ask = function (text, event) {
-                event.target.focus();
+            $scope.ask = function (text) {
                 var question = {
                     "question": {
                         "evidenceRequest": {
@@ -536,7 +381,6 @@
             // Handle available tweets
             $scope.$on('TweetService.tweets', function (event, tweets) {
                 $scope.tweets = tweets;
-                $scope.isLoading = false;
             });
 
             // Handle brewery map selection
@@ -550,8 +394,6 @@
             });
 
             function handleSelect(brewery) {
-                $scope.isLoading = true;
-                $scope.tweets = undefined;
                 TweetService.query(brewery.brewery.name);
             }
         }];
@@ -565,38 +407,20 @@
 
     function ctrl() {
         return ['$scope', 'UserModelingService', 'UmService', function ($scope, UserModelingService, UmService) {
-
-            $scope.$on('TweetService.tweets', function (event, tweets) {
-                if (!tweets) {
+            $scope.build = function () {
+                if (!$scope.$parent.tweets) {
                     console.log('no profile data');
-                    $scope.isLoading=false;
                     return;
                 }
-                $scope.tweets = tweets;
-                $scope.isLoading = true;
 
                 // Convert tweets to a format compatible for
                 // the user modeling service
                 var profileData = UmService.
-                    tweetsToProfileData(tweets);
+                    tweetsToProfileData($scope.$parent.tweets);
 
                 // Invoke user modeling service
                 UserModelingService.profile(profileData);
-            });
-//            $scope.build = function () {
-//                if (!$scope.$parent.tweets) {
-//                    console.log('no profile data');
-//                    return;
-//                }
-//
-//                // Convert tweets to a format compatible for
-//                // the user modeling service
-//                var profileData = UmService.
-//                    tweetsToProfileData($scope.$parent.tweets);
-//
-//                // Invoke user modeling service
-//                UserModelingService.profile(profileData);
-//            }
+            }
         }];
     }
 }());
@@ -612,17 +436,11 @@
                 $scope.visualization = $sce.trustAsHtml(visualization);
             });
 
-            $scope.$on('UserModelingService.profiling', function (event, analysis) {
-                $scope.isLoading = true;
-            });
-
             $scope.$on('UserModelingService.profile', function (event, analysis) {
-                $scope.isLoading = false;
-                if (analysis.error_code || (analysis.code && analysis.code != 200)) {
-                    $scope.error = analysis.user_message || analysis.error;
+                if (analysis.error_code) {
+                    $scope.error = analysis.user_message;
                     return;
                 }
-
                 // TODO Traits can be filtered, however /visualize endpoint
                 // To keep only traits returned by traits()
                 // Uncomment the following line and replace all values 'analysis' with 'filteredAnalysis'
@@ -630,11 +448,10 @@
                 $scope.analysis = analysis;
 
                 $scope.error = undefined;
-                $scope.categories = UmService.categories(analysis.tree);
-                $scope.analysisFlat = (UmService.flatten($scope.categories));
+                $scope.analysisFlat = (UmService.flatten(analysis.tree));
                 $scope.analysisKeys = Object.keys($scope.analysisFlat);
 
-               // UserModelingService.visualize(analysis);
+                UserModelingService.visualize(analysis);
             });
         }];
 
@@ -797,7 +614,6 @@
         .factory('BreweryService', service());
 
     function service() {
-        var baseUrl = API_BASE;
         return ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
             var res = null;
             return {
@@ -810,7 +626,7 @@
             function fetchBeers(breweryId) {
                 var request = $http({
                     method: "get",
-                    url: baseUrl+'/brewery/' + breweryId + '/beers'
+                    url: '/brewery/' + breweryId + '/beers'
                 });
                 return request.then(handleSuccess('BreweryService.brewery.beers'), handleError);
             }
@@ -823,7 +639,7 @@
                     params.lng = ll[1];
                     var request = $http({
                         method: "get",
-                        url: baseUrl+'/breweries/nearby',
+                        url: '/breweries/nearby',
                         params: params
                     });
                     return request.then(handleSuccess('BreweryService.breweries'), handleError);
@@ -834,7 +650,7 @@
 
                     var request = $http({
                         method: "get",
-                        url: baseUrl+'/breweries',
+                        url: '/breweries',
                         params: params
                     });
                     return request.then(handleSuccess('BreweryService.breweries'), handleError);
@@ -900,28 +716,8 @@
                 });
 
             }
-
-            function isPhoneGap() {
-                return  document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
-            }
-
             function query() {
                 $rootScope.$broadcast("LocationService.searching");
-
-                if (isPhoneGap()) {
-                    var onReady = function onDeviceReady() {
-                      currentLocation();
-                    }
-
-                    $(function(){
-                        document.addEventListener("deviceready", onReady, false);
-                    });
-                } else {
-                    currentLocation();
-                }
-            }
-
-            function currentLocation() {
                 if(navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function(position) {
                         $rootScope.$broadcast("LocationService.location", {
@@ -1172,7 +968,6 @@
         .factory('QaapiService', service());
 
     function service() {
-        var baseUrl = 'http://brewerymaster.mybluemix.net';
         return ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
             var res = null;
             return {
@@ -1186,7 +981,7 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    url: baseUrl+'/question',
+                    url: '/question',
                     data: question
                 });
                 return request.then(handleSuccess, handleError);
@@ -1219,7 +1014,6 @@
 
     function service() {
         return['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
-            var baseUrl = 'http://brewerymaster.mybluemix.net';
             return {
                 query: query
             };
@@ -1227,7 +1021,7 @@
             function query(text) {
                 var request = $http({
                     method: "get",
-                    url: baseUrl+'/tweet',
+                    url: '/tweet',
                     params: {
                         q: text,
                         count: 100
@@ -1259,7 +1053,6 @@
     function service() {
         return ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
             var res = null;
-            var baseUrl = 'http://brewerymaster.mybluemix.net';
             return {
                 profile: profile,
                 visualize: visualize
@@ -1271,10 +1064,9 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    url: baseUrl+'/um/profile',
+                    url: '/um/profile',
                     data: userData
                 });
-                $rootScope.$broadcast('UserModelingService.profiling');
                 return request.then(handleSuccess('UserModelingService.profile'),
                     handleError('UserModelingService.profile'));
             }
@@ -1285,7 +1077,7 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    url: baseUrl+'/um/visualize',
+                    url: '/um/visualize',
                     data: profileData
                 });
                 return request.then(handleSuccess('UserModelingService.visualization'),
@@ -1295,7 +1087,6 @@
             function handleError(topic) {
                 return function (response) {
                     if (!angular.isObject(response.data) || !response.data.user_message) {
-                        $rootScope.$broadcast(topic, response.data);
                         return $q.reject("An unknown error occurred.");
                     }
                     $rootScope.$broadcast(topic, response.data);
@@ -1328,7 +1119,6 @@
             return {
                 init: function (searchHandler) {
                     map = new google.maps.Map(containerDiv, {
-                        zoom: 15,
                         mapTypeId: google.maps.MapTypeId.ROADMAP,
                         navigationControl: true,
                         navigationControlOptions: {
@@ -1509,7 +1299,7 @@
             return local;
         }
 
-        function categories(tree) {
+        function flatten(tree) {
             var cats = {};
             var arr = [],
                 f = function (t, level) {
@@ -1549,11 +1339,6 @@
                 };
             f(tree, 0);
 
-
-            return cats; //cats; //arr
-        }
-
-        function flatten(cats) {
             var res = [
                 cats['personality'],
                 cats['needs'],
@@ -1567,13 +1352,12 @@
                     return -1;
                 });
             });
-            return res;
+            return res; //cats; //arr
         }
 
         return {
             tweetsToProfileData: tweetsToProfileData,
             filterTraits: filterTraits,
-            categories : categories,
             flatten: flatten
         }
     }
