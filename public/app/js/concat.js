@@ -3,6 +3,10 @@
     'use strict';
 
     var base = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+    if (!base.match("^http")) {
+        base = 'https://brewerymaster.mybluemix.net';
+    }
+    //console.log('base: '+base);
     angular.module('beerApp', [
         'ngRoute',
         'beerApp.services.BreweryService',
@@ -53,33 +57,47 @@
 
 
 
-    function isPhoneGap() {
-        return  document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
-    }
-
-    if (isPhoneGap()) {
-        var onReady = function onDeviceReady() {
-            currentLocation();
-        }
-
-        $(function(){
-            document.addEventListener("deviceready", onReady, false);
-        });
-    }
+    //function isPhoneGap() {
+    //    return  document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
+    //}
 
 
-    function currentLocation() {
-        if(navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-//                $rootScope.$broadcast("LocationService.location", {
-//                    loc: position.coords.latitude+","+position.coords.longitude
-//                });
-            }, function() {
-//                var request = $http.jsonp('http://ipinfo.io?callback=JSON_CALLBACK');
-//                return request.then(handleSuccess, handleError);
-            });
-        }
-    }
+
+//    if (isPhoneGap()) {
+//        console.log('is phone gap');
+//        var onReady = function onDeviceReady() {
+//            console.log('device ready');
+//            currentLocation();
+//        }
+//
+//        $(function(){
+//            console.log('setup device ready listener')
+//            document.addEventListener("deviceready", onReady, false);
+//        });
+//    }
+//
+//
+//    function currentLocation() {
+//        console.log('get loc');
+//        if(navigator.geolocation) {
+//            navigator.geolocation.getCurrentPosition(function(position) {
+//                console.log('geoloc found')
+////                $rootScope.$broadcast("LocationService.location", {
+////                    loc: position.coords.latitude+","+position.coords.longitude
+////                });
+//            }, function() {
+//                console.log('geoloc failure')
+////                var request = $http.jsonp('http://ipinfo.io?callback=JSON_CALLBACK');
+////                return request.then(handleSuccess, handleError);
+//            }, {
+//                enableHighAccuracy : false,
+//                timeout : 4000,
+//                maximumAge: 0 // Number.POSITIVE_INFINITY
+//            });
+//        } else {
+//            console.log('no geoloc');
+//        }
+//    }
 }());
 /*global $:false, angular:false, console:false */
 (function () {
@@ -354,6 +372,13 @@
                     renderMap(BreweryService.breweries());
                 };
 
+
+                $scope.$watch('showMap', function() {
+                    if (map) {
+                        map.resize();
+                    }
+                });
+
                 $scope.$on('LocationService.location', function(event,r){
                     BreweryService.fetchBreweries(r);
                 });
@@ -402,6 +427,10 @@
                         LocationService.lookup(text);
                     }
                 }
+                //
+                //$( window ).resize(function() {
+                //    map.resize();
+                //});
 
 //                function() {
 //                    var dist = $('#footer').offset().top - $('#search').offset().top,
@@ -932,24 +961,9 @@
 
             }
 
-            function isPhoneGap() {
-                return  document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
-            }
-
             function query() {
                 $rootScope.$broadcast("LocationService.searching");
-
-                if (isPhoneGap()) {
-                    var onReady = function onDeviceReady() {
-                      currentLocation();
-                    }
-
-                    $(function(){
-                        document.addEventListener("deviceready", onReady, false);
-                    });
-                } else {
-                    currentLocation();
-                }
+                currentLocation();
             }
 
             function currentLocation() {
@@ -958,9 +972,13 @@
                         $rootScope.$broadcast("LocationService.location", {
                             loc: position.coords.latitude+","+position.coords.longitude
                         });
-                    }, function() {
+                    }, function(err) {
                         var request = $http.jsonp('http://ipinfo.io?callback=JSON_CALLBACK');
                         return request.then(handleSuccess, handleError);
+                    }, {
+                        enableHighAccuracy : false,
+                        timeout : 4000,
+                        maximumAge: 0 // Number.POSITIVE_INFINITY
                     });
                 } else {
                     // Use Ip Address to detect location
@@ -1411,6 +1429,9 @@
                     var marker = idToMarkerMap['_' + lat + '' + long];
                     infowindow.setContent(marker._infoContent);
                     infowindow.open(map, marker);
+                },
+                resize: function() {
+                    google.maps.event.trigger(map,'resize')
                 }
             }
         }
